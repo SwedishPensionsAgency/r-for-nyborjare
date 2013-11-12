@@ -155,6 +155,15 @@ c(factor("a"), factor("b"))
 Därför bör man vara extra varsam när man använder sig av faktorvariabler.
 
 
+Matriser
+========================================================
+
+```{r}
+matrix(1:6, ncol = 3)
+array(1:12, c(2, 3, 2))
+```
+
+
 Läs mer om datastrukturer
 ========================================================
 
