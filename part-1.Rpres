@@ -73,6 +73,21 @@ Valet av metod för att hämta ut delar av data beror på vilken __datatyp__ vi 
 
 R erbjuder __flera metoder__ för att hämta ut data för varje datatyp.
 
+Grundläggande operationer
+========================================================
+
+Data i R lagras i en __datastruktur__. Om vi anropar hela strukturen får vi, vanligtvis, ut _all_ data i strukturen.
+
+För att hämta delar av data ur en struktur använder vi metoder kallade __operatorer__ på strukturen.
+
+Det finns tre sådana operatorer:
+- __[__: Hämta ett subset av data som matchar en uppsättning kriterier
+- __[[__: Hämta ett enda namngivet värde ur en datastruktur
+- __$__: Hämta en namngiven variabel/kolumn ur en sammansatt datastruktur
+
+Operatorerna anges direkt efter ett anrop av en datastruktur, på formen __mindata$id__ eller __minlista[2]__.
+
+
 Enkla vektorer
 ========================================================
 
@@ -87,6 +102,7 @@ x[c(1,2)] # Välj ett eller flera element
 x[order(x)] # Välj alla element, sorterade
 x[['aa']] # Välj ett, namngivet eller numrerat, element
 ```
+
 
 Listor
 ========================================================
@@ -104,6 +120,7 @@ ll[c(1,2)]
 ll[[1]]
 
 ```
+
 
 data.frame()
 ========================================================
@@ -124,6 +141,7 @@ DF[,c("value")] # Väljer kolumnen "value"
 DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
 ```
 
+
 data.table()
 ========================================================
 
@@ -141,6 +159,32 @@ DT[,list(value)] # Väljer kolumnen "value"
 DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ```
 <small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
+
+Sortering och sampling
+========================================================
+
+Två vanliga operationer på data är __sortering__ och __sampling__.
+
+Sortering görs, något kontraintuitivt, _inte_ med kommandot __sort()__ utan med kommandot __order()__:
+```{r,results="hide"}
+DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
+# DT[sort(DT$id2)] # Genererar ett fel
+```
+
+Sampling kan göras med kommandot __sample()__:
+```{r,results="hide"}
+# Sampla en vektor
+vektor <- c(1:1000)
+vektor_sample <- sample(vektor, 100)
+
+# Sampla rader ur en data.frame
+DT <- data.table(id=c(1:1000),namn=rep(c("Ny","Gammal"))) # Skapa tabell
+antalrader <- nrow(DT) # Antal rader i tabellen
+DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
+
+```
+<small>OBS! Ibland genererar R inget fel vid användning av __sort()__, men producerar felaktiga resultat. __sort()__ bör användas med stor försiktighet.</small>
+
 
 En grundläggande "vokabulär"
 ========================================================
@@ -197,6 +241,6 @@ type: section
 
 
 
-```{r}
+```{r,results="hide"}
 
 ```
