@@ -21,6 +21,16 @@ Lärandemål
 
 Datastrukturer
 ========================================================
+incremental: true
+
+- Vektorer
+  - Atomic vectors (`vector`)
+  - Listor (`list`)
+  - Faktorer (`factor`)
+- Matriser (`matrix`, `array`)
+- Data frames
+  - Data frame (`data.frame`)
+  - Data table (`data.table`)
 
 
 Subsetting
