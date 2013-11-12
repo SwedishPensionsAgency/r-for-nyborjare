@@ -25,6 +25,58 @@ Datastrukturer
 ========================================================
 type: section
 
+Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
+
+- Vektorer
+  - Atomic vectors (`vector`)
+  - Listor (`list`)
+  - Faktorer (`factor`)
+- Matriser (`matrix`, `array`)
+- Datatabeller
+  - Data frame (`data.frame`)
+  - Data table (`data.table`)
+
+Atomic vectors
+========================================================
+
+De vanligaste typerna av vektorer är:
+
+
+```r
+logical <- c(T, FALSE, TRUE, FALSE)
+numeric <- c(1, 2.5, 4.5)
+integer <- c(1L, 6L, 10L)
+character <- c("these are", "some strings")
+```
+
+
+Vanliga vektorer är inte "nestade": 
+
+
+```r
+c(1, c(2, c(3, 4)))
+```
+
+```
+[1] 1 2 3 4
+```
+
+```r
+c(1, 2, 3, 4)
+```
+
+```
+[1] 1 2 3 4
+```
+
+
+
+Läs mer om datastrukturer
+========================================================
+
+- [Advanced R programming - Data structures](http://adv-r.had.co.nz/Data-structures.html)
+
+
 Subsetting
 ========================================================
 type: section
