@@ -35,15 +35,12 @@ type: section
 Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
 
 - Vektorer
-  - Atomic vectors (`vector`)
-  - Listor (`list`)
-  - Faktorer (`factor`)
-- Matriser (`matrix`, `array`)
-- Datatabeller
-  - Data frame (`data.frame`)
-  - Data table (`data.table`)
+- Listor
+- Faktorer
+- Matriser
+- "Data frames"
 
-Atomic vectors
+Vektorer
 ========================================================
 
 De vanligaste typerna av vektorer är:
@@ -108,12 +105,12 @@ str(x)
 ```
 
 
-Namn
+Attribut och namn
 ========================================================
 
-Alla objekt kan ha attribut kopplade till sig. Ett vanligt sådant är till exempel list- eller vektornamn.
+Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
 
-### Vektorer 
+__Vektorer__
 
 ```{r}
 x <- c(a = 1, b = 2, c = 3)
@@ -127,8 +124,7 @@ Man kan även ändra eller lägga till namn i efterhand:
 names(x) <- c("x", "y", "z")
 ```
 
-
-### Listor
+__Listor__
 
 ```{r}
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
