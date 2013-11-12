@@ -5,13 +5,14 @@ css: css/slides.css
 
 Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten
 
-18 november, 2014
+18 november, 2013
 
 
 Lärandemål
 ========================================================
 type: section
 
+- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
 - Sammanställa deskriptiv statistik om data med enklare funktioner
 - Använda ggplot och grafiska funktioner för deskription och exploration av data
 - Använda och förstå ett flertal datastrukturer
@@ -68,7 +69,7 @@ type: section
 
 När vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
 
-Vår metod för att hämta ut delar av data beror på vilken __datatyp__ vi använder oss av.
+Valet av metod för att hämta ut delar av data beror på vilken __datatyp__ vi använder oss av.
 
 R erbjuder __flera metoder__ för att hämta ut data för varje datatyp.
 
@@ -107,6 +108,7 @@ ll[[1]]
 data.frame()
 ========================================================
 
+data.frame är R:s grundläggande datastruktur för data på tabellform.
 
 Data:
 ```{r,results="hide"}
@@ -117,9 +119,9 @@ value=c("Love", "Thomas", "Ole"))
 
 Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
 ```{r,results="hide"}
-DF[c(1,2),]
-DF[,c("value")]
-DF[DF$value=="Ole",]
+DF[c(1,2),] # Väljer raderna 1 och 2
+DF[,c("value")] # Väljer kolumnen "value"
+DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
 ```
 
 data.table()
@@ -127,15 +129,18 @@ data.table()
 
 data.table fungerar ungefär som data.frame, men skiljer sig i vissa detaljer.
 
-```{r}
-DT <- data.table(id=c(1:3),
+```{r,results="hide"}
+DT <- data.table(id=c(4:6),
 value=c("Cédric", "Elin", "Ingemar"))
 ```
 
-
-```{r}
-
+Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
+```{r,results="hide"}
+DT[c(1:2)] # Väljer raderna 1 och 2
+DT[,list(value)] # Väljer kolumnen "value"
+DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ```
+<small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
 
 En grundläggande "vokabulär"
 ========================================================
