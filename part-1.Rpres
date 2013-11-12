@@ -1,6 +1,7 @@
 Grundkurs i R
 ========================================================
 transition: linear
+css: css/slides.css
 
 Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten
 
@@ -37,27 +38,30 @@ Enkla vektorer
 
 Data:
 ```{r}
-x <- c(2.1, 4.2, 3.3, 5.4)
+x <- c(aa=2.1, bb=4.2, cc=3.3, dd=5.4)
 ```
 
 Metoder för dataextrahering:
 ```{r}
-x[c(1,2)]
-x[order(x)]
+x[c(1,2)] # Välj ett eller flera element
+x[order(x)] # Välj alla element, sorterade
+x[['aa']] # Välj ett, namngivet eller numrerat, element
 ```
 
 Listor
 ========================================================
 
+Listor fungerar ungefär som vektorer, men samma metoder fungerar inte alltid.
+
 Data:
 ```{r}
-x <- c(2.1, 4.2, 3.3, 5.4)
+ll <- list(2.1, 4.2, 3.3, 5.4)
 ```
 
 Metoder för dataextrahering:
 ```{r}
-x[c(1,2)]
-x[order(x)]
+ll[c(1,2)]
+
 ```
 
 
