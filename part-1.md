@@ -57,11 +57,11 @@ character <- c("these are", "some strings")
 ```
 
 
-Vanliga vektorer är inte "nestade": 
+Man kan lägga samman vektorer och de "plattas" då ut:
 
 
 ```r
-c(1, c(2, c(3, 4)))
+c(1, 2, 3, 4)
 ```
 
 ```
@@ -69,7 +69,7 @@ c(1, c(2, c(3, 4)))
 ```
 
 ```r
-c(1, 2, 3, 4)
+c(1, c(2, c(3, 4)))
 ```
 
 ```
@@ -150,6 +150,75 @@ c(1, T, F)
 
 
 När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
+
+
+Listor
+========================================================
+
+Listor kan innehålla olika typer av vektorer:
+
+
+```r
+x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
+```
+
+
+Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
+
+
+```r
+x <- list(list(1,2), list("a","b","c"), 5:9)
+str(x)
+```
+
+```
+List of 3
+ $ :List of 2
+  ..$ : num 1
+  ..$ : num 2
+ $ :List of 3
+  ..$ : chr "a"
+  ..$ : chr "b"
+  ..$ : chr "c"
+ $ : int [1:5] 5 6 7 8 9
+```
+
+
+
+Namn på vektorer och listor
+========================================================
+
+### Vektorer 
+
+
+```r
+x <- c(a = 1, b = 2, c = 3)
+x <- c("a" = 1, "b" = 2, "c" = 3)
+x
+```
+
+```
+a b c 
+1 2 3 
+```
+
+
+Man kan även ändra eller lägga till namn i efterhand:
+
+
+```r
+names(x) <- c("x", "y", "z")
+```
+
+
+
+### Listor
+
+
+```r
+x <- list(a = 1, b = 2, list(c = 3, d = 4))
+```
+
 
 
 Läs mer om datastrukturer
