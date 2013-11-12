@@ -46,45 +46,106 @@ Vektorer
 
 De vanligaste typerna av vektorer är:
 
-```{r}
+
+```r
 logical <- c(T, FALSE, TRUE, FALSE)
 numeric <- c(1, 2.5, 4.5)
 integer <- c(1L, 6L, 10L)
 character <- c("these are", "some strings")
 ```
 
+
 Man kan lägga samman vektorer och de "plattas" då ut:
 
-```{r}
+
+```r
 c(1, 2, 3, 4)
+```
+
+```
+[1] 1 2 3 4
+```
+
+```r
 c(1, c(2, c(3, 4)))
 ```
+
+```
+[1] 1 2 3 4
+```
+
 
 ========================================================
 
 För att testa eller se vilken datatyp en variabel är:
 
-```{r}
+
+```r
 typeof(integer)
+```
+
+```
+[1] "integer"
+```
+
+```r
 is.integer(integer)
+```
+
+```
+[1] TRUE
+```
+
+```r
 is.double(integer)
 ```
 
+```
+[1] FALSE
+```
+
+
 Man kan även kontrollera för om det är en vektor:
 
-```{r}
+
+```r
 is.vector(integer)
 ```
+
+```
+[1] TRUE
+```
+
 
 ========================================================
 
 Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
 
-```{r}
+
+```r
 c("a", 1)
+```
+
+```
+[1] "a" "1"
+```
+
+```r
 c("a", T)
+```
+
+```
+[1] "a"    "TRUE"
+```
+
+```r
 c(1, T, F)
 ```
+
+```
+[1] 1 1 0
+```
+
 
 När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
 
@@ -94,16 +155,32 @@ Listor
 
 Listor kan innehålla olika typer av vektorer:
 
-```{r}
+
+```r
 x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
 ```
 
+
 Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
 
-```{r}
+
+```r
 x <- list(list(1,2), list("a","b","c"), 5:9)
 str(x)
 ```
+
+```
+List of 3
+ $ :List of 2
+  ..$ : num 1
+  ..$ : num 2
+ $ :List of 3
+  ..$ : chr "a"
+  ..$ : chr "b"
+  ..$ : chr "c"
+ $ : int [1:5] 5 6 7 8 9
+```
+
 
 
 Attribut och namn
@@ -113,23 +190,34 @@ Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn fö
 
 __Vektorer__
 
-```{r}
+
+```r
 x <- c(a = 1, b = 2, c = 3)
 x <- c("a" = 1, "b" = 2, "c" = 3)
 x
 ```
 
+```
+a b c 
+1 2 3 
+```
+
+
 Man kan även ändra eller lägga till namn i efterhand:
 
-```{r}
+
+```r
 names(x) <- c("x", "y", "z")
 ```
 
+
 __Listor__
 
-```{r}
+
+```r
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
+
 
 
 Faktorer
@@ -137,17 +225,37 @@ Faktorer
 
 Faktorer inkluderar en slags uppslagstabell för kodvärden:
 
-```{r}
+
+```r
 x <- factor(c("a", "b", "b", "a"))
 x
+```
+
+```
+[1] a b b a
+Levels: a b
+```
+
+```r
 levels(x)
 ```
 
+```
+[1] "a" "b"
+```
+
+
 Observera att man **inte** kan kombinera två faktorvariabler:
 
-```{r}
+
+```r
 c(factor("a"), factor("b"))
 ```
+
+```
+[1] 1 1
+```
+
 
 Därför bör man vara extra varsam när man använder sig av faktorvariabler.
 
@@ -155,30 +263,35 @@ Därför bör man vara extra varsam när man använder sig av faktorvariabler.
 Matriser
 ========================================================
 
-```{r}
+
+```r
 matrix(1:6, ncol = 3)
+```
+
+```
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+```
+
+```r
 array(1:12, c(2, 3, 2))
 ```
 
+```
+, , 1
 
-Data frames
-========================================================
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
 
-`data.frame` är det vanligaste sättet att lagra data i R. Det flexibla tabellformatet gör det enkelt att bearbeta data och använda för dataanalys.
+, , 2
 
-```{r}
-data.frame(x = 1:3, y = c("a", "b", "c"))
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12
 ```
 
-Eftersom det kan vara problematiskt att jobba med faktorer, så kan man ange med argumentet `stringsAsFactors = FALSE` att text ska vara `character`:
-
-```{r}
-df <- data.frame(
-  x = 1:3, 
-  y = c("a", "b", "c"), 
-  stringsAsFactors = FALSE
-)
-```
 
 
 Läs mer om datastrukturer
@@ -214,16 +327,20 @@ Enkla vektorer
 ========================================================
 
 Data:
-```{r,results="hide"}
+
+```r
 x <- c(aa=2.1, bb=4.2, cc=3.3, dd=5.4)
 ```
 
+
 Metoder för dataextrahering:
-```{r,results="hide"}
+
+```r
 x[c(1,2)] # Välj ett eller flera element
 x[order(x)] # Välj alla element, sorterade
 x[['aa']] # Välj ett, namngivet eller numrerat, element
 ```
+
 
 
 Listor
@@ -232,16 +349,19 @@ Listor
 De metoder som fungerar för listor fungerar _oftast_ även för vektorer.
 
 Data:
-```{r,results="hide"}
+
+```r
 ll <- list(2.1, 4.2, 3.3, 5.4)
 ```
 
+
 Metoder för dataextrahering:
-```{r,results="hide"}
+
+```r
 ll[c(1,2)]
 ll[[1]]
-
 ```
+
 
 
 data.frame()
@@ -250,18 +370,22 @@ data.frame()
 data.frame är R:s grundläggande datastruktur för data på tabellform.
 
 Data:
-```{r,results="hide"}
+
+```r
 DF <- data.frame(id=c(1:3),
 value=c("Love", "Thomas", "Ole"))
 ```
 
 
+
 Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
-```{r,results="hide"}
+
+```r
 DF[c(1,2),] # Väljer raderna 1 och 2
 DF[,c("value")] # Väljer kolumnen "value"
 DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
 ```
+
 
 
 data.table()
@@ -269,17 +393,21 @@ data.table()
 
 data.table fungerar ungefär som data.frame, men skiljer sig i vissa detaljer.
 
-```{r,results="hide"}
+
+```r
 DT <- data.table(id=c(4:6),
 value=c("Cédric", "Elin", "Ingemar"))
 ```
 
+
 Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
-```{r,results="hide"}
+
+```r
 DT[c(1:2)] # Väljer raderna 1 och 2
 DT[,list(value)] # Väljer kolumnen "value"
 DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ```
+
 <small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
 
 Sortering och sampling
@@ -288,13 +416,16 @@ Sortering och sampling
 Två vanliga operationer på data är __sortering__ och __sampling__.
 
 Sortering görs, något kontraintuitivt, _inte_ med kommandot __sort()__ utan med kommandot __order()__:
-```{r,results="hide"}
+
+```r
 DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
 # DT[sort(DT$id2)] # Genererar ett fel
 ```
 
+
 Sampling kan göras med kommandot __sample()__:
-```{r,results="hide"}
+
+```r
 # Sampla en vektor
 vektor <- c(1:1000)
 vektor_sample <- sample(vektor, 100)
@@ -303,8 +434,8 @@ vektor_sample <- sample(vektor, 100)
 DT <- data.table(id=c(1:1000),namn=rep(c("Ny","Gammal"))) # Skapa tabell
 antalrader <- nrow(DT) # Antal rader i tabellen
 DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
-
 ```
+
 <small>OBS! Ibland genererar R inget fel vid användning av __sort()__, men producerar felaktiga resultat. __sort()__ bör användas med stor försiktighet.</small>
 
 
@@ -363,6 +494,5 @@ type: section
 
 
 
-```{r,results="hide"}
 
-```
+
