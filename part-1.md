@@ -1,63 +1,155 @@
 Grundkurs i R
 ========================================================
 transition: linear
+css: css/slides.css
 
 Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten
 
 18 november, 2014
 
 
-L‰randemÂl
+L√§randem√•l
 ========================================================
+type: section
 
-- Sammanst‰lla deskriptiv statistik om data med enklare funktioner
-- Anv‰nda ggplot och grafiska funktioner fˆr deskription och exploration av data
-- Anv‰nda och fˆrstÂ ett flertal datastrukturer
-- Installera och anv‰nda paket
-- H‰mta data frÂn olika k‰llor (Excel, MiDAS, Coldbir, Pedal)
+- Sammanst√§lla deskriptiv statistik om data med enklare funktioner
+- Anv√§nda ggplot och grafiska funktioner f√∂r deskription och exploration av data
+- Anv√§nda och f√∂rst√• ett flertal datastrukturer
+- Installera och anv√§nda paket
+- H√§mta data fr√•n olika k√§llor (Excel, MiDAS, Coldbir, Pedal)
 - Lagra data i olika format
-- Sj‰lvst‰ndigt inh‰mta ny kunskap och hitta svar pÂ frÂgor om R (vara en del av R:s community)
+- Sj√§lvst√§ndigt inh√§mta ny kunskap och hitta svar p√• fr√•gor om R (vara en del av R:s community)
 
 
 Datastrukturer
 ========================================================
-
+type: section
 
 Subsetting
 ========================================================
+type: section
 
+N√§r vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
 
-En grundl‰ggande "vokabul‰r"
+V√•r metod f√∂r att h√§mta ut delar av data beror p√• vilken __datatyp__ vi anv√§nder oss av.
+
+R erbjuder __flera metoder__ f√∂r att h√§mta ut data f√∂r varje datatyp.
+
+Enkla vektorer
 ========================================================
+
+Data:
+
+```r
+x <- c(aa=2.1, bb=4.2, cc=3.3, dd=5.4)
+```
+
+
+Metoder f√∂r dataextrahering:
+
+```r
+x[c(1,2)] # V√§lj ett eller flera element
+x[order(x)] # V√§lj alla element, sorterade
+x[['aa']] # V√§lj ett, namngivet eller numrerat, element
+```
+
+
+Listor
+========================================================
+
+De metoder som fungerar f√∂r listor fungerar _oftast_ √§ven f√∂r vektorer.
+
+Data:
+
+```r
+ll <- list(2.1, 4.2, 3.3, 5.4)
+```
+
+
+Metoder f√∂r dataextrahering:
+
+```r
+ll[c(1,2)]
+ll[[1]]
+```
+
+
+data.frame()
+========================================================
+
+
+Data:
+
+```r
+DF <- data.frame(id=c(1:3),
+value=c("Love", "Thomas", "Ole"))
+```
+
+
+
+Urval kan g√∂ras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
+
+```r
+DF[c(1,2),]
+DF[,c("value")]
+DF[DF$value=="Ole",]
+```
+
+
+data.table()
+========================================================
+
+data.table fungerar ungef√§r som data.frame, men skiljer sig i vissa detaljer.
+
+
+```r
+DT <- data.table(id=c(1:3),
+value=c("C√©dric", "Elin", "Ingemar"))
+```
+
+
+
+
+
+
+En grundl√§ggande "vokabul√§r"
+========================================================
+type: section
 
 20-30 funktioner (?) ur Hadleys "Vocabulary"-avsnitt
 
 
 Funktioner
 ========================================================
+type: section
 
 
 Pakethantering
 ========================================================
+type: section
 
 
 Grafik och dataanalys
 ========================================================
+type: section
 
 - ggplot2
 
 
-Externa datak‰llor
+Externa datak√§llor
 ========================================================
+type: section
 
 
 
-Best practices fˆr programdesign
+Best practices f√∂r programdesign
 ========================================================
+type: section
 
 
-Att l‰ra sig mer om R
+Att l√§ra sig mer om R
 ========================================================
+type: section
 
 - R:s community
 - Stack Overflow
@@ -66,7 +158,14 @@ Att l‰ra sig mer om R
 
 Avslutning och utblick
 ========================================================
+type: section
 
 
 Kurslitteratur
 ========================================================
+type: section
+
+
+
+
+
