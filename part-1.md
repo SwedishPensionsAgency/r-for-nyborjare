@@ -22,6 +22,13 @@ type: section
 - Självständigt inhämta ny kunskap och hitta svar på frågor om R (vara en del av R:s community)
 
 
+Kurslitteratur
+=======================================================
+
+- [Advanced R programming](http://adv-r.had.co.nz) av Hadley Wickham
+
+
+
 Datastrukturer
 ========================================================
 type: section
@@ -29,15 +36,12 @@ type: section
 Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
 
 - Vektorer
-  - Atomic vectors (`vector`)
-  - Listor (`list`)
-  - Faktorer (`factor`)
-- Matriser (`matrix`, `array`)
-- Datatabeller
-  - Data frame (`data.frame`)
-  - Data table (`data.table`)
+- Listor
+- Faktorer
+- Matriser
+- "Data frames"
 
-Atomic vectors
+Vektorer
 ========================================================
 
 De vanligaste typerna av vektorer är:
@@ -51,16 +55,8 @@ character <- c("these are", "some strings")
 ```
 
 
-Vanliga vektorer är inte "nestade": 
+Man kan lägga samman vektorer och de "plattas" då ut:
 
-
-```r
-c(1, c(2, c(3, 4)))
-```
-
-```
-[1] 1 2 3 4
-```
 
 ```r
 c(1, 2, 3, 4)
@@ -70,12 +66,236 @@ c(1, 2, 3, 4)
 [1] 1 2 3 4
 ```
 
+```r
+c(1, c(2, c(3, 4)))
+```
+
+```
+[1] 1 2 3 4
+```
+
+
+========================================================
+
+För att testa eller se vilken datatyp en variabel är:
+
+
+```r
+typeof(integer)
+```
+
+```
+[1] "integer"
+```
+
+```r
+is.integer(integer)
+```
+
+```
+[1] TRUE
+```
+
+```r
+is.double(integer)
+```
+
+```
+[1] FALSE
+```
+
+
+Man kan även kontrollera för om det är en vektor:
+
+
+```r
+is.vector(integer)
+```
+
+```
+[1] TRUE
+```
+
+
+========================================================
+
+Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
+
+
+```r
+c("a", 1)
+```
+
+```
+[1] "a" "1"
+```
+
+```r
+c("a", T)
+```
+
+```
+[1] "a"    "TRUE"
+```
+
+```r
+c(1, T, F)
+```
+
+```
+[1] 1 1 0
+```
+
+
+När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
+
+
+Listor
+========================================================
+
+Listor kan innehålla olika typer av vektorer:
+
+
+```r
+x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
+```
+
+
+Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
+
+
+```r
+x <- list(list(1,2), list("a","b","c"), 5:9)
+str(x)
+```
+
+```
+List of 3
+ $ :List of 2
+  ..$ : num 1
+  ..$ : num 2
+ $ :List of 3
+  ..$ : chr "a"
+  ..$ : chr "b"
+  ..$ : chr "c"
+ $ : int [1:5] 5 6 7 8 9
+```
+
+
+
+Attribut och namn
+========================================================
+
+Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
+
+__Vektorer__
+
+
+```r
+x <- c(a = 1, b = 2, c = 3)
+x <- c("a" = 1, "b" = 2, "c" = 3)
+x
+```
+
+```
+a b c 
+1 2 3 
+```
+
+
+Man kan även ändra eller lägga till namn i efterhand:
+
+
+```r
+names(x) <- c("x", "y", "z")
+```
+
+
+__Listor__
+
+
+```r
+x <- list(a = 1, b = 2, list(c = 3, d = 4))
+```
+
+
+
+Faktorer
+========================================================
+
+Faktorer inkluderar en slags uppslagstabell för kodvärden:
+
+
+```r
+x <- factor(c("a", "b", "b", "a"))
+x
+```
+
+```
+[1] a b b a
+Levels: a b
+```
+
+```r
+levels(x)
+```
+
+```
+[1] "a" "b"
+```
+
+
+Observera att man **inte** kan kombinera två faktorvariabler:
+
+
+```r
+c(factor("a"), factor("b"))
+```
+
+```
+[1] 1 1
+```
+
+
+Därför bör man vara extra varsam när man använder sig av faktorvariabler.
+
+
+Matriser
+========================================================
+
+
+```r
+matrix(1:6, ncol = 3)
+```
+
+```
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+```
+
+```r
+array(1:12, c(2, 3, 2))
+```
+
+```
+, , 1
+
+     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6
+
+, , 2
+
+     [,1] [,2] [,3]
+[1,]    7    9   11
+[2,]    8   10   12
+```
+
 
 
 Läs mer om datastrukturer
 ========================================================
-
-- [Advanced R programming - Data structures](http://adv-r.had.co.nz/Data-structures.html)
 
 
 Subsetting
