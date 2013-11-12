@@ -55,6 +55,34 @@ c(1, c(2, c(3, 4)))
 c(1, 2, 3, 4)
 ```
 
+========================================================
+
+För att testa eller se vilken datatyp en variabel är:
+
+```{r}
+typeof(integer)
+is.integer(integer)
+is.double(integer)
+```
+
+Man kan även kontrollera för om det är en vektor:
+
+```{r}
+is.vector(integer)
+```
+
+========================================================
+
+Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
+
+```{r}
+c("a", 1)
+c("a", T)
+c(1, T, F)
+```
+
+När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
+
 
 Läs mer om datastrukturer
 ========================================================
