@@ -160,6 +160,26 @@ array(1:12, c(2, 3, 2))
 ```
 
 
+Data frames
+========================================================
+
+`data.frame` är det vanligaste sättet att lagra data i R. Det flexibla tabellformatet gör det enkelt att bearbeta data och använda för dataanalys.
+
+```{r}
+data.frame(x = 1:3, y = c("a", "b", "c"))
+```
+
+Eftersom det kan vara problematiskt att jobba med faktorer, så kan man ange med argumentet `stringsAsFactors = FALSE` att text ska vara `character`:
+
+```{r}
+df <- data.frame(
+  x = 1:3, 
+  y = c("a", "b", "c"), 
+  stringsAsFactors = FALSE
+)
+```
+
+
 Läs mer om datastrukturer
 ========================================================
 
