@@ -1,4 +1,5 @@
 .html
-*.md
+.md
 /figure
 .Rproj.user
+part-1.md

@@ -5,13 +5,14 @@ css: css/slides.css
 
 Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten
 
-18 november, 2014
+18 november, 2013
 
 
 Lärandemål
 ========================================================
 type: section
 
+- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
 - Sammanställa deskriptiv statistik om data med enklare funktioner
 - Använda ggplot och grafiska funktioner för deskription och exploration av data
 - Använda och förstå ett flertal datastrukturer
@@ -83,9 +84,24 @@ type: section
 
 När vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
 
-Vår metod för att hämta ut delar av data beror på vilken __datatyp__ vi använder oss av.
+Valet av metod för att hämta ut delar av data beror på vilken __datatyp__ vi använder oss av.
 
 R erbjuder __flera metoder__ för att hämta ut data för varje datatyp.
+
+Grundläggande operationer
+========================================================
+
+Data i R lagras i en __datastruktur__. Om vi anropar hela strukturen får vi, vanligtvis, ut _all_ data i strukturen.
+
+För att hämta delar av data ur en struktur använder vi metoder kallade __operatorer__ på strukturen.
+
+Det finns tre sådana operatorer:
+- __[__: Hämta ett subset av data som matchar en uppsättning kriterier
+- __[[__: Hämta ett enda namngivet värde ur en datastruktur
+- __$__: Hämta en namngiven variabel/kolumn ur en sammansatt datastruktur
+
+Operatorerna anges direkt efter ett anrop av en datastruktur, på formen __mindata$id__ eller __minlista[2]__.
+
 
 Enkla vektorer
 ========================================================
@@ -104,6 +120,7 @@ x[c(1,2)] # Välj ett eller flera element
 x[order(x)] # Välj alla element, sorterade
 x[['aa']] # Välj ett, namngivet eller numrerat, element
 ```
+
 
 
 Listor
@@ -126,9 +143,11 @@ ll[[1]]
 ```
 
 
+
 data.frame()
 ========================================================
 
+data.frame är R:s grundläggande datastruktur för data på tabellform.
 
 Data:
 
@@ -142,10 +161,11 @@ value=c("Love", "Thomas", "Ole"))
 Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
 
 ```r
-DF[c(1,2),]
-DF[,c("value")]
-DF[DF$value=="Ole",]
+DF[c(1,2),] # Väljer raderna 1 och 2
+DF[,c("value")] # Väljer kolumnen "value"
+DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
 ```
+
 
 
 data.table()
@@ -155,13 +175,48 @@ data.table fungerar ungefär som data.frame, men skiljer sig i vissa detaljer.
 
 
 ```r
-DT <- data.table(id=c(1:3),
+DT <- data.table(id=c(4:6),
 value=c("Cédric", "Elin", "Ingemar"))
 ```
 
 
+Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
+
+```r
+DT[c(1:2)] # Väljer raderna 1 och 2
+DT[,list(value)] # Väljer kolumnen "value"
+DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
+```
+
+<small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
+
+Sortering och sampling
+========================================================
+
+Två vanliga operationer på data är __sortering__ och __sampling__.
+
+Sortering görs, något kontraintuitivt, _inte_ med kommandot __sort()__ utan med kommandot __order()__:
+
+```r
+DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
+# DT[sort(DT$id2)] # Genererar ett fel
+```
 
 
+Sampling kan göras med kommandot __sample()__:
+
+```r
+# Sampla en vektor
+vektor <- c(1:1000)
+vektor_sample <- sample(vektor, 100)
+
+# Sampla rader ur en data.frame
+DT <- data.table(id=c(1:1000),namn=rep(c("Ny","Gammal"))) # Skapa tabell
+antalrader <- nrow(DT) # Antal rader i tabellen
+DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
+```
+
+<small>OBS! Ibland genererar R inget fel vid användning av __sort()__, men producerar felaktiga resultat. __sort()__ bör användas med stor försiktighet.</small>
 
 
 En grundläggande "vokabulär"
