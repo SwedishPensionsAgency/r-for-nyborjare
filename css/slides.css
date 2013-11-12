@@ -30,10 +30,11 @@
 
 .reveal .slides {
   text-align: left;
+  font-size: 0.85em;
 }
 
 .reveal small {
-	font-size: 0.85em;
+	font-size: 0.65em;
 }
 
 .reveal pre {   
