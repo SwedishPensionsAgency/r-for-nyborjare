@@ -127,7 +127,7 @@
 .section .reveal h2,
 .section .reveal p {
    color: white;
-   margin-top: 50px;
+   margin-top: 0px;
 }
 
 .sub-section .reveal .state-background {

@@ -175,35 +175,15 @@ Metoder för dataextrahering:
 
 ```r
 x[c(1,2)] # Välj ett eller flera element
-```
-
-```
- aa  bb 
-2.1 4.2 
-```
-
-```r
 x[order(x)] # Välj alla element, sorterade
-```
-
-```
- aa  cc  bb  dd 
-2.1 3.3 4.2 5.4 
-```
-
-```r
 x[['aa']] # Välj ett, namngivet eller numrerat, element
-```
-
-```
-[1] 2.1
 ```
 
 
 Listor
 ========================================================
 
-Listor fungerar ungefär som vektorer, men samma metoder fungerar inte alltid.
+De metoder som fungerar för listor fungerar _oftast_ även för vektorer.
 
 Data:
 
@@ -216,15 +196,45 @@ Metoder för dataextrahering:
 
 ```r
 ll[c(1,2)]
+ll[[1]]
 ```
 
-```
-[[1]]
-[1] 2.1
 
-[[2]]
-[1] 4.2
+data.frame()
+========================================================
+
+
+Data:
+
+```r
+DF <- data.frame(id=c(1:3),
+value=c("Love", "Thomas", "Ole"))
 ```
+
+
+
+Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
+
+```r
+DF[c(1,2),]
+DF[,c("value")]
+DF[DF$value=="Ole",]
+```
+
+
+data.table()
+========================================================
+
+data.table fungerar ungefär som data.frame, men skiljer sig i vissa detaljer.
+
+
+```r
+DT <- data.table(id=c(1:3),
+value=c("Cédric", "Elin", "Ingemar"))
+```
+
+
+
 
 
 
