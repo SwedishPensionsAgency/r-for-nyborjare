@@ -10,6 +10,7 @@ Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten
 
 Lärandemål
 ========================================================
+type: section
 
 - Sammanställa deskriptiv statistik om data med enklare funktioner
 - Använda ggplot och grafiska funktioner för deskription och exploration av data
@@ -22,10 +23,11 @@ Lärandemål
 
 Datastrukturer
 ========================================================
-
+type: section
 
 Subsetting
 ========================================================
+type: section
 
 När vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
 
@@ -67,35 +69,42 @@ ll[c(1,2)]
 
 En grundläggande "vokabulär"
 ========================================================
+type: section
 
 20-30 funktioner (?) ur Hadleys "Vocabulary"-avsnitt
 
 
 Funktioner
 ========================================================
+type: section
 
 
 Pakethantering
 ========================================================
+type: section
 
 
 Grafik och dataanalys
 ========================================================
+type: section
 
 - ggplot2
 
 
 Externa datakällor
 ========================================================
+type: section
 
 
 
 Best practices för programdesign
 ========================================================
+type: section
 
 
 Att lära sig mer om R
 ========================================================
+type: section
 
 - R:s community
 - Stack Overflow
@@ -104,11 +113,12 @@ Att lära sig mer om R
 
 Avslutning och utblick
 ========================================================
+type: section
 
 
 Kurslitteratur
 ========================================================
-
+type: section
 
 
 
