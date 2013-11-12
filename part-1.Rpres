@@ -108,8 +108,10 @@ str(x)
 ```
 
 
-Namn på vektorer och listor
+Namn
 ========================================================
+
+Alla objekt kan ha attribut kopplade till sig. Ett vanligt sådant är till exempel list- eller vektornamn.
 
 ### Vektorer 
 
@@ -131,6 +133,26 @@ names(x) <- c("x", "y", "z")
 ```{r}
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
+
+
+Faktorer
+========================================================
+
+Faktorer inkluderar en slags uppslagstabell för kodvärden:
+
+```{r}
+x <- factor(c("a", "b", "b", "a"))
+x
+levels(x)
+```
+
+Observera att man **inte** kan kombinera två faktorvariabler:
+
+```{r}
+c(factor("a"), factor("b"))
+```
+
+Därför bör man vara extra varsam när man använder sig av faktorvariabler.
 
 
 Läs mer om datastrukturer
