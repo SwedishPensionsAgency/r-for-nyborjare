@@ -21,6 +21,13 @@ type: section
 - Självständigt inhämta ny kunskap och hitta svar på frågor om R (vara en del av R:s community)
 
 
+Kurslitteratur
+=======================================================
+
+- [Advanced R programming](http://adv-r.had.co.nz) av Hadley Wickham
+
+
+
 Datastrukturer
 ========================================================
 type: section
@@ -86,8 +93,6 @@ När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `
 
 Läs mer om datastrukturer
 ========================================================
-
-- [Advanced R programming - Data structures](http://adv-r.had.co.nz/Data-structures.html)
 
 
 Subsetting
