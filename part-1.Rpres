@@ -26,6 +26,40 @@ Datastrukturer
 Subsetting
 ========================================================
 
+När vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
+
+Vår metod för att hämta ut delar av data beror på vilken __datatyp__ vi använder oss av.
+
+R erbjuder __flera metoder__ för att hämta ut data för varje datatyp.
+
+Enkla vektorer
+========================================================
+
+Data:
+```{r}
+x <- c(2.1, 4.2, 3.3, 5.4)
+```
+
+Metoder för dataextrahering:
+```{r}
+x[c(1,2)]
+x[order(x)]
+```
+
+Listor
+========================================================
+
+Data:
+```{r}
+x <- c(2.1, 4.2, 3.3, 5.4)
+```
+
+Metoder för dataextrahering:
+```{r}
+x[c(1,2)]
+x[order(x)]
+```
+
 
 En grundläggande "vokabulär"
 ========================================================
@@ -70,3 +104,10 @@ Avslutning och utblick
 
 Kurslitteratur
 ========================================================
+
+
+
+
+```{r}
+
+```
