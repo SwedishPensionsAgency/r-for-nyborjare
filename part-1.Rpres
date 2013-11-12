@@ -262,6 +262,7 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ```
 <small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
 
+
 Sortering och sampling
 ========================================================
 
@@ -292,13 +293,114 @@ En grundläggande "vokabulär"
 ========================================================
 type: section
 
-20-30 funktioner (?) ur Hadleys "Vocabulary"-avsnitt
+20-30 funktioner (?) ur Hadleys "Vocabulary"-```avsnitt```
 
+Grunderna
+========================================================
+```r
+# De första funktionerna att lära sig
+?
+str
+
+# Operatorer
+%in%, match
+=, <-
+head, tail
+
+# Logik
+&, |, !, xor
+all, any
+
+# Flödeskontroll
+if, &, |
+for, while
+
+```
+
+Matematik
+========================================================
+```r
+# Jämförelser
+!=, ==, >, >=, <, <=
+is.na
+
+# Grundläggande matematik
+max, min, prod, sum
+mean, median, cor, sd, var
+```
+
+Datatyper
+========================================================
+```r
+# Vektorer och matriser
+c, matrix
+length, dim, ncol, nrow
+cbind, rbind
+names, colnames, rownames
+
+# Konverteringar
+as.data.frame, as.list, as.character, as.numeric
+
+# Städning och minneshantering
+rm
+gc
+memory.size
+tables
+
+```
+
+
+I/O
+========================================================
+```r
+# Output
+print, cat
+
+# Läsa och skriva data
+data
+read.csv, write.csv,
+fread
+load, save
+library(foreign)
+```
 
 Funktioner
 ========================================================
 type: section
 
+En viktig del av att utveckla i R är att arbeta med, och skapa, __funktioner__.
+
+Funktioner används för att __återanvända kod__, hantera __tillfällig minnesanvändning__ och att skapa en __strukturerad programsyntax__.
+
+Funktioner kan, med lite god vilja, liknas vid ett SAS-makro. Åtminstone om man bortser från att SAS-makron inte följer samma syntax som vanlig SAS-kod.
+
+
+Att skriva funktioner
+========================================================
+En funktion består av en __deklaration__, en __body__ och 
+
+Exempel på funktioner
+========================================================
+```{r}
+sq <- function(x) {
+   x^2
+}
+
+sq(5)
+
+```
+
+```{r}
+binom_coeff <- function(x,y) {
+   numerator <- factorial(x)
+   denominator <- factorial(y) * factorial(x-y)
+   
+   return(numerator/denominator)
+}
+
+binom_coeff(3,3)
+
+```
 
 Pakethantering
 ========================================================

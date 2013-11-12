@@ -119,6 +119,9 @@
   margin-left: 12px;
 }
 
+/******
+* Set background color for 'section' slides here *
+*******/
 .section .reveal .state-background {
    background: #96A2B6;
 }
