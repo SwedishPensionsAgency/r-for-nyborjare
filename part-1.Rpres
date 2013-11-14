@@ -450,10 +450,11 @@ Paketet har som mål att med lite kod och simpel syntax erbjuda snabb läs-/skri
 
 Dessutom finns stöd för hantering av dokumentation (t.ex. beskrivning av variabler).
 
-För installation från GitHub:
+Installera och ladda paket:
 
 ```{r}
-devtools::install_github('Coldbir', 'SthlmR')
+# devtools::install_github('Coldbir', 'SthlmR')
+library(Coldbir)
 ```
 
 Skapa ny databaskoppling och ange sökväg:
