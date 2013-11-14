@@ -448,6 +448,8 @@ Coldbir är en kolumndatabas i R - en vidareutveckling av tidigare midAUX (MIDAS
 
 Paketet har som mål att med lite kod och simpel syntax erbjuda snabb läs-/skrivhastighet, för att göra det enklare och snabbare att analysera data i R.
 
+Dessutom finns stöd för hantering av dokumentation (t.ex. beskrivning av variabler).
+
 För installation från GitHub:
 
 ```{r}
