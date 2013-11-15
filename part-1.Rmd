@@ -110,11 +110,9 @@ str(x)
 
 Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
 
-__Vektorer__
-
 ```{r}
-x <- c(a = 1, b = 2, c = 3)
-x <- c("a" = 1, "b" = 2, "c" = 3)
+# Vektorer
+x <- c(a = 1, b = 2, "c" = 3)
 x
 ```
 
@@ -124,9 +122,8 @@ Man kan även ändra eller lägga till namn i efterhand:
 names(x) <- c("x", "y", "z")
 ```
 
-__Listor__
-
 ```{r}
+# Listor
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
 
@@ -142,13 +139,15 @@ x
 levels(x)
 ```
 
-Observera att man **inte** kan kombinera två faktorvariabler:
+---
+
+**Observera** att man **INTE** bör kombinera två faktorvariabler:
 
 ```{r}
 c(factor("a"), factor("b"))
 ```
 
-Därför bör man vara extra varsam när man använder sig av faktorvariabler.
+Därför kan det ofta vara bättre att jobba med `character` snarare än `factor`.
 
 ---
 
