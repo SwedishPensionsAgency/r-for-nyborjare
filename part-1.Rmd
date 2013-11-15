@@ -472,14 +472,13 @@ lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
 
 ### Installera nya paket
 
-Paket i R kan installeras via internet, eller via en nedladdad zip-fil. Allra enklast är att ladda ned paketen via R:s inbyggda pakethanterare:
-
+R har en inbyggd pakethantering som kan ladda ned och installera nya paket. De flesta paket är lagrade på __CRAN__ och kan installeras därifrån med funktionen `install.packages()`:
 
 ```{r, eval=F}
 install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
 ```
 
-Vissa paket är lagrade på open source-plattformen GitHub, och måste installeras därifrån:
+Vissa paket är lagrade på open source-plattformen __GitHub__, och installeras därifrån med hjälp av funktionen `install_github()` i `devtools`-paketet:
 
 ```{r,results="hide"}
 require(devtools)
@@ -490,7 +489,33 @@ install_github("Coldbir","SwedishPensionsAgency")
 
 ---
 
+## RStudio
 
+RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
+
+Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
+
+---
+
+### Utvärdera kod
+
+Genom att skriva namnet på en funktion utan parenteser visas funktionens kod direkt i R-terminalen:
+
+```{r, eval=F}
+lm # Visar källkoden för funktionen lm
+```
+
+RStudio innehåller även en __source browser__ som kan visa källkoden som ett skript. Browsern aktiveras genom att markera namnet på en funktion och trycka __F2__.
+
+Många primitiva funktioner i R är dock skrivna i C och redan färdigkompilerade, vilket gör att source browsern inte innehåller någon värdefull information.
+
+```{r, eval=F}
+sum # Källkoden till denna funktion kan inte visas
+```
+
+---
+
+### Visa hjälpfiler och dokumentation
 
 ---
 
