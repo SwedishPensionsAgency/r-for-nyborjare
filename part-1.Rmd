@@ -3,7 +3,7 @@ title: Grundkurs i R
 author: Love Hansson och Thomas Reinholdsson
 job: Pensionsmyndigheten
 widgets: [quiz]
-framework: io2012
+framework: shower
 mode: selfcontained
 hitheme: tomorrow
 ---
@@ -342,7 +342,7 @@ En grundläggande "vokabulär"
 ========================================================
 type: section
 
-20-30 funktioner (?) ur Hadleys "Vocabulary"-```avsnitt```
+Grundläggande funktioner i R
 
 ---
 
@@ -472,6 +472,49 @@ binom_coeff(3,3)
 Pakethantering
 ========================================================
 type: section
+
+R:s basfunktionalitet utvidgas med hjälp av funktioner.
+
+Dessa är lagrade i __paket__ som kan läsas in i på begäran.
+
+De flesta paket är lagrade på R-projektets paketserver __CRAN__.
+
+
+---
+
+Ladda ett paket i R
+========================================================
+
+Ett paket laddas med någon av funtionerna `require()` eller `library()`:
+
+```{r,results="hide"}
+require(stats)
+library(class)
+```
+
+De funktioner som ingår i paketet kan nu användas i R:
+
+```{r}
+x <- rnorm(1000,0,1) # Skapa 1000 värden ~ N(0,1)
+y <- rep(1:10,100) # Skapa indexvariabel
+
+lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
+```
+
+---
+
+Installera nya paket
+========================================================
+
+Paket i R kan installeras via internet, eller via en nedladdad zip-fil. Allra enklast är att ladda ned paketen via R:s inbyggda pakethanterare:
+```{r,results="hide"}
+install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
+```
+
+Vissa paket
+```{r,results="hide"}
+
+```
 
 ---
 
