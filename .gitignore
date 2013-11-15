@@ -1,5 +1,5 @@
-.html
-.md
+*.html
+*.md
 /figure
-.Rproj.user
-part-1.md
+*.Rproj.user
+/libraries
