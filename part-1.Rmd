@@ -511,7 +511,15 @@ sum # Källkoden till denna funktion kan inte visas
 
 ---
 
-### Visa hjälpfiler och dokumentation
+### Tabbkomplettering och hjälpfiler
+
+Genom att börja skriva namnet på en funktion och trycka på tabb-tangenten i RStudio visas en lista över de kommandon som liknar det som skrivits, samt en liten hjälptext.
+
+![bild]
+
+Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfil.
+
+![bild2]
 
 ---
 
