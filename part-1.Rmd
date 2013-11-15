@@ -701,33 +701,27 @@ Tänk på att de bör ha samma längd.
 
 ### Coldbir: MIDAS
 
-MIDAS-data har data för flera tidsperioder, och enda tillägget är att man då använder sig av `dims`, t.ex. för att läsa in `PGI` för december 2012:
-
-```{r, eval=F}
-a <- cdb("Q:/MIDAS", na = 0)
-pgi <- a["PGI", c(2012, 12)]
-```
-
-Som ni ser så kan man även ange `na = 0` för att ersätta `NA`-värden med `0`.
-
 Anslut till databas
 
 ```{r, eval=F}
 a <- cdb("//psysstat5w/G/MidasCDB", na = 0)
 ```
 
-type = "f" innebär att variabler läses in som faktorer då kodtabell finns tillgänglig.
+Som ni ser så kan man även ange `na = 0` för att ersätta `NA`-värden med `0`.
+
 Lista samtliga variabler
 
 ```{r, eval=F}
 get_vars(a)
 ```
 
-Ange dims = T för att inkludera dimensioner
+Ange `dims = T` för att inkludera dimensioner
 
 ```{r, eval=F}
 get_vars(a, dims = T)
 ```
+
+---
 
 Hämta data för variabel
 
@@ -738,7 +732,9 @@ head(x, 10)
 # Levels: Kvinna Man
 ```
 
-där a anger objektet för kopplingen till databasen, och därefter följer variabelnamn (case-sensitive) och val av dimension (2010). Om variabeln saknar dimensioner så hade anropet varit `a["KON"]`, eller med flera dimensioner `a["KON", c(2010, 12)]`.
+där `a` anger objektet för kopplingen till databasen, och därefter följer variabelnamn (case-sensitive) och val av dimension (`2012`). Om variabeln saknat dimensioner så hade anropet varit `a["KON"]`, eller med flera dimensioner `a["KON", c(2012, 12)]`.
+
+---
 
 Hämta variabeldokumentation:
 
@@ -752,13 +748,13 @@ För att hämta enbart titel:
 get_doc(a, "SEKTORTILLHORIGH")$title
 ```
 
-#### Fler exempel
-
 Antal individer per sektortillhörighet:
 
 ```{r, eval=F}
 table(a["SEKTORTILLHORIGH", 2010])
 ```
+
+---
 
 Skapa en barplot med samma fördelning:
 
@@ -771,6 +767,8 @@ barplot(freq, horiz = T, las = 1)
 ```
 
 ![](img/sektortillhorigh1.png)
+
+---
 
 Barplot med titel och källa:
 
