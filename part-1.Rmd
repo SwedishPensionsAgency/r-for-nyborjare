@@ -3,6 +3,7 @@ title: Grundkurs i R
 author: Love Hansson och Thomas Reinholdsson
 job: Pensionsmyndigheten
 widgets: [quiz]
+ext_widgets: {rCharts: "libraries/highcharts"}
 framework: io2012
 mode: selfcontained
 hitheme: tomorrow
@@ -19,13 +20,6 @@ hitheme: tomorrow
 - Hämta data från olika källor (Excel, MiDAS, Coldbir, Pedal)
 - Lagra data i olika format
 - Självständigt inhämta ny kunskap och hitta svar på frågor om R (vara en del av R:s community)
-
----
-
-
-## Kurslitteratur
-
-- [Advanced R programming](http://adv-r.had.co.nz) av Hadley Wickham
 
 ---
 
@@ -415,21 +409,16 @@ En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat)
 sq <- function(x) {
    x^2
 }
-
 sq(5)
-
 ```
 
 ```{r}
 binom_coeff <- function(x,y) {
    numerator <- factorial(x)
    denominator <- factorial(y) * factorial(x-y)
-   
    return(numerator/denominator)
 }
-
 binom_coeff(5,2)
-
 ```
 
 ---
@@ -459,7 +448,6 @@ De funktioner som ingår i paketet kan nu användas i R:
 ```{r}
 x <- rnorm(1000,0,1) # Skapa 1000 värden ~ N(0,1)
 y <- rep(1:10,100) # Skapa indexvariabel
-
 lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
 ```
 
@@ -475,7 +463,7 @@ install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
 
 Vissa paket är lagrade på open source-plattformen __GitHub__, och installeras därifrån med hjälp av funktionen `install_github()` i `devtools`-paketet:
 
-```{r,results="hide"}
+```{r, eval=F}
 require(devtools)
 
 # Installera Coldbir-paketet från GitHub
@@ -522,10 +510,75 @@ Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfi
 
 ---
 
-
 ## Grafik och dataanalys
 
 - ggplot2
+- iPlot
+- rCharts
+
+---
+
+### `ggplot2`
+
+Paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. Skapat av Hadley Wickham.
+
+Exempel på tillämpningsområden:
+- interaktivt direkt i R-konsolen
+- applikationer, t.ex. `iPlot`
+- publikationer, t.ex. Orange rapport
+
+Ladda paket:
+
+```{r, warning=F}
+library(ggplot2)
+```
+
+---
+
+#### Density plot
+
+```{r, warning=F}
+ggplot(diamonds, aes(depth, fill = cut)) + 
+   geom_density(alpha = 0.2) + xlim(55, 70)
+```
+
+---
+
+#### Histogram
+
+```{r, warning=F,message=F}
+ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
+```
+
+---
+
+#### Scatter plot
+
+```{r, warning=F,message=F}
+ggplot(diamonds, aes(x = price, y = depth, color = clarity)) + geom_point() + facet_grid(color ~ cut)
+```
+
+---
+
+### iPlot
+
+[http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+
+---
+
+### rCharts
+
+```{r, warning=F,message=F,results='asis',cache=F, echo=2:4}
+library(rCharts)
+a <- Highcharts$new()
+# ...
+a$chart(type = "spline")
+a$series(data = c(1, 3, 2, 4, 5, 4, 6, 2, 3, 5, NA), dashStyle = "longdash")
+a$series(data = c(NA, 4, 1, 3, 4, 2, 9, 1, 2, 3, 4), dashStyle = "shortdot")
+a$legend(symbolWidth = 80)
+
+a$print()
+```
 
 ---
 
@@ -592,10 +645,9 @@ Dessutom finns stöd för hantering av dokumentation (t.ex. beskrivning av varia
 
 ---
 
-Installera och ladda paket:
+Ladda paket:
 
 ```{r, eval=F}
-devtools::install_github('Coldbir', 'SthlmR')
 library(Coldbir)
 ```
 
@@ -662,8 +714,11 @@ Som ni ser så kan man även ange `na = 0` för att ersätta `NA`-värden med `0
 
 ---
 
-## Kurslitteratur
+## Kurslitteratur och referenser
 
-```{r,results="hide"}
+### Böcker
+- [Advanced R programming](http://adv-r.had.co.nz) av Hadley Wickham
 
-```
+### R-paket
+- `ggplot2` av Hadley Wickham
+- `slidify` av Ramnath Vaidyanathan
