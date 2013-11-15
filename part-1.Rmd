@@ -182,6 +182,22 @@ df <- data.frame(
 
 ---
 
+## Quiz
+
+1. Val1
+2. Val2
+3. Val3
+
+***.hint
+
+Testhint
+
+***.explanation
+
+Testförklaring
+
+---
+
 ## Subsetting
 
 När vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
@@ -787,13 +803,31 @@ barplot(freq, horiz = T, las = 1, main = paste(docs$title, year), sub = paste("K
 
 ## Att lära sig mer om R
 
-- R:s community
-- Stack Overflow
-- GitHub
+Att programmera är, framförallt i början, ofta att stöta på problem. Funktioner gör inte det man förväntat sig, man saknar kännedom om vissa metoder eller förstår inte viss syntax.
+
+En av styrkorna med R är det utomordentliga nätverk av engagerade och kunniga utvecklare som samlas kring vissa online-portaler, särskilt __GitHub__ och __StackOverflow__.
+
+Ofta är svaret på en fråga bara en Google-sökning bort. Det kan ibland vara svårt att veta exakt vad man ska söka på, men efter ett tag brukar det vara lätt att se ungefär vilken typ av sökning som ger bra svar.
+
+Ofta är den första träffen vid en googling en sida på [StackOverflow](http://www.stackoverflow.com/).
+
+![bild]
+
+---
+
+### Att söka efter mer information
+
+Det finns gott om böcker om R-programmering, men dessa är ofta helt onödiga för att lära sig R-programmering, särskilt i början.
+
+Genom att utveckla en bra sökteknik kan man ofta hitta svar på frågor blixtsnabbt.
+
+All kommunikation kring R sker i regel på engelska.
 
 ---
 
 ## Avslutning och utblick
+
+
 
 ---
 
