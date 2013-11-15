@@ -8,8 +8,8 @@ mode: selfcontained
 hitheme: tomorrow
 ---
 
-Grundkurs i R
-========================================================
+# Grundkurs i R
+
 transition: linear
 css: css/slides.css
 
@@ -19,8 +19,8 @@ Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten
 
 ---
 
-Lärandemål
-========================================================
+## Lärandemål
+
 type: section
 
 - Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
@@ -34,8 +34,8 @@ type: section
 
 ---
 
-Kurslitteratur
-=======================================================
+### Kurslitteratur
+
 
 - [Advanced R programming](http://adv-r.had.co.nz) av Hadley Wickham
 
@@ -302,6 +302,7 @@ value=c("Cédric", "Elin", "Ingemar"))
 ```
 
 Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
+
 ```{r,results="hide"}
 DT[c(1:2)] # Väljer raderna 1 och 2
 DT[,list(value)] # Väljer kolumnen "value"
@@ -386,6 +387,7 @@ mean, median, cor, sd, var
 
 Datatyper
 ========================================================
+
 ```r
 # Vektorer och matriser
 c, matrix
@@ -409,6 +411,7 @@ tables
 
 I/O
 ========================================================
+
 ```r
 # Output
 print, cat
@@ -463,7 +466,7 @@ binom_coeff <- function(x,y) {
    return(numerator/denominator)
 }
 
-binom_coeff(3,3)
+binom_coeff(5,2)
 
 ```
 
@@ -507,14 +510,23 @@ Installera nya paket
 ========================================================
 
 Paket i R kan installeras via internet, eller via en nedladdad zip-fil. Allra enklast är att ladda ned paketen via R:s inbyggda pakethanterare:
-```{r,results="hide"}
+
+```{r,results="hide",eval=FALSE}
 install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
 ```
 
-Vissa paket
-```{r,results="hide"}
+Vissa paket är lagrade på open source-plattformen GitHub, och måste installeras därifrån:
 
+```{r,results="hide"}
+require(devtools)
+
+# Installera Coldbir-paketet från GitHub
+install_github("Coldbir","SwedishPensionsAgency")
 ```
+
+---
+
+
 
 ---
 
