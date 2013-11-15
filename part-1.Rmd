@@ -9,6 +9,14 @@ mode: selfcontained
 hitheme: tomorrow
 ---
 
+## Om denna presentation
+
+- Vad är detta?
+- Hur rendera "PowerPoint" och hur rendera print-kopior (med hjälp av Whisker-parametrar)
+- Länkar till källkod
+
+---
+
 
 ## Lärandemål
 
@@ -93,7 +101,7 @@ x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
 
 Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
 
-```{r}
+```{r, eval=FALSE}
 x <- list(list(1,2), list("a","b","c"), 5:9)
 str(x)
 ```
@@ -104,7 +112,7 @@ str(x)
 
 Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
 
-```{r}
+```{r, eval=FALSE}
 # Vektorer
 x <- c(a = 1, b = 2, "c" = 3)
 x
@@ -112,11 +120,11 @@ x
 
 Man kan även ändra eller lägga till namn i efterhand:
 
-```{r}
+```{r, eval=FALSE}
 names(x) <- c("x", "y", "z")
 ```
 
-```{r}
+```{r, eval=FALSE}
 # Listor
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
@@ -127,7 +135,7 @@ x <- list(a = 1, b = 2, list(c = 3, d = 4))
 
 Faktorer inkluderar en slags uppslagstabell för kodvärden:
 
-```{r}
+```{r, eval=FALSE}
 x <- factor(c("a", "b", "b", "a"))
 x
 levels(x)
@@ -137,7 +145,7 @@ levels(x)
 
 **Observera** att man **INTE** bör kombinera två faktorvariabler:
 
-```{r}
+```{r, eval=FALSE}
 c(factor("a"), factor("b"))
 ```
 
@@ -147,7 +155,7 @@ Därför kan det ofta vara bättre att jobba med `character` snarare än `factor
 
 ### Matriser
 
-```{r}
+```{r, eval=FALSE}
 matrix(1:6, ncol = 3)
 array(1:12, c(2, 3, 2))
 ```
@@ -158,13 +166,13 @@ array(1:12, c(2, 3, 2))
 
 `data.frame` är det vanligaste sättet att lagra data i R. Det flexibla tabellformatet gör det enkelt att bearbeta data och använda för dataanalys.
 
-```{r}
+```{r, eval=FALSE}
 data.frame(x = 1:3, y = c("a", "b", "c"))
 ```
 
 Eftersom det kan vara problematiskt att jobba med faktorer, så kan man ange med argumentet `stringsAsFactors = FALSE` att text ska vara `character`:
 
-```{r}
+```{r, eval=FALSE}
 df <- data.frame(
   x = 1:3, 
   y = c("a", "b", "c"), 
@@ -273,7 +281,7 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 
 ---
 
-## Sortering och sampling
+### Sortering och sampling
 
 Två vanliga operationer på data är __sortering__ och __sampling__.
 
@@ -301,7 +309,9 @@ DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
 
 ## En grundläggande "vokabulär"
 
-Grundläggande funktioner i R
+Nyckeln till framgångsrik utveckling i R är att behärska ett antal __basfunktioner__ samt de metoder som är anpassade för det problem man vill lösa.
+
+I detta avsnitt går vi igenom en liten uppsättning kommandon som utgör en del av R:s basfunktionalitet.
 
 ---
 
@@ -405,14 +415,14 @@ En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat)
 
 ### Exempel på funktioner
 
-```{r}
+```{r, eval=FALSE}
 sq <- function(x) {
    x^2
 }
 sq(5)
 ```
 
-```{r}
+```{r, eval=FALSE}
 binom_coeff <- function(x,y) {
    numerator <- factorial(x)
    denominator <- factorial(y) * factorial(x-y)
@@ -438,14 +448,14 @@ De flesta paket är lagrade på R-projektets paketserver __CRAN__.
 
 Ett paket laddas med någon av funtionerna `require()` eller `library()`:
 
-```{r,results="hide", warning=F}
+```{r,results="hide", warning=F, eval=FALSE}
 require(stats)
 library(class)
 ```
 
 De funktioner som ingår i paketet kan nu användas i R:
 
-```{r}
+```{r, eval=FALSE}
 x <- rnorm(1000,0,1) # Skapa 1000 värden ~ N(0,1)
 y <- rep(1:10,100) # Skapa indexvariabel
 lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
@@ -477,6 +487,8 @@ install_github("Coldbir","SwedishPensionsAgency")
 RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
 
 Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
+
+![bild]
 
 ---
 
