@@ -54,7 +54,7 @@ character <- c("these are", "some strings")
 
 Man kan lägga samman vektorer och de "plattas" då ut:
 
-```{r}
+```{r, eval=FALSE}
 c(1, 2, 3, 4)
 c(1, c(2, c(3, 4)))
 ```
@@ -63,7 +63,7 @@ c(1, c(2, c(3, 4)))
 
 För att testa eller se vilken datatyp en variabel är:
 
-```{r}
+```{r, eval=FALSE}
 typeof(integer)
 is.integer(integer)
 is.double(integer)
@@ -71,7 +71,7 @@ is.double(integer)
 
 Man kan även kontrollera för om det är en vektor:
 
-```{r}
+```{r, eval=FALSE}
 is.vector(integer)
 ```
 
@@ -79,7 +79,7 @@ is.vector(integer)
 
 Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
 
-```{r}
+```{r, eval=FALSE}
 c("a", 1)
 c("a", T)
 c(1, T, F)
@@ -93,7 +93,7 @@ När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `
 
 Listor kan innehålla olika typer av vektorer:
 
-```{r}
+```{r, eval=FALSE}
 x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
 ```
 
