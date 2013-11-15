@@ -4,3 +4,4 @@
 *.Rproj.user
 /libraries
 .Rproj.user
+/.cache
