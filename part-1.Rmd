@@ -59,8 +59,6 @@ c(1, c(2, c(3, 4)))
 
 ---
 
-### Vektorer forts ...
-
 För att testa eller se vilken datatyp en variabel är:
 
 ```{r}
@@ -76,8 +74,6 @@ is.vector(integer)
 ```
 
 ---
-
-### Vektorer forts ...
 
 Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
 
@@ -487,8 +483,54 @@ Vissa paket
 
 ## Externa datakällor
 
-- pedal
-- XLConnect
+- Excel
+- SQL Server (t.ex. PEDAL)
+- Coldbir (t.ex. MIDAS)
+
+---
+
+### Excel
+
+För inläsning av textfiler så finns det funktioner i R man kan använda sig av, t.ex.:
+
+```{r, eval=F}
+x <- read.csv2("fil.csv")
+```
+
+Det finns motsvarande funktion för att skriva till CSV, se t.ex. `write.csv2`. Se även `*.table`, `*.delim2`.
+
+För inläsning av `xls` eller `xlsx` använd paketet `XLConnect`:
+
+```{r, eval=F}
+library(XLConnect)
+x <- readWorksheetFromFile("fil.xlsx", sheet = 1)
+```
+
+Läs mer: [XLConnect - A platform-independent interface to Excel](http://cran.r-project.org/web/packages/XLConnect/vignettes/XLConnect.pdf).
+
+---
+
+### SQL Server
+
+`RODBC`:
+
+```{r, eval=F}
+con <- odbcDriverConnect("driver=SQL Server; server=pedal")
+x <- sqlQuery("SELECT * FROM PedalDIM.Arende.Process")
+close(con)
+```
+
+`pmtools`:
+
+```{r, eval=F}
+x <- pedal_query("SELECT * FROM PedalDIM.Arende.Process")
+```
+
+alternativ, använd SQL-kod från fil:
+
+```{r, eval=F}
+x <- pedal_query(file = "process.sql")
+```
 
 ---
 
@@ -499,6 +541,8 @@ Coldbir är en kolumndatabas i R - en vidareutveckling av tidigare midAUX (MIDAS
 Paketet har som mål att med lite kod och simpel syntax erbjuda snabb läs-/skrivhastighet, för att göra det enklare och snabbare att analysera data i R.
 
 Dessutom finns stöd för hantering av dokumentation (t.ex. beskrivning av variabler).
+
+---
 
 Installera och ladda paket:
 
@@ -519,6 +563,8 @@ a <- cdb('Q:/myDatabase')
 a[] <- ggplot2::diamonds
 ```
 
+---
+
 Hämta dataset:
 
 ```{r, eval=F}
@@ -538,6 +584,8 @@ a["x_plus_y"] <- a["x"] + a["y"]
 ```
 
 Tänk på att de bör ha samma längd.
+
+---
 
 MIDAS-data har data för flera tidsperioder, och enda tillägget är att man då använder sig av `dims`, t.ex. för att läsa in `PGI` för december 2012:
 
