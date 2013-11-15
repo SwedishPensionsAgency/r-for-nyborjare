@@ -450,7 +450,7 @@ De flesta paket är lagrade på R-projektets paketserver __CRAN__.
 
 Ett paket laddas med någon av funtionerna `require()` eller `library()`:
 
-```{r,results="hide"}
+```{r,results="hide", warning=F}
 require(stats)
 library(class)
 ```
