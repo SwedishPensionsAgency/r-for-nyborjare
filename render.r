@@ -15,24 +15,23 @@ write_file <- function(str, file) {
    close(con)
 }
 
-render_html <- function(file, handout) {
-   str <- whisker.render(
-      read_file(file),
-      data = list(handout = handout)
-   )
-   
-   if (handout) {
-      rmd <- gsub(".template", "-handout.Rmd", file)
-   } else {
-      rmd <- gsub(".template", ".Rmd", file)
-   }
-   
-   write_file(str, rmd)
-   slidify(rmd)
-}
-
-# Create presentation
-render_html("part-1.template", F)
+file <- "part-1.template"
 
 # Create handout
-render_html("part-1.template", T)
+str <- whisker.render(read_file(file), data = list(
+   handout = T,
+   hitheme = "tomorrow"
+))
+rmd <- gsub(".template", "-handout.Rmd", file)
+write_file(str, rmd)
+slidify(rmd)
+
+# Create presentation
+str <- whisker.render(read_file(file), data = list(
+   handout = F,
+   hitheme = "sunburst"
+))
+rmd <- gsub(".template", "-presentation.Rmd", file)
+write_file(str, rmd)
+slidify(rmd)
+

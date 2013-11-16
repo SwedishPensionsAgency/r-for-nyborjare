@@ -6,7 +6,7 @@ widgets: [quiz]
 ext_widgets: {rCharts: "libraries/highcharts"}
 framework: io2012
 mode: selfcontained
-hitheme: tomorrow
+hitheme: {{hitheme}}
 ---
 
 ## Om denna presentation
