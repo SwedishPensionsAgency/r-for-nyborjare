@@ -15,23 +15,26 @@ write_file <- function(str, file) {
    close(con)
 }
 
-render_rmd <- function(file, handout) {
-   res <- whisker.render(
+render_html <- function(file, handout) {
+   str <- whisker.render(
       read_file(file),
       data = list(handout = handout)
    )
-   return(res)
+   
+   if (handout) {
+      rmd <- gsub(".template", "-handout.Rmd", file)
+   } else {
+      rmd <- gsub(".template", ".Rmd", file)
+   }
+   
+   write_file(str, rmd)
+   slidify(rmd)
 }
 
-file <- "part-1.template"
+# Create presentation
+render_html("part-1.template", F)
 
-# Render presentation
-str <- render_rmd(file, F)
-output <- gsub(".template", "-handout.html", file)
-knit2html(text = str, output =  output)
+# Create handout
+render_html("part-1.template", T)
 
-# Render handout
-str <- render_rmd(file, T)
-output <- gsub(".template", ".Rmd", file)
-write_file(str, output)
-slidify(output)
+
