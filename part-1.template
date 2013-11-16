@@ -108,6 +108,8 @@ str(x)
 
 ---
 
+{{#handout}}
+
 ### Attribut och namn
 
 Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
@@ -130,6 +132,8 @@ x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
 
 ---
+
+{{/handout}}
 
 ### Faktorer
 
@@ -282,6 +286,7 @@ DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
 data.table fungerar ungefär som data.frame, men skiljer sig i vissa detaljer.
 
 ```{r,results="hide"}
+require(data.table)
 DT <- data.table(id=c(4:6),
 value=c("Cédric", "Elin", "Ingemar"))
 ```
