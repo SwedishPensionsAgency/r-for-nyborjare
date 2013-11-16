@@ -9,6 +9,12 @@ mode: selfcontained
 hitheme: {{hitheme}}
 ---
 
+<style>
+slide { background-color: white; border-style:solid; border-color:white; }
+body { background-color: white; }
+.title-slide { background-color: white; }
+</style>
+
 ## Om denna presentation
 
 - Vad är detta?
