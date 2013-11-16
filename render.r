@@ -36,5 +36,3 @@ render_html("part-1.template", F)
 
 # Create handout
 render_html("part-1.template", T)
-
-
