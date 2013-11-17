@@ -25,7 +25,7 @@ str <- whisker.render(read_file(file), data = list(
 ))
 rmd <- gsub(".template", "-handout.Rmd", file)
 write_file(str, rmd)
-slidify(rmd)
+pagify(rmd)
 
 # Create presentation
 str <- whisker.render(read_file(file), data = list(
@@ -35,4 +35,4 @@ str <- whisker.render(read_file(file), data = list(
 ))
 rmd <- gsub(".template", "-presentation.Rmd", file)
 write_file(str, rmd)
-slidify(rmd)
+pagify(rmd)

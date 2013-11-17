@@ -41,7 +41,9 @@ hitheme: {{hitheme}}
 
 Detta undervisningsmaterial är del av en nybörjarkurs i R anordnad av Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten.
 
-Materialet består av en presentation i "PowerPoint"-format och ett något mer utförligt handout-material för utskrift. Hela innehållet är skrivet i RMarkdown och genererat med hjälp av paketen [slidify](https://github.com/ramnathv/slidify) och [slidifyLibraries](https://github.com/ramnathv/slidifyLibraries).
+Materialet består av en presentation för fö och ett något mer utförligt handout-material för utskrift. Hela innehållet är skrivet i RMarkdown och genererat med hjälp av paketen [slidify](https://github.com/ramnathv/slidify) och [slidifyLibraries](https://github.com/ramnathv/slidifyLibraries).
+
+Varje avsnitt avslutas med en eller flera interaktiva frågor som kan användas för självstudier.
 
 Materialet är öppen källkod och finns att ladda ned från: http://github.com/SwedishPensionsAgency/r-for-nyborjare. Där finns även instruktioner och källkod för att generera handout och presentationsbilder.
 
@@ -159,8 +161,6 @@ names(x) <- c("x", "y", "z")
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
 
-{{/handout}}
-
 ---
 
 
@@ -174,8 +174,6 @@ x
 levels(x)
 ```
 
-{{#handout}}
-
 ---
 
 **Observera** att man **INTE** bör kombinera två faktorvariabler:
@@ -186,6 +184,8 @@ c(factor("a"), factor("b"))
 
 Därför kan det ofta vara bättre att jobba med `character` snarare än `factor`.
 
+{{/handout}}
+
 ---
 
 ### Matriser
@@ -194,8 +194,6 @@ Därför kan det ofta vara bättre att jobba med `character` snarare än `factor
 x1 <- matrix(1:6, ncol = 3)
 x2 <- array(1:12, c(2, 3, 2))
 ```
-
-{{/handout}}
 
 ---
 
@@ -249,6 +247,8 @@ Valet av metod för att hämta ut delar av data beror på vilken __datatyp__ vi 
 
 R erbjuder __flera metoder__ för att hämta ut data för varje datatyp.
 
+
+{{#handout}}
 ---
 
 ### Grundläggande operationer
@@ -263,6 +263,8 @@ Det finns tre sådana operatorer:
 - __$__: Hämta en namngiven variabel/kolumn ur en sammansatt datastruktur
 
 Operatorerna anges direkt efter ett anrop av en datastruktur, på formen __mindata$id__ eller __minlista[2]__.
+
+{{/handout}}
 
 ---
 
@@ -339,13 +341,39 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ```
 <small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
 
+--- &radio
+
+## Fråga
+Skapa en vektor i enlighet med ovan genom att köra koden `x <- c(aa=1,bb=2,cc=3,dd=2)`.
+
+Gör de två anropen `x[["bb"]]` och `x[2]` samma sak?
+
+1. Nej.
+2. Ja; båda ger resultatet "bb".
+3. _Ja; båda ger resultatet 2._
+
+--- &radio
+
+## Fråga
+Ladda datasetet `diamonds` genom att köra koden `require(ggplot2)`.
+
+`diamonds` är en tabell av typen `data.frame` och innehåller mätdata över ca 55 000 diamanter.
+
+Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamonds$table` har värdet 55. Hur många diamanter i `diamonds`-datasetet har table=55?
+
+1. ca 10st
+2. ca 100st
+3. _mer än 1000st_
+4. Alla diamanter i datasetet
+
+
 ---
 
-### Sortering och sampling
+## Sortering och sampling
 
 Två vanliga operationer på data är __sortering__ och __sampling__.
 
-Sortering görs, något kontraintuitivt, _inte_ med kommandot __sort()__ utan med kommandot __order()__:
+Sortering görs, något kontraintuitivt, __inte__ med kommandot `sort()` utan med kommandot `order()`:
 ```{r,results="hide"}
 DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
 # DT[sort(DT$id2)] # Genererar ett fel
@@ -363,7 +391,6 @@ antalrader <- nrow(DT) # Antal rader i tabellen
 DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
 
 ```
-<small>OBS! Ibland genererar R inget fel vid användning av __sort()__, men producerar felaktiga resultat. __sort()__ bör användas med stor försiktighet.</small>
 
 ---
 
@@ -371,14 +398,19 @@ DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
 
 Nyckeln till framgångsrik utveckling i R är att behärska ett antal __basfunktioner__ samt de metoder som är anpassade för det problem man vill lösa.
 
-I detta avsnitt går vi igenom en liten uppsättning kommandon som utgör en del av R:s basfunktionalitet.
+Åsikterna om exakt vilka funktioner det är viktigt att kunna går isär. I takt med att man blir en bättre R-programmerare utvecklar man så småningom en egen uppfattning om vad som är "basen" för R-programmering.
 
+I utskriftsversionen av detta material har vi listat ett antal funktioner vi själva anser utgör de nödvändiga förkunskaperna för god R-programmering.
+
+En mer utförlig lista finns i online-boken __Advanced R programmering__ (se litteraturlistan).
+
+{{#handout}}
 ---
 
 ### Grunderna
 
 ```r
-# De första funktionerna att lära sig
+# Funktioner som visar information om andra funktioner
 ?
 str
 
@@ -437,8 +469,9 @@ tables
 ---
 
 
-
 ### I/O
+
+I/O står för "input/output" och betecknar de funktioner som reglerar läsning och skrivning av data till/från datorns filsystem eller terminalfönstret.
 
 ```r
 # Output
@@ -452,44 +485,91 @@ load, save
 library(foreign)
 ```
 
+{{/handout}}
+
 ---
 
 ## Funktioner
 
 En viktig del av att utveckla i R är att arbeta med, och skapa, __funktioner__.
 
-Funktioner används för att __återanvända kod__, hantera __tillfällig minnesanvändning__ och att skapa en __strukturerad programsyntax__.
+Nästan all funktionalitet i ett programmeringsspråk, som t.ex. R, består av funktioner. Till och med grundläggande aritmetiska operationer som t.ex. `+` och `*` eller hjälpsymbolen `?` är funktioner.
 
-Funktioner kan, med lite god vilja, liknas vid ett SAS-makro. Åtminstone om man bortser från att SAS-makron inte följer samma syntax som vanlig SAS-kod.
+Några exempel: 
+```{r, eval=FALSE}
+sum(1,2,3) # Visar summan av talen 1, 2 och 3
+
+?sum # Visar en hjälpsida för funktionen sum()
+```
+
+Den sistnämnda funktionen, `?`, spelar en särskilt viktig roll i R då den hjälper oss att förstå alla andra funktioner.
 
 ---
 
 ### Att skriva funktioner
 
+Utvecklare bör och kan enkelt skriva egna funktioner. R-funktioner används ofta för att __återanvända kod__, hantera __tillfällig minnesanvändning__ och öfr att skapa en __strukturerad programsyntax__.
+
+Funktioner kan därför, med _lite god vilja_, liknas vid ett SAS-makro. Åtminstone om man bortser från att SAS-makron inte följer samma syntax som vanlig SAS-kod.
+
+Exempel på en definition av en funktion:
+
+```{r, eval=FALSE}
+polynom <- function(x,y) {
+   return(x^2 + y)
+}
+```
+
 En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat).
 
 - Argumentlista: `function(x,y)`
-- Kodmassa: `{ return(x^2+y) }`
+- Kodmassa: `{ return(x^2 + y) }`
 
 ---
 
 ### Exempel på funktioner
 
+En funktion för att beräkna kvadratroten av ett tal x:
 ```{r, eval=FALSE}
 sq <- function(x) {
    x^2
 }
-sq(5)
+sq(5) # Ger resultatet 25
 ```
 
+Beräkna binomialkoefficienten mellan två tal n, k:
 ```{r, eval=FALSE}
-binom_coeff <- function(x,y) {
-   numerator <- factorial(x)
-   denominator <- factorial(y) * factorial(x-y)
+binom_coeff <- function(n,k) {
+   numerator <- factorial(n)
+   denominator <- factorial(k) * factorial(n-k)
    return(numerator/denominator)
 }
-binom_coeff(5,2)
+binom_coeff(5,2) # Ger resultatet 10
 ```
+
+--- &radio
+
+## Fråga
+
+Vad gör följande funktion?
+
+```{r, eval=FALSE}
+f <- function(x,y,z) {
+   if(z > 3) {
+      j <- x + y
+   } else {
+      j <- x - y
+   }
+
+   return(j)
+}
+
+1. Beräknar x + y
+2. Beräknar x - y + z
+3. Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y
+4. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
+```
+
 
 ---
 
@@ -539,6 +619,16 @@ require(devtools)
 # Installera Coldbir-paketet från GitHub
 install_github("Coldbir","SwedishPensionsAgency")
 ```
+
+--- &radio
+
+## Fråga
+Vilket av följande kommandon installerar paketet `survey` från internet?
+
+1. _`install.packages("survey")`_.
+2. load("survey"")
+3. install_library("survey")
+4. require(survey)
 
 ---
 
@@ -640,6 +730,19 @@ ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + 
 
 ---
 
+## Fråga
+
+Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
+
+Rita en täthetskurva över variabeln `price` med hjälp av ggplot-funktioner. Använd "fill"-funktionen för att dela upp kurvan beroende på värdet på variabeln `cut`.
+
+Påminnelse: Den generella syntaxen är
+```r
+ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
+```
+
+---
+
 ### iPlot
 
 ```{r,eval=F}
@@ -651,7 +754,15 @@ library(iPlot)
 iPlot(ggplot2::diamonds)
 ```
 
+![bild]
+
 - Testa själv: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+
+---
+
+## Fråga
+
+Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
 --- &twocol
 
