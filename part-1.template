@@ -832,7 +832,7 @@ barplot(freq, horiz = T, las = 1, main = paste(docs$title, year), sub = paste("K
 
 Att skriva kod som andra (och framförallt framtida själv) förstår är en konst i sig. 
 
-**Style Guide**: Ett par länktips:
+**Style Guide**:
 
 - Hadley's Style Guide - [http://adv-r.had.co.nz/Style.html](http://adv-r.had.co.nz/Style.html)
 - Google's R Style Guide - [http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml](http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml)
