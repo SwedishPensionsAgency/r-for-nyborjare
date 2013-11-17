@@ -41,7 +41,7 @@ hitheme: {{hitheme}}
 
 Detta undervisningsmaterial är del av en nybörjarkurs i R anordnad av Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten.
 
-Materialet består av en presentation för fö och ett något mer utförligt handout-material för utskrift. Hela innehållet är skrivet i RMarkdown och genererat med hjälp av paketen [slidify](https://github.com/ramnathv/slidify) och [slidifyLibraries](https://github.com/ramnathv/slidifyLibraries).
+Materialet består av en presentation och ett något mer utförligt handout-material för utskrift. Hela innehållet är skrivet i RMarkdown och genererat med hjälp av paketen [slidify](https://github.com/ramnathv/slidify) och [slidifyLibraries](https://github.com/ramnathv/slidifyLibraries).
 
 Varje avsnitt avslutas med en eller flera interaktiva frågor som kan användas för självstudier.
 
