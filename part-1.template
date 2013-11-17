@@ -799,11 +799,11 @@ iPlot(ggplot2::diamonds)
 
 ![](img/iplot.png)
 
-- Testa själv: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
-
 ---
 
 ## Fråga / uppgift
+
+Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
 
 Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
