@@ -26,7 +26,7 @@ hitheme: {{hitheme}}
    }
    pre code {
    {{#handout}}
-      background: white;
+      background: #f8f8ff;
    {{/handout}}
    {{^handout}}
       background: #f8f8ff;
@@ -55,10 +55,10 @@ Materialet är öppen källkod och finns att ladda ned från: http://github.com/
 
 ## Lärandemål
 
-- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
-- Sammanställa deskriptiv statistik om data med enklare funktioner
-- Använda ggplot och grafiska funktioner för deskription och exploration av data
 - Använda och förstå ett flertal datastrukturer
+- Sammanställa deskriptiv statistik om data med enklare funktioner
+- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
+- Använda ggplot och grafiska funktioner för deskription och exploration av data
 - Installera och använda paket
 - Hämta data från olika källor (Excel, MiDAS, Coldbir, Pedal)
 - Lagra data i olika format
@@ -112,12 +112,12 @@ is.vector(integer)
 Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
 
 ```{r, eval=T}
-c("a", 1)
-c("a", T)
-c(1, T, F)
+c("a", 1) # Konverterar 1 till "1"
+c("a", T) # Konverterar TRUE till "TRUE"
+c(1, T, F) # Konverterar TRUE och FALSE till 1 och 0
 ```
 
-När logiska vektorer (`TRUE`/`FALSE`) konverteras så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
+När logiska vektorer (`TRUE`/`FALSE`) konverteras till numeriska värden så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
 
 ---
 
@@ -295,7 +295,6 @@ Operatorerna anges direkt efter ett anrop av en datastruktur, på formen __minda
 
 ### Enkla vektorer
 
-Data:
 ```{r,results="hide"}
 x <- c(aa=2.1, bb=4.2, cc=3.3, dd=5.4)
 ```
@@ -331,15 +330,13 @@ ll[[1]]
 
 data.frame är R:s grundläggande datastruktur för data på tabellform.
 
-Data:
 ```{r,results="hide"}
 DF <- data.frame(id=c(1:3),
 value=c("Love", "Thomas", "Ole"))
 ```
 
-
 Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
-```{r,results="hide"}
+```{r,eval=F}
 DF[c(1,2),] # Väljer raderna 1 och 2
 DF[,c("value")] # Väljer kolumnen "value"
 DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
@@ -349,8 +346,6 @@ DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
 
 ### data.table()
 
-data.table fungerar ungefär som data.frame, men skiljer sig i vissa detaljer.
-
 ```{r,results="hide"}
 require(data.table)
 DT <- data.table(id=c(4:6),
@@ -359,7 +354,7 @@ value=c("Cédric", "Elin", "Ingemar"))
 
 Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
 
-```{r,results="hide"}
+```{r,eval=F}
 DT[c(1:2)] # Väljer raderna 1 och 2
 DT[,list(value)] # Väljer kolumnen "value"
 DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
@@ -389,7 +384,7 @@ Ladda datasetet `diamonds` genom att köra koden `require(ggplot2)`.
 
 `diamonds` är en tabell av typen `data.frame` och innehåller mätdata över ca 55 000 diamanter.
 
-Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamonds$table` har värdet 55. Hur många diamanter i `diamonds`-datasetet har table=55?
+Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamonds$table` har värdet 55. Ungefär hur många diamanter i `diamonds`-datasetet har table=55?
 
 1. ca 10st
 2. ca 100st
@@ -720,7 +715,7 @@ Nedan är några exempel på bibliotek som lämpar sig väl för analys och graf
 - `iPlot`
 - `rCharts`
 
-Varav dessa så är `iPlot` ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
+`iPlot` är ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
 
 ---
 
@@ -766,7 +761,7 @@ ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + 
 
 ---
 
-## Fråga
+## Fråga / uppgift
 
 Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
 
@@ -796,7 +791,7 @@ iPlot(ggplot2::diamonds)
 
 ---
 
-## Fråga
+## Fråga / uppgift
 
 Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
