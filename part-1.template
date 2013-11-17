@@ -346,13 +346,40 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ```
 <small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
 
+--- &radio
+
+## Fråga
+Skapa en vektor i enlighet med ovan genom att köra koden `x <- c(aa=1,bb=2,cc=3,dd=2)`.
+
+Vad är värdet av de två anropen `x[["bb"]]` och `x[2]`?
+
+1. 2 respektive ["bb","dd"]
+2. _2 respektive 2_
+3. "bb" respektive [2,4]
+4. "bb" respektive 2
+
+--- &radio
+
+## Fråga
+Ladda datasetet `diamonds` genom att köra koden `require(ggplot2)`.
+
+`diamonds` är en tabell av typen `data.frame` och innehåller mätdata över ca 55 000 diamanter.
+
+Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamonds$table` har värdet 55. Hur många diamanter i `diamonds`-datasetet har table=55?
+
+1. ca 10st
+2. ca 100st
+3. _mer än 1000st_
+4. Alla diamanter i datasetet
+
+
 ---
 
-### Sortering och sampling
+## Sortering och sampling
 
 Två vanliga operationer på data är __sortering__ och __sampling__.
 
-Sortering görs, något kontraintuitivt, _inte_ med kommandot __sort()__ utan med kommandot __order()__:
+Sortering görs, något kontraintuitivt, __inte__ med kommandot `sort()` utan med kommandot `order()`:
 ```{r,results="hide"}
 DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
 # DT[sort(DT$id2)] # Genererar ett fel
@@ -370,7 +397,6 @@ antalrader <- nrow(DT) # Antal rader i tabellen
 DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
 
 ```
-<small>OBS! Ibland genererar R inget fel vid användning av __sort()__, men producerar felaktiga resultat. __sort()__ bör användas med stor försiktighet.</small>
 
 ---
 
@@ -525,6 +551,30 @@ binom_coeff <- function(n,k) {
 binom_coeff(5,2)
 ```
 
+--- &radio
+
+## Fråga
+
+Vad gör följande funktion?
+
+```{r, eval=FALSE}
+f <- function(x,y,z) {
+   if(z > 3) {
+      j <- x + y
+   } else {
+      j <- x - y
+   }
+
+   return(j)
+}
+
+1. Beräknar värdet av x + y
+2. Beräknar värdet av x - y + z
+3. Beräknar värdet av x + y om z är större än 3, eller värdet av x - y om z är mindre än eller lika med 3
+4. Beräknar värdet av z + y om x är större än 3, eller värdet av z - y om x är mindre än eller lika med 3
+```
+
+
 ---
 
 ## Pakethantering
@@ -573,6 +623,16 @@ require(devtools)
 # Installera Coldbir-paketet från GitHub
 install_github("Coldbir","SwedishPensionsAgency")
 ```
+
+--- &radio
+
+## Fråga
+Vilket av följande kommandon installerar paketet `survey` från internet?
+
+1. _`install.packages("survey")`_.
+2. load("survey"")
+3. install_library("survey")
+4. require(survey)
 
 ---
 
@@ -666,6 +726,19 @@ ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + 
 
 ---
 
+## Fråga
+
+Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
+
+Rita en täthetskurva över variabeln `price` med hjälp av ggplot-funktioner. Använd "fill"-funktionen för att dela upp kurvan beroende på värdet på variabeln `cut`.
+
+Påminnelse: Den generella syntaxen är
+```r
+ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
+```
+
+---
+
 ### iPlot
 
 ```{r,eval=F}
@@ -677,7 +750,15 @@ library(iPlot)
 iPlot(ggplot2::diamonds)
 ```
 
+![bild]
+
 - Testa själv: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+
+---
+
+## Fråga
+
+Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
 --- &twocol
 
