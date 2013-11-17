@@ -588,9 +588,13 @@ Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfi
 
 ## Grafik och dataanalys
 
-- ggplot2
-- iPlot
-- rCharts
+Nedan är några exempel på bibliotek som lämpar sig väl för analys och grafik:
+
+- `ggplot2`
+- `iPlot`
+- `rCharts`
+
+Varav dessa så är `iPlot` ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
 
 ---
 
@@ -599,7 +603,7 @@ Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfi
 Paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. Skapat av Hadley Wickham.
 
 Exempel på tillämpningsområden:
-- interaktivt direkt i R-konsolen
+- interaktivt i R-konsolen
 - applikationer, t.ex. `iPlot`
 - publikationer, t.ex. Orange rapport
 
