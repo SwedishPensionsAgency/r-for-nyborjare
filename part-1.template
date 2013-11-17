@@ -2,10 +2,11 @@
 title: Grundkurs i R
 author: Love Hansson och Thomas Reinholdsson
 job: Pensionsmyndigheten
-widgets: [quiz]
+widgets: [mathjax, bootstrap, quiz]
 ext_widgets: {rCharts: "libraries/highcharts"}
 framework: {{framework}}
 mode: selfcontained
+url: {lib: libraries}
 hitheme: {{hitheme}}
 ---
 
@@ -247,8 +248,8 @@ vignette("datatable-intro")
 
 ## Quiz
 
-1. _Val1_
-2. Val2
+1. Val1
+2. _Val2_
 3. Val3
 
 ***.hint
