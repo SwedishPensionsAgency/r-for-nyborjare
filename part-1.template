@@ -410,9 +410,9 @@ Sortering görs, något kontraintuitivt, __inte__ med kommandot `sort()` utan me
 DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
 # DT[sort(DT$id2)] # Genererar ett fel
 
+```
 <small>OBS! Ibland kan man av misstag råka använda `sort()` istället för `order()` utan att R varnar användaren. Detta kan leda till att data blir felaktigt utan att man märker det. Tumregeln är att aldrig använda `sort()`.</small>
 
-```
 
 ---
 
@@ -535,7 +535,7 @@ En viktig del av att utveckla i R är att arbeta med, och skapa, __funktioner__.
 Nästan all funktionalitet i ett programmeringsspråk, som t.ex. R, består av funktioner. Till och med grundläggande aritmetiska operationer som t.ex. `+` och `*` eller hjälpsymbolen `?` är funktioner.
 
 Några exempel: 
-```{r, eval=FALSE}
+```r
 sum(1,2,3) # Visar summan av talen 1, 2 och 3
 
 ?sum # Visar en hjälpsida för funktionen sum()
