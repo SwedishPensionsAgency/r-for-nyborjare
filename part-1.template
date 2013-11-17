@@ -165,7 +165,7 @@ x <- list(a = 1, b = 2, list(c = 3, d = 4))
 
 Faktorer inkluderar en slags uppslagstabell för kodvärden:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 x <- factor(c("a", "b", "b", "a"))
 x
 levels(x)
@@ -175,7 +175,7 @@ levels(x)
 
 **Observera** att man **INTE** bör kombinera två faktorvariabler:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 c(factor("a"), factor("b"))
 ```
 
@@ -186,8 +186,8 @@ Därför kan det ofta vara bättre att jobba med `character` snarare än `factor
 ### Matriser
 
 ```{r, eval=FALSE}
-matrix(1:6, ncol = 3)
-array(1:12, c(2, 3, 2))
+x1 <- matrix(1:6, ncol = 3)
+x2 <- array(1:12, c(2, 3, 2))
 ```
 
 ---
@@ -197,7 +197,7 @@ array(1:12, c(2, 3, 2))
 `data.frame` är det vanligaste sättet att lagra data i R. Det flexibla tabellformatet gör det enkelt att bearbeta data och använda för dataanalys.
 
 ```{r, eval=FALSE}
-data.frame(x = 1:3, y = c("a", "b", "c"))
+df <- data.frame(x = 1:3, y = c("a", "b", "c"))
 ```
 
 Eftersom det kan vara problematiskt att jobba med faktorer, så kan man ange med argumentet `stringsAsFactors = FALSE` att text ska vara `character`:
@@ -208,6 +208,23 @@ df <- data.frame(
   y = c("a", "b", "c"), 
   stringsAsFactors = FALSE
 )
+```
+
+---
+
+### data.table()
+
+`data.table` är snabbare än `data.frame` och rekommendera.
+
+```{r, eval=FALSE}
+library(data.table)
+dt <- data.table(x = 1:3, y = c("a", "b", "c"))
+```
+
+Läs: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf):
+
+```{r, eval=FALSE}
+vignette("datatable-intro")
 ```
 
 ---
