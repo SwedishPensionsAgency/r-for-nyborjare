@@ -55,14 +55,81 @@ Materialet är öppen källkod och finns att ladda ned från: http://github.com/
 
 ## Lärandemål
 
+- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
 - Använda och förstå ett flertal datastrukturer
 - Sammanställa deskriptiv statistik om data med enklare funktioner
-- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
 - Använda ggplot och grafiska funktioner för deskription och exploration av data
 - Installera och använda paket
 - Hämta data från olika källor (Excel, MiDAS, Coldbir, Pedal)
 - Lagra data i olika format
 - Självständigt inhämta ny kunskap och hitta svar på frågor om R (vara en del av R:s community)
+
+---
+
+## Innehåll
+- Om R och RStudio
+- Datatyper i R
+- Subsetting, sortering och sampling
+- En grundläggande "vokabulär" i R
+- Externa datakällor
+- Funktioner och pakethantering
+- Grafik
+- Best practices
+
+
+---
+
+## Kort om R
+
+R är ett __programmeringsspråk__ likt t.ex. Python, Scala eller C++.
+
+Några av R:s styrkor är att det innehåller många kraftfulla funktioner för analys och deskription av data både numeriskt och grafiskt.
+
+Under de senaste 2-3 åren har R och de funktioner som är tillgängliga utvecklats mycket snabbt. R är idag ett godtagbart förstahandsval för både visualisering och statistisk modellering, men även vid hantering och bearbetning av mycket stora datamängder.
+
+---
+
+## RStudio
+
+RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
+
+Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
+
+![](img/rstudio1.png)
+
+---
+
+### Utvärdera kod
+
+Genom att skriva namnet på en funktion utan parenteser visas funktionens kod direkt i R-terminalen:
+
+```{r, eval=F}
+lm # Visar källkoden för funktionen lm
+```
+
+RStudio innehåller även en __source browser__ som kan visa källkoden som ett skript. Browsern aktiveras genom att markera namnet på en funktion och trycka __F2__.
+
+Många primitiva funktioner i R är dock skrivna i C och redan färdigkompilerade, vilket gör att source browsern inte innehåller någon värdefull information.
+
+```{r, eval=F}
+sum # Källkoden till denna funktion kan inte visas
+```
+
+---
+
+### Tabbkomplettering
+
+Genom att börja skriva namnet på en funktion och trycka på tabb-tangenten i RStudio visas en lista över de kommandon som liknar det som skrivits, samt en liten hjälptext.
+
+![](img/rstudio2.png)
+
+---
+
+### Hjälpfiler
+
+Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfil.
+
+![](img/rstudio3.png)
 
 ---
 
@@ -131,7 +198,7 @@ x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
 
 Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
 
-```{r, eval=F}
+```{r, eval=T}
 x <- list(list(1,2), list("a","b","c"), 5:9)
 str(x)
 ```
@@ -139,7 +206,7 @@ str(x)
 {{#handout}}
 ---
 
-### Attribut och namn (**handout**)
+### Attribut och namn
 
 Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
 
@@ -184,8 +251,6 @@ c(factor("a"), factor("b"))
 
 Därför kan det ofta vara bättre att jobba med `character` snarare än `factor`.
 
-{{/handout}}
-
 ---
 
 ### Matriser
@@ -196,6 +261,9 @@ Till skillnad från `data.frame` och `list`, så måste alla värden vara av sam
 x1 <- matrix(1:6, ncol = 3)
 x2 <- array(1:12, c(2, 3, 2))
 ```
+
+{{/handout}}
+
 
 ---
 
@@ -351,7 +419,7 @@ DF <- data.frame(id=c(1:3),
 value=c("Love", "Thomas", "Ole"))
 ```
 
-Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i []-anropet!
+Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i [ ]-anropet!
 ```{r,eval=F}
 DF[c(1,2),] # Väljer raderna 1 och 2
 DF[,c("value")] # Väljer kolumnen "value"
@@ -418,7 +486,7 @@ Två vanliga operationer på data är __sortering__ och __sampling__.
 
 Sortering görs, något kontraintuitivt, __inte__ med kommandot `sort()` utan med kommandot `order()`:
 ```{r,results="hide"}
-DT[order(DT$id)] # Genomför en "proc sort" på tabellen DF
+DT[order(DT$id)] # Genomför en "proc sort" på tabellen DT
 # DT[sort(DT$id2)] # Genererar ett fel
 
 ```
@@ -536,307 +604,6 @@ library(foreign)
 ```
 
 {{/handout}}
-
----
-
-## Funktioner
-
-En viktig del av att utveckla i R är att arbeta med, och skapa, __funktioner__.
-
-Nästan all funktionalitet i ett programmeringsspråk, som t.ex. R, består av funktioner. Till och med grundläggande aritmetiska operationer som t.ex. `+` och `*` eller hjälpsymbolen `?` är funktioner.
-
-Några exempel: 
-```r
-sum(1,2,3) # Visar summan av talen 1, 2 och 3
-
-?sum # Visar en hjälpsida för funktionen sum()
-```
-
-Den sistnämnda funktionen, `?`, spelar en särskilt viktig roll i R då den hjälper oss att förstå alla andra funktioner.
-
----
-
-### Att skriva funktioner
-
-Utvecklare bör och kan enkelt skriva egna funktioner. R-funktioner används ofta för att __återanvända kod__, hantera __tillfällig minnesanvändning__ och öfr att skapa en __strukturerad programsyntax__.
-
-Funktioner kan därför, med _lite god vilja_, liknas vid ett SAS-makro. Åtminstone om man bortser från att SAS-makron inte följer samma syntax som vanlig SAS-kod.
-
-Exempel på en definition av en funktion:
-
-```{r, eval=FALSE}
-polynom <- function(x,y) {
-   return(x^2 + y)
-}
-```
-
-En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat).
-
-- Argumentlista: `function(x,y)`
-- Kodmassa: `{ return(x^2 + y) }`
-
----
-
-### Exempel på funktioner
-
-En funktion för att beräkna kvadratroten av ett tal x:
-```{r, eval=FALSE}
-sq <- function(x) {
-   x^2
-}
-sq(5) # Ger resultatet 25
-```
-
-Beräkna binomialkoefficienten mellan två tal n, k:
-```{r, eval=FALSE}
-binom_coeff <- function(n,k) {
-   numerator <- factorial(n)
-   denominator <- factorial(k) * factorial(n-k)
-   return(numerator/denominator)
-}
-binom_coeff(5,2) # Ger resultatet 10
-```
-
---- &radio
-
-## Fråga
-
-Vad gör följande funktion?
-
-```{r, eval=FALSE}
-f <- function(x,y,z) {
-   if (z > 3) {
-      j <- x + y
-   } else {
-      j <- x - y
-   }
-   return(j)
-}
-```
-
-1. Beräknar x - y + z
-2. _Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y_
-3. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
-
----
-
-## Pakethantering
-
-R:s basfunktionalitet utvidgas med hjälp av funktioner.
-
-Dessa är lagrade i __paket__ som kan läsas in i på begäran.
-
-De flesta paket är lagrade på R-projektets paketserver __CRAN__.
-
-
----
-
-### Ladda ett paket i R
-
-Ett paket laddas med någon av funtionerna `require()` eller `library()`:
-
-```{r,results="hide", warning=F, eval=FALSE}
-require(stats)
-library(class)
-```
-
-De funktioner som ingår i paketet kan nu användas i R:
-
-```{r, eval=FALSE}
-x <- rnorm(1000,0,1) # Skapa 1000 värden ~ N(0,1)
-y <- rep(1:10,100) # Skapa indexvariabel
-lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
-```
-
----
-
-### Installera nya paket
-
-R har en inbyggd pakethantering som kan ladda ned och installera nya paket. De flesta paket är lagrade på __CRAN__ och kan installeras därifrån med funktionen `install.packages()`:
-
-```{r, eval=F}
-install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
-```
-
-Vissa paket är lagrade på open source-plattformen __GitHub__, och installeras därifrån med hjälp av funktionen `install_github()` i `devtools`-paketet:
-
-```{r, eval=F}
-require(devtools)
-
-# Installera Coldbir-paketet från GitHub
-install_github("Coldbir","SwedishPensionsAgency")
-```
-
---- &radio
-
-## Fråga
-Vilket av följande kommandon installerar paketet `survey` från internet?
-
-1. _`install.packages("survey")`_.
-2. load("survey"")
-3. install_library("survey")
-4. require(survey)
-
----
-
-## RStudio
-
-RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
-
-Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
-
-![](img/rstudio1.png)
-
----
-
-### Utvärdera kod
-
-Genom att skriva namnet på en funktion utan parenteser visas funktionens kod direkt i R-terminalen:
-
-```{r, eval=F}
-lm # Visar källkoden för funktionen lm
-```
-
-RStudio innehåller även en __source browser__ som kan visa källkoden som ett skript. Browsern aktiveras genom att markera namnet på en funktion och trycka __F2__.
-
-Många primitiva funktioner i R är dock skrivna i C och redan färdigkompilerade, vilket gör att source browsern inte innehåller någon värdefull information.
-
-```{r, eval=F}
-sum # Källkoden till denna funktion kan inte visas
-```
-
----
-
-### Tabbkomplettering
-
-Genom att börja skriva namnet på en funktion och trycka på tabb-tangenten i RStudio visas en lista över de kommandon som liknar det som skrivits, samt en liten hjälptext.
-
-![](img/rstudio2.png)
-
----
-
-### Hjälpfiler
-
-Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfil.
-
-![](img/rstudio3.png)
-
----
-
-## Grafik och dataanalys
-
-Nedan är några exempel på bibliotek som lämpar sig väl för analys och grafik:
-
-- `ggplot2`
-- `iPlot`
-- `rCharts`
-
-`iPlot` är ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
-
----
-
-### `ggplot2`
-
-Paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. Skapat av Hadley Wickham.
-
-Exempel på tillämpningsområden:
-- interaktivt i R-konsolen
-- applikationer, t.ex. `iPlot`
-- publikationer, t.ex. Orange rapport
-
-Ladda paket:
-
-```{r, warning=F}
-library(ggplot2)
-```
-
----
-
-#### Density plot
-
-```{r, warning=F, fig.width = 12.5, fig.height = 6}
-ggplot(diamonds, aes(depth, fill = cut)) + 
-   geom_density(alpha = 0.2) + xlim(55, 70)
-```
-
----
-
-#### Histogram
-
-```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
-ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
-```
-
----
-
-#### Scatter plot
-
-```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
-ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
-```
-
----
-
-## Fråga / uppgift
-
-Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
-
-Rita en täthetskurva över variabeln `price` med hjälp av ggplot-funktioner. Använd "fill"-funktionen för att dela upp kurvan beroende på värdet på variabeln `cut`.
-
-Påminnelse: Den generella syntaxen är
-```r
-ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
-```
-
----
-
-### iPlot
-
-```{r,eval=F}
-library(devtools)
-install_github("iPlot", "SwedishPensionsAgency")
-
-# Exempel
-library(iPlot)
-iPlot(ggplot2::diamonds)
-```
-
-![](img/iplot.png)
-
----
-
-## Fråga / uppgift
-
-Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
-
-Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
-
---- &twocol
-
-### rCharts
-
-*** =right
-
-```{r, warning=F,message=F,cache=F,echo=T,tidy=F}
-library(rCharts)
-
-a <- Highcharts$new()
-a$chart(type = "spline")
-a$title(text = "Spline Chart")
-a$series(data = c(1, 3, 2, 4, 5, 4, 6,
-  2, 3, 5, NA), dashStyle = "longdash")
-a$series(data = c(NA, 4, 1, 3, 4, 2, 9,
-  1, 2, 3, 4), dashStyle = "shortdot")
-a$legend(symbolWidth = 80)
-
-# a$print()
-```
-
-*** =left
-
-```{r, results='asis', echo=F}
-a$print()
-```
 
 ---
 
@@ -1047,6 +814,263 @@ barplot(freq, horiz = T, las = 1, main = paste(docs$title, year), sub = paste("K
 
 ---
 
+## Funktioner
+
+En viktig del av att utveckla i R är att arbeta med, och skapa, __funktioner__.
+
+Nästan all funktionalitet i ett programmeringsspråk, som t.ex. R, består av funktioner. Till och med grundläggande aritmetiska operationer som t.ex. `+` och `*` eller hjälpsymbolen `?` är funktioner.
+
+Några exempel: 
+```r
+sum(1,2,3) # Visar summan av talen 1, 2 och 3
+
+?sum # Visar en hjälpsida för funktionen sum()
+```
+
+Den sistnämnda funktionen, `?`, spelar en särskilt viktig roll i R då den hjälper oss att förstå alla andra funktioner.
+
+---
+
+### Att skriva funktioner
+
+Utvecklare bör och kan enkelt skriva egna funktioner. R-funktioner används ofta för att __återanvända kod__, hantera __tillfällig minnesanvändning__ och öfr att skapa en __strukturerad programsyntax__.
+
+Funktioner kan därför, med _lite god vilja_, liknas vid ett SAS-makro. Åtminstone om man bortser från att SAS-makron inte följer samma syntax som vanlig SAS-kod.
+
+Exempel på en definition av en funktion:
+
+```{r, eval=FALSE}
+polynom <- function(x,y) {
+   return(x^2 + y)
+}
+```
+
+En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat).
+
+- Argumentlista: `function(x,y)`
+- Kodmassa: `{ return(x^2 + y) }`
+
+---
+
+### Exempel på funktioner
+
+En funktion för att beräkna kvadratroten av ett tal x:
+```{r, eval=FALSE}
+sq <- function(x) {
+   x^2
+}
+sq(5) # Ger resultatet 25
+```
+
+Beräkna binomialkoefficienten mellan två tal n, k:
+```{r, eval=FALSE}
+binom_coeff <- function(n,k) {
+   numerator <- factorial(n)
+   denominator <- factorial(k) * factorial(n-k)
+   return(numerator/denominator)
+}
+binom_coeff(5,2) # Ger resultatet 10
+```
+
+--- &radio
+
+## Fråga
+
+Vad gör följande funktion?
+
+```{r, eval=FALSE}
+f <- function(x,y,z) {
+   if (z > 3) {
+      j <- x + y
+   } else {
+      j <- x - y
+   }
+   return(j)
+}
+```
+
+1. Beräknar x - y + z
+2. _Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y_
+3. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
+
+---
+
+## Pakethantering
+
+R:s basfunktionalitet utvidgas med hjälp av funktioner.
+
+Dessa är lagrade i __paket__ som kan läsas in i på begäran.
+
+De flesta paket är lagrade på R-projektets paketserver __CRAN__.
+
+
+---
+
+### Ladda ett paket i R
+
+Ett paket laddas med någon av funtionerna `require()` eller `library()`:
+
+```{r,results="hide", warning=F, eval=FALSE}
+require(stats)
+library(class)
+```
+
+De funktioner som ingår i paketet kan nu användas i R:
+
+```{r, eval=FALSE}
+x <- rnorm(1000,0,1) # Skapa 1000 värden ~ N(0,1)
+y <- rep(1:10,100) # Skapa indexvariabel
+lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
+```
+
+---
+
+### Installera nya paket
+
+R har en inbyggd pakethantering som kan ladda ned och installera nya paket. De flesta paket är lagrade på __CRAN__ och kan installeras därifrån med funktionen `install.packages()`:
+
+```{r, eval=F}
+install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
+```
+
+Vissa paket är lagrade på open source-plattformen __GitHub__, och installeras därifrån med hjälp av funktionen `install_github()` i `devtools`-paketet:
+
+```{r, eval=F}
+require(devtools)
+
+# Installera Coldbir-paketet från GitHub
+install_github("Coldbir","SwedishPensionsAgency")
+```
+
+--- &radio
+
+## Fråga
+Vilket av följande kommandon installerar paketet `survey` från internet?
+
+1. _`install.packages("survey")`_.
+2. load("survey"")
+3. install_library("survey")
+4. require(survey)
+
+---
+
+## Grafik och dataanalys
+
+Nedan är några exempel på bibliotek som lämpar sig väl för analys och grafik:
+
+- `ggplot2`
+- `iPlot`
+- `rCharts`
+
+`iPlot` är ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
+
+---
+
+### `ggplot2`
+
+Paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. Skapat av Hadley Wickham.
+
+Exempel på tillämpningsområden:
+- interaktivt i R-konsolen
+- applikationer, t.ex. `iPlot`
+- publikationer, t.ex. Orange rapport
+
+Ladda paket:
+
+```{r, warning=F}
+library(ggplot2)
+```
+
+---
+
+#### Density plot
+
+```{r, warning=F, fig.width = 12.5, fig.height = 6}
+ggplot(diamonds, aes(depth, fill = cut)) + 
+   geom_density(alpha = 0.2) + xlim(55, 70)
+```
+
+---
+
+#### Histogram
+
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
+```
+
+---
+
+#### Scatter plot
+
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
+```
+
+---
+
+## Fråga / uppgift
+
+Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
+
+Rita en täthetskurva över variabeln `price` med hjälp av ggplot-funktioner. Använd "fill"-funktionen för att dela upp kurvan beroende på värdet på variabeln `cut`.
+
+Påminnelse: Den generella syntaxen är
+```r
+ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
+```
+
+---
+
+### iPlot
+
+```{r,eval=F}
+library(devtools)
+install_github("iPlot", "SwedishPensionsAgency")
+
+# Exempel
+library(iPlot)
+iPlot(ggplot2::diamonds)
+```
+
+![](img/iplot.png)
+
+---
+
+## Fråga / uppgift
+
+Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+
+Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
+
+--- &twocol
+
+### rCharts
+
+*** =right
+
+```{r, warning=F,message=F,cache=F,echo=T,tidy=F}
+library(rCharts)
+
+a <- Highcharts$new()
+a$chart(type = "spline")
+a$title(text = "Spline Chart")
+a$series(data = c(1, 3, 2, 4, 5, 4, 6,
+  2, 3, 5, NA), dashStyle = "longdash")
+a$series(data = c(NA, 4, 1, 3, 4, 2, 9,
+  1, 2, 3, 4), dashStyle = "shortdot")
+a$legend(symbolWidth = 80)
+
+# a$print()
+```
+
+*** =left
+
+```{r, results='asis', echo=F}
+a$print()
+```
+
+---
+
 ## Best practices för programdesign
 
 Att skriva kod som andra (och framförallt framtida själv) förstår är en konst i sig. 
@@ -1062,10 +1086,11 @@ Att skriva kod som andra (och framförallt framtida själv) förstår är en kon
 
 => Låg teknisk skuld!
 
----
+--- &twocol
 
 ## Att lära sig mer om R
 
+*** =right
 Att programmera är, framförallt i början, ofta att stöta på problem. Funktioner gör inte det man förväntat sig, man saknar kännedom om vissa metoder eller förstår inte viss syntax.
 
 En av styrkorna med R är det utomordentliga nätverk av engagerade och kunniga utvecklare som samlas kring vissa online-portaler, särskilt __GitHub__ och __StackOverflow__.
@@ -1074,23 +1099,19 @@ Ofta är svaret på en fråga bara en Google-sökning bort. Det kan ibland vara 
 
 Ofta är den första träffen vid en googling en sida på [StackOverflow](http://www.stackoverflow.com/).
 
-![bild]
+*** =left
+
+![](img/googlestackoverflow.png)
 
 ---
 
 ### Att söka efter mer information
 
-Det finns gott om böcker om R-programmering, men dessa är ofta helt onödiga för att lära sig R-programmering, särskilt i början.
+Det finns gott om böcker om R-programmering, men dessa är ofta helt __onödiga__ för att lära sig R-programmering, särskilt i början.
 
-Genom att utveckla en bra sökteknik kan man ofta hitta svar på frågor blixtsnabbt.
+Genom att utveckla en __bra sökteknik__ kan man ofta hitta svar på frågor blixtsnabbt.
 
-All kommunikation kring R sker i regel på engelska.
-
----
-
-## Avslutning och utblick
-
-
+All kommunikation kring R sker i regel på __engelska__.
 
 ---
 
@@ -1102,3 +1123,9 @@ All kommunikation kring R sker i regel på engelska.
 ### R-paket
 - `ggplot2` av Hadley Wickham
 - `slidify` av Ramnath Vaidyanathan
+- `iPlot` av Thomas Reinholdsson och Love Hansson
+- `Coldbir` av Thomas Reinholdsson
+
+---
+
+## Tack för att ni lyssnade!
