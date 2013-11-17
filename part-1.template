@@ -907,7 +907,9 @@ f <- function(x,y,z) {
 
 R:s basfunktionalitet utvidgas med hjälp av funktioner.
 
-Dessa är lagrade i __paket__ som kan läsas in i på begäran.
+Det stora community av utvecklare och organisationer runt R har utvecklat tusentals funktioner och moduler som ofta är mycket användbara.
+
+Dessa funktioner är lagrade i __paket__ som kan läsas in i R på begäran. R levereras med ett antal "standardpaket", men fler kan installeras från internet.
 
 De flesta paket är lagrade på R-projektets paketserver __CRAN__.
 
