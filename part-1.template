@@ -34,13 +34,20 @@ hitheme: {{hitheme}}
 
 </style>
 
+{{#handout}}
+
 ## Om denna presentation
 
-- Vad är detta?
-- Hur rendera "PowerPoint" och hur rendera print-kopior (med hjälp av Whisker-parametrar)
-- Länkar till källkod
+Detta undervisningsmaterial är del av en nybörjarkurs i R anordnad av Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten.
+
+Materialet består av en presentation i "PowerPoint"-format och ett något mer utförligt handout-material för utskrift. Hela innehållet är skrivet i RMarkdown och genererat med hjälp av paketen [slidify](https://github.com/ramnathv/slidify) och [slidifyLibraries](https://github.com/ramnathv/slidifyLibraries).
+
+Materialet är öppen källkod och finns att ladda ned från: http://github.com/SwedishPensionsAgency/r-for-nyborjare. Där finns även instruktioner och källkod för att generera handout och presentationsbilder.
+
 
 ---
+
+{{/handout}}
 
 
 ## Lärandemål
@@ -171,6 +178,8 @@ x
 levels(x)
 ```
 
+{{#handout}}
+
 ---
 
 **Observera** att man **INTE** bör kombinera två faktorvariabler:
@@ -189,6 +198,8 @@ Därför kan det ofta vara bättre att jobba med `character` snarare än `factor
 x1 <- matrix(1:6, ncol = 3)
 x2 <- array(1:12, c(2, 3, 2))
 ```
+
+{{/handout}}
 
 ---
 
@@ -214,24 +225,29 @@ df <- data.frame(
 
 ### data.table()
 
-`data.table` är snabbare än `data.frame` och rekommendera.
+`data.table` fungerar på många sätt precis som `data.frame` men är snabbare och rekommenderas för stora datamängder eller datamängder som behöver sorteras ofta.
 
 ```{r, eval=FALSE}
 library(data.table)
 dt <- data.table(x = 1:3, y = c("a", "b", "c"))
 ```
 
-Läs: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf):
+{{#handout}}
+
+Läs: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf): http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf
+
+{{/handout}}
+
 
 ```{r, eval=FALSE}
 vignette("datatable-intro")
 ```
 
----
+--- &radio
 
 ## Quiz
 
-1. Val1
+1. _Val1_
 2. Val2
 3. Val3
 
