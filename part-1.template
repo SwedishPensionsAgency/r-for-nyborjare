@@ -346,12 +346,11 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 ## Fråga
 Skapa en vektor i enlighet med ovan genom att köra koden `x <- c(aa=1,bb=2,cc=3,dd=2)`.
 
-Vad är värdet av de två anropen `x[["bb"]]` och `x[2]`?
+Gör de två anropen `x[["bb"]]` och `x[2]` samma sak?
 
-1. 2 respektive ["bb","dd"]
-2. _2 respektive 2_
-3. "bb" respektive [2,4]
-4. "bb" respektive 2
+1. Nej.
+2. Ja; båda ger resultatet "bb".
+3. _Ja; båda ger resultatet 2._
 
 --- &radio
 
@@ -405,6 +404,7 @@ I utskriftsversionen av detta material har vi listat ett antal funktioner vi sj�
 
 En mer utförlig lista finns i online-boken __Advanced R programmering__ (se litteraturlistan).
 
+{{#handout}}
 ---
 
 ### Grunderna
@@ -469,7 +469,6 @@ tables
 ---
 
 
-
 ### I/O
 
 I/O står för "input/output" och betecknar de funktioner som reglerar läsning och skrivning av data till/från datorns filsystem eller terminalfönstret.
@@ -485,6 +484,8 @@ fread
 load, save
 library(foreign)
 ```
+
+{{/handout}}
 
 ---
 
@@ -528,22 +529,22 @@ En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat)
 
 ### Exempel på funktioner
 
-1. En funktion för att beräkna kvadratroten av ett tal x:
+En funktion för att beräkna kvadratroten av ett tal x:
 ```{r, eval=FALSE}
 sq <- function(x) {
    x^2
 }
-sq(5)
+sq(5) # Ger resultatet 25
 ```
 
-2. Beräkna binomialkoefficienten mellan två tal n, k:
+Beräkna binomialkoefficienten mellan två tal n, k:
 ```{r, eval=FALSE}
 binom_coeff <- function(n,k) {
    numerator <- factorial(n)
    denominator <- factorial(k) * factorial(n-k)
    return(numerator/denominator)
 }
-binom_coeff(5,2)
+binom_coeff(5,2) # Ger resultatet 10
 ```
 
 --- &radio
@@ -563,10 +564,10 @@ f <- function(x,y,z) {
    return(j)
 }
 
-1. Beräknar värdet av x + y
-2. Beräknar värdet av x - y + z
-3. Beräknar värdet av x + y om z är större än 3, eller värdet av x - y om z är mindre än eller lika med 3
-4. Beräknar värdet av z + y om x är större än 3, eller värdet av z - y om x är mindre än eller lika med 3
+1. Beräknar x + y
+2. Beräknar x - y + z
+3. Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y
+4. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
 ```
 
 
