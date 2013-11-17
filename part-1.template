@@ -244,22 +244,6 @@ Läs: [Introduction to the data.table package in R](http://cran.r-project.org/we
 vignette("datatable-intro")
 ```
 
---- &radio
-
-## Quiz
-
-1. Val1
-2. _Val2_
-3. Val3
-
-***.hint
-
-Testhint
-
-***.explanation
-
-Testförklaring
-
 ---
 
 ## Subsetting
@@ -723,6 +707,8 @@ x <- readWorksheetFromFile("fil.xlsx", sheet = 1)
 Läs mer: [XLConnect - A platform-independent interface to Excel](http://cran.r-project.org/web/packages/XLConnect/vignettes/XLConnect.pdf).
 
 --- &radio
+
+## Fråga
 
 ### Hur läser man in en CSV-fil som har "`,`" som seperator?
 
