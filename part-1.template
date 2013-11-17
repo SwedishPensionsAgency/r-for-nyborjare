@@ -555,21 +555,19 @@ Vad gör följande funktion?
 
 ```{r, eval=FALSE}
 f <- function(x,y,z) {
-   if(z > 3) {
+   if (z > 3) {
       j <- x + y
    } else {
       j <- x - y
    }
-
    return(j)
 }
+```
 
 1. Beräknar x + y
 2. Beräknar x - y + z
 3. Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y
 4. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
-```
-
 
 ---
 
