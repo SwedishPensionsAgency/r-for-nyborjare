@@ -72,7 +72,7 @@ Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
 - Listor
 - Faktorer
 - Matriser
-- "Data frames"
+- "data.frame"
 
 ---
 
@@ -87,9 +87,9 @@ integer <- c(1L, 6L, 10L)
 character <- c("these are", "some strings")
 ```
 
-Man kan lägga samman vektorer och de "plattas" då ut:
+Man kan lägga samman vektorer - vilket medför att de "plattas" ut:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 c(1, 2, 3, 4)
 c(1, c(2, c(3, 4)))
 ```
@@ -98,15 +98,10 @@ c(1, c(2, c(3, 4)))
 
 För att testa eller se vilken datatyp en variabel är:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 typeof(integer)
 is.integer(integer)
 is.double(integer)
-```
-
-Man kan även kontrollera för om det är en vektor:
-
-```{r, eval=FALSE}
 is.vector(integer)
 ```
 
@@ -114,7 +109,7 @@ is.vector(integer)
 
 Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
 
-```{r, eval=FALSE}
+```{r, eval=T}
 c("a", 1)
 c("a", T)
 c(1, T, F)
