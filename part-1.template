@@ -830,6 +830,19 @@ barplot(freq, horiz = T, las = 1, main = paste(docs$title, year), sub = paste("K
 
 ## Best practices för programdesign
 
+Att skriva kod som andra (och framförallt framtida själv) förstår är en konst i sig. 
+
+**Style Guide**: Ett par länktips:
+
+- Hadley's Style Guide - [http://adv-r.had.co.nz/Style.html](http://adv-r.had.co.nz/Style.html)
+- Google's R Style Guide - [http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml](http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml)
+
+**Kommentarer**: Skriv kommentar genom att använda `#`. Beskriv ***varför*** och inte ***vad*** koden gör.
+
+**Refaktorisering**: Definiera funktioner, paketera kod, och försök skriva enkel och lite kod.
+
+=> Låg teknisk skuld!
+
 ---
 
 ## Att lära sig mer om R
