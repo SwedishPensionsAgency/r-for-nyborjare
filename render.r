@@ -20,7 +20,8 @@ file <- "part-1.template"
 # Create handout
 str <- whisker.render(read_file(file), data = list(
    handout = T,
-   hitheme = "tomorrow"
+   framework = "io2012",
+   hitheme = "github"
 ))
 rmd <- gsub(".template", "-handout.Rmd", file)
 write_file(str, rmd)
@@ -29,9 +30,9 @@ slidify(rmd)
 # Create presentation
 str <- whisker.render(read_file(file), data = list(
    handout = F,
-   hitheme = "sunburst"
+   framework = "io2012",
+   hitheme = "github"
 ))
 rmd <- gsub(".template", "-presentation.Rmd", file)
 write_file(str, rmd)
 slidify(rmd)
-

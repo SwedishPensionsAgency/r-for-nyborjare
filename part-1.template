@@ -4,15 +4,34 @@ author: Love Hansson och Thomas Reinholdsson
 job: Pensionsmyndigheten
 widgets: [quiz]
 ext_widgets: {rCharts: "libraries/highcharts"}
-framework: io2012
+framework: {{framework}}
 mode: selfcontained
 hitheme: {{hitheme}}
 ---
 
 <style>
-slide { background-color: white; border-style:solid; border-color:white; }
-body { background-color: white; }
-.title-slide { background-color: white; }
+   slide {
+      background-color: white;
+   }
+   body {
+      background-color: white;
+   }
+   .title-slide {
+      background-color: white;
+   }
+   article p {
+      margin-bottom: 10px;
+      margin-top: 10px;
+   }
+   pre code {
+   {{#handout}}
+      background: white;
+   {{/handout}}
+   {{^handout}}
+      background: #f8f8ff;
+   {{/handout}}
+   }
+
 </style>
 
 ## Om denna presentation
