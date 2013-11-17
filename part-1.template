@@ -131,21 +131,21 @@ x <- list(list(1,2), list("a","b","c"), 5:9)
 str(x)
 ```
 
+{{#handout}}
 ---
 
-{{#handout}}
-
-### Attribut och namn
+### Attribut och namn (**handout**)
 
 Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
 
 ```{r, eval=FALSE}
 # Vektorer
 x <- c(a = 1, b = 2, "c" = 3)
-x
 ```
 
-Man kan även ändra eller lägga till namn i efterhand:
+Namnen kan anges med `"..."`, t.ex. `"c" = 3`.
+
+För att lägga till namn i efterhand:
 
 ```{r, eval=FALSE}
 names(x) <- c("x", "y", "z")
@@ -156,9 +156,10 @@ names(x) <- c("x", "y", "z")
 x <- list(a = 1, b = 2, list(c = 3, d = 4))
 ```
 
+{{/handout}}
+
 ---
 
-{{/handout}}
 
 ### Faktorer
 
@@ -191,7 +192,7 @@ array(1:12, c(2, 3, 2))
 
 ---
 
-### Data frames
+### data.frame()
 
 `data.frame` är det vanligaste sättet att lagra data i R. Det flexibla tabellformatet gör det enkelt att bearbeta data och använda för dataanalys.
 
