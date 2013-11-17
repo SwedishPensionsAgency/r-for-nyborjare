@@ -613,7 +613,7 @@ library(ggplot2)
 
 #### Density plot
 
-```{r, warning=F}
+```{r, warning=F, fig.width = 12.5, fig.height = 6}
 ggplot(diamonds, aes(depth, fill = cut)) + 
    geom_density(alpha = 0.2) + xlim(55, 70)
 ```
@@ -622,7 +622,7 @@ ggplot(diamonds, aes(depth, fill = cut)) +
 
 #### Histogram
 
-```{r, warning=F,message=F}
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
 ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 ```
 
@@ -630,8 +630,8 @@ ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 
 #### Scatter plot
 
-```{r, warning=F,message=F}
-ggplot(diamonds, aes(x = price, y = depth, color = clarity)) + geom_point() + facet_grid(color ~ cut)
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
 ```
 
 ---
@@ -640,19 +640,30 @@ ggplot(diamonds, aes(x = price, y = depth, color = clarity)) + geom_point() + fa
 
 [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
 
----
+--- &twocol
 
 ### rCharts
 
-```{r, warning=F,message=F,results='asis',cache=F, echo=2:4}
+*** =right
+
+```{r, warning=F,message=F,cache=F,echo=T,tidy=F}
 library(rCharts)
+
 a <- Highcharts$new()
-# ...
 a$chart(type = "spline")
-a$series(data = c(1, 3, 2, 4, 5, 4, 6, 2, 3, 5, NA), dashStyle = "longdash")
-a$series(data = c(NA, 4, 1, 3, 4, 2, 9, 1, 2, 3, 4), dashStyle = "shortdot")
+a$title(text = "Spline Chart")
+a$series(data = c(1, 3, 2, 4, 5, 4, 6,
+  2, 3, 5, NA), dashStyle = "longdash")
+a$series(data = c(NA, 4, 1, 3, 4, 2, 9,
+  1, 2, 3, 4), dashStyle = "shortdot")
 a$legend(symbolWidth = 80)
 
+# a$print()
+```
+
+*** =left
+
+```{r, results='asis', echo=F}
 a$print()
 ```
 
