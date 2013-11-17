@@ -74,7 +74,7 @@ Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
 - Listor
 - Faktorer
 - Matriser
-- "Data frames"
+- "data.frame"
 
 ---
 
@@ -89,9 +89,9 @@ integer <- c(1L, 6L, 10L)
 character <- c("these are", "some strings")
 ```
 
-Man kan lägga samman vektorer och de "plattas" då ut:
+Man kan lägga samman vektorer - vilket medför att de "plattas" ut:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 c(1, 2, 3, 4)
 c(1, c(2, c(3, 4)))
 ```
@@ -100,15 +100,10 @@ c(1, c(2, c(3, 4)))
 
 För att testa eller se vilken datatyp en variabel är:
 
-```{r, eval=FALSE}
+```{r, eval=T}
 typeof(integer)
 is.integer(integer)
 is.double(integer)
-```
-
-Man kan även kontrollera för om det är en vektor:
-
-```{r, eval=FALSE}
 is.vector(integer)
 ```
 
@@ -116,7 +111,7 @@ is.vector(integer)
 
 Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
 
-```{r, eval=FALSE}
+```{r, eval=T}
 c("a", 1)
 c("a", T)
 c(1, T, F)
@@ -136,7 +131,7 @@ x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
 
 Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
 
-```{r, eval=FALSE}
+```{r, eval=F}
 x <- list(list(1,2), list("a","b","c"), 5:9)
 str(x)
 ```
@@ -642,7 +637,7 @@ RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
 
 Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
 
-![bild]
+![](img/rstudio1.png)
 
 ---
 
@@ -664,15 +659,19 @@ sum # Källkoden till denna funktion kan inte visas
 
 ---
 
-### Tabbkomplettering och hjälpfiler
+### Tabbkomplettering
 
 Genom att börja skriva namnet på en funktion och trycka på tabb-tangenten i RStudio visas en lista över de kommandon som liknar det som skrivits, samt en liten hjälptext.
 
-![bild]
+![](img/rstudio2.png)
+
+---
+
+### Hjälpfiler
 
 Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfil.
 
-![bild2]
+![](img/rstudio3.png)
 
 ---
 
