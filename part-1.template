@@ -2,10 +2,11 @@
 title: Grundkurs i R
 author: Love Hansson och Thomas Reinholdsson
 job: Pensionsmyndigheten
-widgets: [quiz]
+widgets: [mathjax, bootstrap, quiz]
 ext_widgets: {rCharts: "libraries/highcharts"}
 framework: {{framework}}
 mode: selfcontained
+url: {lib: libraries}
 hitheme: {{hitheme}}
 ---
 
@@ -227,12 +228,12 @@ Läs: [Introduction to the data.table package in R](http://cran.r-project.org/we
 vignette("datatable-intro")
 ```
 
----
+--- &radio
 
 ## Quiz
 
 1. Val1
-2. Val2
+2. _Val2_
 3. Val3
 
 ***.hint
