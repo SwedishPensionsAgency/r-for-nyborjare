@@ -706,6 +706,24 @@ x <- readWorksheetFromFile("fil.xlsx", sheet = 1)
 
 Läs mer: [XLConnect - A platform-independent interface to Excel](http://cran.r-project.org/web/packages/XLConnect/vignettes/XLConnect.pdf).
 
+--- &radio
+
+### Hur läser man in en CSV-fil som har "`,`" som seperator?
+
+1. _read.csv("fil.csv")_
+2. read.csv2("fil.csv")
+3. read.table("fil.csv")
+
+***.hint
+
+`?read.table`
+
+***.explanation
+
+Rätt svar är `read.csv`!
+
+`read.csv` och `read.csv2` är endast wrapper-funktioner till `read.table`. Man skulle även kunna skriva `read.table("fil.csv", sep = ";")`.
+
 ---
 
 ### SQL Server
