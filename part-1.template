@@ -190,6 +190,8 @@ Därför kan det ofta vara bättre att jobba med `character` snarare än `factor
 
 ### Matriser
 
+Till skillnad från `data.frame` och `list`, så måste alla värden vara av samma typ.
+
 ```{r, eval=FALSE}
 x1 <- matrix(1:6, ncol = 3)
 x2 <- array(1:12, c(2, 3, 2))
