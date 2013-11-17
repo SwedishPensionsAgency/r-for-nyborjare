@@ -344,7 +344,12 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 --- &radio
 
 ## Fråga
-Skapa en vektor i enlighet med ovan genom att köra koden `x <- c(aa=1,bb=2,cc=3,dd=2)`.
+
+Skapa en vektor i enlighet med ovan genom att köra koden:
+
+```{r, eval=F}
+x <- c(aa=1,bb=2,cc=3,dd=2)
+```
 
 Gör de två anropen `x[["bb"]]` och `x[2]` samma sak?
 
