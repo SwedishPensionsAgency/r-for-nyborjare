@@ -312,10 +312,13 @@ x <- c(aa=2.1, bb=4.2, cc=3.3, dd=5.4)
 ```
 
 Metoder för dataextrahering:
-```{r, eval=T}
+```{r, eval=F}
 x[c(1,2)] # Välj ett eller flera element
-x[order(x)] # Välj alla element, sorterade
 x[['aa']] # Välj ett, namngivet eller numrerat, element
+```
+
+```{r, eval=T}
+x[order(x)] # Välj alla element, sorterade
 ```
 
 ---
@@ -325,16 +328,17 @@ x[['aa']] # Välj ett, namngivet eller numrerat, element
 De metoder som fungerar för listor fungerar _oftast_ även för vektorer.
 
 Data:
-```{r,results="hide"}
+```{r,eval=T}
 ll <- list(2.1, 4.2, 3.3, 5.4)
 ```
 
 Metoder för dataextrahering:
-```{r,results="hide"}
+```{r,eval=F}
 ll[c(1,2)]
 ll[[1]]
-
 ```
+
+Det första alternativet `[` returnerar en lista med namn och värden, medan `[[` endast returnerar värdet `2.1`.
 
 ---
 
