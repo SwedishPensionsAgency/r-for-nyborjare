@@ -638,7 +638,16 @@ ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + 
 
 ### iPlot
 
-[http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+```{r,eval=F}
+library(devtools)
+install_github("iPlot", "SwedishPensionsAgency")
+
+# Exempel
+library(iPlot)
+iPlot(ggplot2::diamonds)
+```
+
+- Testa själv: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
 
 --- &twocol
 
