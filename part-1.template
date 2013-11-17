@@ -237,6 +237,32 @@ Läs: [Introduction to the data.table package in R](http://cran.r-project.org/we
 vignette("datatable-intro")
 ```
 
+--- &radio
+
+## Fråga
+
+Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
+
+![](img/excelvector.png)
+
+1. `data.frame`
+2. _`vector`_
+3. `matrix`
+4. `character`
+
+--- &radio
+
+## Fråga
+
+Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
+
+![](img/exceltable.png)
+
+1. _`data.frame`_
+2. `vector`
+3. `matrix`
+4. `character`
+
 ---
 
 ## Subsetting
@@ -750,7 +776,7 @@ library(iPlot)
 iPlot(ggplot2::diamonds)
 ```
 
-![bild]
+![](img/iplot.png)
 
 - Testa själv: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
 
