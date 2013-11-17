@@ -228,7 +228,7 @@ dt <- data.table(x = 1:3, y = c("a", "b", "c"))
 
 {{#handout}}
 
-Läs: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf): http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf
+Lästips: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf)
 
 {{/handout}}
 
@@ -248,7 +248,6 @@ Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
 1. `data.frame`
 2. _`vector`_
 3. `matrix`
-4. `character`
 
 --- &radio
 
