@@ -228,7 +228,7 @@ dt <- data.table(x = 1:3, y = c("a", "b", "c"))
 
 {{#handout}}
 
-Läs: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf): http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf
+Lästips: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf)
 
 {{/handout}}
 
