@@ -327,7 +327,7 @@ vignette("datatable-intro")
 
 --- &radio
 
-## Fråga
+## Quiz
 
 Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
 
@@ -339,7 +339,7 @@ Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
 
 --- &radio
 
-## Fråga
+## Quiz
 
 Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
 
@@ -455,7 +455,7 @@ DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
 
 --- &radio
 
-## Fråga
+## Quiz
 
 Skapa en vektor i enlighet med ovan genom att köra koden:
 
@@ -471,7 +471,7 @@ Gör de två anropen `x[["bb"]]` och `x[2]` samma sak?
 
 --- &radio
 
-## Fråga
+## Quiz
 Ladda datasetet `diamonds` genom att köra koden `require(ggplot2)`.
 
 `diamonds` är en tabell av typen `data.frame` och innehåller mätdata över ca 55 000 diamanter.
@@ -644,7 +644,7 @@ Läs mer: [XLConnect - A platform-independent interface to Excel](http://cran.r-
 
 --- &radio
 
-## Fråga
+## Quiz
 
 ### Hur läser man in en CSV-fil som har "`,`" som seperator?
 
@@ -880,7 +880,7 @@ binom_coeff(5,2) # Ger resultatet 10
 
 --- &radio
 
-## Fråga
+## Quiz
 
 Vad gör följande funktion?
 
@@ -952,7 +952,7 @@ install_github("Coldbir","SwedishPensionsAgency")
 
 --- &radio
 
-## Fråga
+## Quiz
 Vilket av följande kommandon installerar paketet `survey` från internet?
 
 1. _`install.packages("survey")`_.
@@ -1016,7 +1016,7 @@ ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + 
 
 ---
 
-## Fråga / uppgift
+## Quiz
 
 Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
 
@@ -1044,7 +1044,7 @@ iPlot(ggplot2::diamonds)
 
 ---
 
-## Fråga / uppgift
+## Quiz
 
 Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
 
