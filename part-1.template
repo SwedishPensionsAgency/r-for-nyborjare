@@ -745,10 +745,8 @@ Tänk på att de bör ha samma längd.
 Anslut till databas
 
 ```{r, eval=F}
-a <- cdb("//psysstat5w/G/MidasCDB", na = 0)
+a <- cdb("//psysstat5w/G/MidasCDB")
 ```
-
-Som ni ser så kan man även ange `na = 0` för att ersätta `NA`-värden med `0`.
 
 Lista samtliga variabler
 
