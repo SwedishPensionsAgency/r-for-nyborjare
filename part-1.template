@@ -1094,6 +1094,46 @@ Att skriva kod som andra (och framförallt framtida själv) förstår är en kon
 
 => Låg teknisk skuld!
 
+{{#handout}}
+---
+
+### Att skriva läsbar kod
+
+Oläslig kod är ofta farlig på flera sätt. Vanliga misstag innefattar:
+- _Spacing_: Uteblivna mellanslag och radbrytningar i kod
+- _Återanvändning_: Istället för att återvinna kod i funktioner, upprepas samma kod många gånger
+- _Kommentering_: Otillräcklig dokumentation innan och inom funktioner och annan kod
+- _Indentering_: Tabb-indrag används för att orientera koden efter vilken funktion den är underordnad
+
+---
+
+```r
+f<-function(x,y){
+print(x);if(class(x)=="integer")
+   return(x) else{return(y)}}
+```
+
+```r
+# A function that prints x, then returns
+# the value of x if x is an integer, else returns the value of y
+f <- function(x, y) {
+   # Print the value of x
+   print(x)
+
+   # Check if x is an integer
+   if (class(x) == "integer") {
+
+      # If x is an integer, return the value of x
+      return(x)
+   } else {
+
+      # Otherwise, return the value of y
+      return(class(y))
+   }
+}
+
+
+{{/handout}}
 --- &twocol
 
 ## Att lära sig mer om R
