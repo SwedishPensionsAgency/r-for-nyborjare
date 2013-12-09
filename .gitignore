@@ -5,3 +5,7 @@
 /libraries
 .Rproj.user
 /.cache
+.Rhistory
+.RData
+*.jpg
+*.png
