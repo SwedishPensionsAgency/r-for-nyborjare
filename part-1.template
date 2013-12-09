@@ -97,14 +97,12 @@ Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktion
 
 ## RStudio
 
-{{#handout}}
-![](img/rstudio1.png)
-{{/handout}}
-
 {{^handout}}
 <iframe src = 'http://nektar.io/rstudio/' height='600px'></iframe>
 {{/handout}}
 
+{{#handout}}
+![](img/rstudio1.png)
 
 ---
 
@@ -139,6 +137,9 @@ Genom att börja skriva namnet på en funktion och trycka på tabb-tangenten i R
 Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfil.
 
 ![](img/rstudio3.png)
+
+{{/handout}}
+
 
 ---
 
