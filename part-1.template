@@ -81,7 +81,7 @@ Materialet är öppen källkod och finns att ladda ned från: http://github.com/
 
 ## Kort om R
 
-R är ett __programmeringsspråk__ likt t.ex. Python, Scala eller C++.
+R är ett __programmeringsspråk__ likt t.ex. Python, Scala eller C++. Styrkan med R är att det innehåller en mycket stor uppsättning funktioner för bearbetning, analys och deskription av data för statistiska ändamål.
 
 Några av R:s styrkor är att det innehåller många kraftfulla funktioner för analys och deskription av data både numeriskt och grafiskt.
 
@@ -274,13 +274,16 @@ m
 
 där `ncol` (alt. `nrow`) anger där hur många kolumner vektorn ska delas upp på.
 
+`matrix` används oftast enbart när olika matrisoperationer är nödvändiga. I de flesta fall är det vanligare att man använder `data.frame` eller `data.table` för dataanalys eller datalagring.
+
+---
+
 `matrix` är i princip samma som en två-dimensionell `array`. Array:er kan i sin tur ha alltifrån en till flera dimensioner, nedan är ett exempel:
 
 ```{r, eval=T}
 a <- array(1:12, c(2, 3, 2))
 ```
 
-För enklare dataanalys så är det vanligare att man använder `data.frame` eller `data.table`. 
 
 {{/handout}}
 ---
@@ -381,9 +384,9 @@ Data i R lagras i en __datastruktur__. Om vi anropar hela strukturen får vi, va
 För att hämta delar av data ur en struktur använder vi metoder kallade __operatorer__ på strukturen.
 
 Det finns tre sådana operatorer:
-- __[__: Hämta ett subset av data som matchar en uppsättning kriterier
-- __[[__: Hämta ett enda namngivet värde ur en datastruktur
-- __$__: Hämta en namngiven variabel/kolumn ur en sammansatt datastruktur
+- `[`: Hämta ett subset av data som matchar en uppsättning kriterier
+- `[[`: Hämta ett enda namngivet värde ur en datastruktur
+- `$`: Hämta en namngiven variabel/kolumn ur en sammansatt datastruktur
 
 Operatorerna anges direkt efter ett anrop av en datastruktur, på formen __mindata$id__ eller __minlista[2]__.
 
@@ -413,7 +416,6 @@ x[order(x)] # Välj alla element, sorterade
 
 De metoder som fungerar för listor fungerar _oftast_ även för vektorer.
 
-Data:
 ```{r,eval=T}
 ll <- list(2.1, 4.2, 3.3, 5.4)
 ```
@@ -437,12 +439,16 @@ DF <- data.frame(id=c(1:3),
 value=c("Love", "Thomas", "Ole"))
 ```
 
-Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i [ ]-anropet!
+Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier.
 ```{r,eval=F}
-DF[c(1,2),] # Väljer raderna 1 och 2
-DF[,c("value")] # Väljer kolumnen "value"
-DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
+# Väljer raderna 1 och 2
+DF[c(1,2),]
+# Väljer kolumnen "value"
+DF[,c("value")]
+# Välj den rad där "value" == "Ole"
+DF[DF$value=="Ole",]
 ```
+<small>Observera kommatecknet i `[`-anropet!</small>
 
 ---
 
@@ -457,11 +463,14 @@ value=c("Cédric", "Elin", "Ingemar"))
 Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
 
 ```{r,eval=F}
-DT[c(1:2)] # Väljer raderna 1 och 2
-DT[,list(value)] # Väljer kolumnen "value"
-DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
+# Välj raderna 1 och 2
+DT[c(1:2)]
+# Välj kolumnen "value"
+DT[,list(value)]
+# Skapa en ny variabel med värdena {1,0,-1}
+DT[,id2 := (5-id),by=id]
 ```
-<small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
+<small>Observera att kommatecknet kan __utelämnas__ i första exemplet!</small>
 
 --- &radio
 
@@ -517,12 +526,12 @@ DT[order(DT$id)] # Genomför en "proc sort" på tabellen DT
 
 Sampling kan göras med kommandot __sample()__:
 ```{r,results="hide"}
-# Sampla en vektor
+# Sampla 100 element ur en vektor
 vektor <- c(1:1000)
 vektor_sample <- sample(vektor, 100)
 
-# Sampla rader ur en data.frame
-DT <- data.table(id=c(1:1000),namn=rep(c("Ny","Gammal"))) # Skapa tabell
+# Sampla 10 rader ur en data.frame
+DT <- data.table(id=c(1:1000), namn=rep(c("Ny","Gammal")))
 antalrader <- nrow(DT) # Antal rader i tabellen
 DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
 
@@ -576,8 +585,22 @@ is.na
 
 # Grundläggande matematik
 max, min, prod, sum
-mean, median, cor, sd, var
 ```
+
+---
+
+### Statistik
+```r
+# Linjär regression
+lm, glm
+summary
+anova
+
+# Läges- och spridningsmått
+mean, median, cor, sd, var
+
+# Det viktigaste statistikpaketett
+library(stats)
 
 ---
 
@@ -627,21 +650,32 @@ library(foreign)
 
 ## Externa datakällor
 
+Data lagras ofta t.ex. på disk eller i databaser. R har en uppsättning funktioner för att läsa in och skriva data, t.ex. följande format:
+
 - Excel
 - SQL Server (t.ex. PEDAL)
 - Coldbir (t.ex. MIDAS)
 
+
+
 ---
 
 ### Excel
+Filer från t.ex. Excel lagras ofta i två format: CSV eller XLS[X].
 
-För inläsning av textfiler så finns det funktioner i R man kan använda sig av, t.ex.:
+`CSV`:
+För inläsning av textfiler så finns det funktioner i R man kan använda sig av t.ex. funktionerna `read.csv`/`read.csv2` eller `fread`:
 
 ```{r, eval=F}
 x <- read.csv2("fil.csv")
+y <- data.table::fread("fil.csv")
 ```
 
 Det finns motsvarande funktion för att skriva till CSV, se t.ex. `write.csv2`. Se även `*.table`, `*.delim2`.
+
+---
+
+`XLS[X]`:
 
 För inläsning av `xls` eller `xlsx` använd paketet `XLConnect`:
 
@@ -656,7 +690,7 @@ Läs mer: [XLConnect - A platform-independent interface to Excel](http://cran.r-
 
 ## Quiz
 
-### Hur läser man in en CSV-fil som har "`,`" som seperator?
+I en CSV-fil är olika celler separerade med något tecken, t.ex. "`;`" eller "`,`". Hur läser man in en CSV-fil som har "`,`" som separator?
 
 1. _read.csv("fil.csv")_
 2. read.csv2("fil.csv")
@@ -676,21 +710,29 @@ Rätt svar är `read.csv`!
 
 ### SQL Server
 
+R kan använda paketet `RODBC` för att kommunicera med de flesta SQL-liknande databaser.
+
 `RODBC`:
 
 ```{r, eval=F}
+library(RODBC)
 con <- odbcDriverConnect("driver=SQL Server; server=pedal")
 x <- sqlQuery("SELECT * FROM PedalDIM.Arende.Process")
 close(con)
 ```
 
+---
+
+På Pensionsmyndigheten kan vi även använda det egenutvecklade paketet `pmtools` för att förenkla anrop av vissa SQL-databaser.
+
 `pmtools`:
 
 ```{r, eval=F}
+library(pmtools)
 x <- pedal_query("SELECT * FROM PedalDIM.Arende.Process")
 ```
 
-alternativ, använd SQL-kod från fil:
+En SQL-fråga kan även lagras i en separa fil och användas som anrop:
 
 ```{r, eval=F}
 x <- pedal_query(file = "process.sql")
