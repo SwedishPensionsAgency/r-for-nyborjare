@@ -974,6 +974,8 @@ library(ggplot2)
 
 T.ex. så kan man skapa grafer interaktiv i R-konsolen eller så kan man tillsammans med **R Markdown** (eller Sweave) inkludera dem i publikationer.
 
+För rapportgenerering så finns det flertalet paket som kan vara till nytta, se t.ex. `brew`, `knitr`, `pander` och `whisker`.
+
 ---
 
 ### Histogram
