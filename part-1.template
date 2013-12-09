@@ -978,7 +978,7 @@ T.ex. så kan man skapa grafer interaktiv i R-konsolen eller så kan man tillsam
 
 ### Histogram
 
-```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F}
 ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 ```
 
@@ -986,7 +986,7 @@ ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 
 ### Density plot
 
-```{r, warning=F, fig.width = 12.5, fig.height = 6}
+```{r, warning=F, fig.width = 12.5, fig.height = 6, cache=F}
 ggplot(diamonds, aes(depth, fill = cut)) + 
    geom_density(alpha = 0.2) + xlim(55, 70)
 ```
@@ -995,7 +995,7 @@ ggplot(diamonds, aes(depth, fill = cut)) +
 
 ### Scatter plot
 
-```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F}
 ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
 ```
 
@@ -1014,7 +1014,7 @@ ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
 
 --- &twocol
 
-### R Markdown (HTML)
+### R Markdown - HTML
 
 *** =right
 
@@ -1042,7 +1042,7 @@ ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
 
 --- &twocol
 
-### Orange Rapport (PDF)
+### Orange Rapport - PDF
 
 *** =left
 
@@ -1078,10 +1078,59 @@ R och JavaScript samverkar bra då de har liknande datatyper, jämför t.ex. `li
 
 För ytterligare paket som hanterar interaktiva diagram se t.ex. `ggvis` och `googleVis`.
 
+{{#handout}}
+
 ---
 
-### Shiny
+### List
 
+```{r, tidy=F}
+x <- list(
+   a = list(
+      b = 1,
+      c = 2:3
+   ),
+   list(
+      d = "e",
+      f = c("g", "h")
+   )
+)
+```
+
+{{/handout}}
+
+### JSON
+
+
+```{r, results='asis'}
+cat(RJSONIO::toJSON(x))
+```
+
+--- &twocol
+
+### Shiny - Kod
+
+*** =left
+
+![](img/shiny-ui.png)
+
+*** =right
+
+![](img/shiny-server.png)
+
+--- &twocol
+
+### Shiny - Applikation
+
+*** =left
+
+![](img/shiny-app.png)
+
+*** =right
+
+[www.rstudio.com/shiny/](http://www.rstudio.com/shiny/)
+
+![](img/shiny-gallery.png)
 
 ---
 
