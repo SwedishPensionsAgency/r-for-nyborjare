@@ -664,6 +664,7 @@ Data lagras ofta t.ex. på disk eller i databaser. R har en uppsättning funktio
 Filer från t.ex. Excel lagras ofta i två format: CSV eller XLS[X].
 
 `CSV`:
+
 För inläsning av textfiler så finns det funktioner i R man kan använda sig av t.ex. funktionerna `read.csv`/`read.csv2` eller `fread`:
 
 ```{r, eval=F}
@@ -710,9 +711,9 @@ Rätt svar är `read.csv`!
 
 ### SQL Server
 
-R kan använda paketet `RODBC` för att kommunicera med de flesta SQL-liknande databaser.
+`RODBC`
 
-`RODBC`:
+R kan använda paketet `RODBC` för att kommunicera med de flesta SQL-liknande databaser.
 
 ```{r, eval=F}
 library(RODBC)
@@ -723,9 +724,9 @@ close(con)
 
 ---
 
-På Pensionsmyndigheten kan vi även använda det egenutvecklade paketet `pmtools` för att förenkla anrop av vissa SQL-databaser.
+`pmtools`
 
-`pmtools`:
+På Pensionsmyndigheten kan vi även använda det egenutvecklade paketet `pmtools` för att förenkla anrop av vissa SQL-databaser.
 
 ```{r, eval=F}
 library(pmtools)
@@ -742,11 +743,17 @@ x <- pedal_query(file = "process.sql")
 
 ### Coldbir
 
-Coldbir är en kolumndatabas i R - en vidareutveckling av tidigare midAUX (MIDAS).
+Coldbir ("COLumn DataBase In R") är en kolumndatabas i R - en vidareutveckling av tidigare midAUX (MIDAS).
 
 Paketet har som mål att med lite kod och simpel syntax erbjuda snabb läs-/skrivhastighet, för att göra det enklare och snabbare att analysera data i R.
 
 Dessutom finns stöd för hantering av dokumentation (t.ex. beskrivning av variabler).
+
+Coldbir är open source och kan installeras med följande kommando:
+
+```r
+devtools::install_github("Coldbir","SwedishPensionsAgency")
+```
 
 ---
 
@@ -814,16 +821,17 @@ get_vars(a, dims = T)
 
 ---
 
-Hämta data för variabel
+Hämta data för variabel:
 
 ```{r, eval=F}
 x <- a["KON", 2012]
-head(x, 10)
-# [1] <NA>   <NA>   <NA>   <NA>   <NA>   Kvinna <NA>   Man    <NA>   <NA>  
+head(x, 8)
+# [1] <NA>   <NA>   <NA>   <NA>   <NA>   Kvinna <NA>   Man
+
 # Levels: Kvinna Man
 ```
 
-där `a` anger objektet för kopplingen till databasen, och därefter följer variabelnamn (case-sensitive) och val av dimension (`2012`). Om variabeln saknat dimensioner så hade anropet varit `a["KON"]`, eller med flera dimensioner `a["KON", c(2012, 12)]`.
+`a` anger objektet för kopplingen till databasen, och därefter följer variabelnamn (skiftlägeskänsliga!) och val av dimension (`2012`). Om variabeln saknat dimensioner så hade anropet varit `a["KON"]`, eller med flera dimensioner `a["KON", c(2012, 12)]`.
 
 ---
 
@@ -1004,6 +1012,21 @@ require(devtools)
 # Installera Coldbir-paketet från GitHub
 install_github("Coldbir","SwedishPensionsAgency")
 ```
+
+---
+
+### Använda en enstaka funktion från ett paket
+
+Ibland vill man bara använda en enstaka funktion från ett paket. Det kan även förekomma att flera paket har funktioner med samma namn, men som gör olika saker. Man kan då vilja ange från vilket paket funktionen ska hämtas. Detta görs med operatorn `::`.
+
+```r
+# Installera paketet shiny
+devtools::install_github("shiny","RStudio")
+
+# Beskriv det data som finns i vektorn mydata
+Hmisc::describe(mydata)
+```
+
 
 --- &radio
 
