@@ -1042,7 +1042,7 @@ Vilket av följande kommandon installerar paketet `survey` från internet?
 
 ## Statisk presentation
 
-En av R:s mest välkända styrkor är dess grafiska presentation.
+En av R:s mest välkända styrkor är dess funktioner för grafisk presentation.
 
 `ggplot` av Hadley Wickham är ett paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. 
 
@@ -1071,7 +1071,12 @@ ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 
 ### Density plot
 
-```{r, warning=F, fig.width = 12.5, fig.height = 6, cache=F}
+```r
+ggplot(diamonds, aes(depth, fill = cut)) + 
+   geom_density(alpha = 0.2) + xlim(55, 70)
+```
+
+```{r, echo=F,warning=F, fig.width = 12.5, fig.height = 6, cache=F}
 ggplot(diamonds, aes(depth, fill = cut)) + 
    geom_density(alpha = 0.2) + xlim(55, 70)
 ```
@@ -1080,7 +1085,12 @@ ggplot(diamonds, aes(depth, fill = cut)) +
 
 ### Scatter plot
 
-```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F}
+```r
+ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) +
+   geom_point() + facet_grid(Sex ~ Smoke)
+```
+
+```{r, echo=F, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F}
 ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
 ```
 
@@ -1105,10 +1115,10 @@ ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
 
 ```
     Title
-    ============================
+    =======================
     
-    This is **R Markdown** ...
-
+    This is **R Markdown**.
+   
     ```{r, eval = F}
     summary(cars)
     ```
@@ -1315,29 +1325,30 @@ Oläslig kod är ofta farlig på flera sätt. Vanliga misstag innefattar:
 ---
 
 ```r
-f<-function(x,y){
-print(x);if(class(x)=="integer")
-   return(x) else{return(y)}}
+# A function that checks for the class of x, 
+# and returns either x or an error
+f<-function(x,class){
+if(class(x)==class) return(x) else { 
+error("Wrong class")}}
 ```
 
 ```r
-# A function that prints x, then returns
-# the value of x if x is an integer, else returns the value of y
-f <- function(x, y) {
-   # Print the value of x
-   print(x)
+# Determine whether x is of an expected class,
+# and halt the program if it is not
+f <- function(x, class) {
+   if (class(x)) == class {
 
-   # Check if x is an integer
-   if (class(x) == "integer") {
-
-      # If x is an integer, return the value of x
+      # If x is of the expected class, keep running
       return(x)
    } else {
 
-      # Otherwise, return the value of y
-      return(class(y))
+      # The program should be halted if x
+      # is not of the expected class
+      error("Wrong class")
    }
 }
+```
+
 
 {{/handout}}
 --- &twocol
@@ -1349,13 +1360,22 @@ Att programmera är, framförallt i början, ofta att stöta på problem. Funkti
 
 En av styrkorna med R är det utomordentliga nätverk av engagerade och kunniga utvecklare som samlas kring vissa online-portaler, särskilt __GitHub__ och __StackOverflow__.
 
-Ofta är svaret på en fråga bara en Google-sökning bort. Det kan ibland vara svårt att veta exakt vad man ska söka på, men efter ett tag brukar det vara lätt att se ungefär vilken typ av sökning som ger bra svar.
+*** =left
+
+![](img/googlestackoverflow.png)
+
+--- &twocol
+
+*** =right
+
+Lösningen på ett programmeringsproblem är nästan alltid bara en Google-sökning bort. Det kan ibland vara svårt att veta exakt vad man ska söka på, men efter ett tag brukar det vara lätt att se ungefär vilken typ av sökning som ger bra svar.
 
 Ofta är den första träffen vid en googling en sida på [StackOverflow](http://www.stackoverflow.com/).
 
 *** =left
 
-![](img/googlestackoverflow.png)
+![](img/stackoverflow.png)
+
 
 ---
 
