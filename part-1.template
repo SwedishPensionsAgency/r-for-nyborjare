@@ -1068,6 +1068,23 @@ I RStudio, skapa en ny **R Markdown**-fil och välj *spara som*. Klicka därefte
 
 ---
 
+## Interaktiv Presentation
+
+R och JavaScript samverkar bra då de har liknande datatyper, jämför t.ex. `list`:or i R med `JSON`-objekt i JavaScript. Nedan är några paket som drar nytta av denna samverkan:
+
+- Shiny
+- iPlot
+- rCharts
+
+För ytterligare paket som hanterar interaktiva diagram se t.ex. `ggvis` och `googleVis`.
+
+---
+
+### Shiny
+
+
+---
+
 ### iPlot
 
 ```{r,eval=F}
@@ -1085,7 +1102,7 @@ iPlot(ggplot2::diamonds)
 
 ## Quiz
 
-Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+Testa iPlot online: [nektar.io/shiny/iplot/diamonds/](nektar.io/shiny/iplot/diamonds/)
 
 Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
