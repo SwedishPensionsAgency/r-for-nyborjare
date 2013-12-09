@@ -87,15 +87,24 @@ Några av R:s styrkor är att det innehåller många kraftfulla funktioner för 
 
 Under de senaste 2-3 åren har R och de funktioner som är tillgängliga utvecklats mycket snabbt. R är idag ett godtagbart förstahandsval för både visualisering och statistisk modellering, men även vid hantering och bearbetning av mycket stora datamängder.
 
----
-
-## RStudio
+### RStudio
 
 RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
 
 Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
 
+---
+
+## RStudio
+
+{{#handout}}
 ![](img/rstudio1.png)
+{{/handout}}
+
+{{^handout}}
+<iframe src = 'http://nektar.io/rstudio/' height='600px'></iframe>
+{{/handout}}
+
 
 ---
 
