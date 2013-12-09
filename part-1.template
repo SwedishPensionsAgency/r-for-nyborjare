@@ -159,7 +159,7 @@ Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
 
 De vanligaste typerna av vektorer är:
 
-```{r, eval=F}
+```{r, eval=TRUE}
 logical <- c(T, FALSE, TRUE, FALSE)
 numeric <- c(1, 2.5, 4.5)
 integer <- c(1L, 6L, 10L)
@@ -177,7 +177,7 @@ c(1, c(2, c(3, 4)))
 
 För att testa eller se vilken datatyp en variabel är:
 
-```{r, eval=T}
+```{r, eval=TRUE}
 typeof(integer)
 is.integer(integer)
 is.double(integer)
@@ -503,6 +503,8 @@ Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamo
 4. Alla diamanter i datasetet
 
 
+{{#handout}}
+
 ---
 
 ## Sortering och sampling
@@ -518,7 +520,6 @@ DT[order(DT$id)] # Genomför en "proc sort" på tabellen DT
 
 ```
 <small>OBS! Ibland kan man av misstag råka använda `sort()` istället för `order()` utan att R varnar användaren. Detta kan leda till att data blir felaktigt utan att man märker det. Tumregeln är att aldrig använda `sort()`.</small>
-
 
 ---
 
@@ -536,6 +537,9 @@ antalrader <- nrow(DT) # Antal rader i tabellen
 DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
 
 ```
+
+{{/handout}}
+
 
 ---
 
@@ -797,6 +801,8 @@ a["x_plus_y"] <- a["x"] + a["y"]
 
 Tänk på att de bör ha samma längd.
 
+{{#handout}}
+
 ---
 
 ### Coldbir: MIDAS
@@ -853,9 +859,12 @@ Antal individer per sektortillhörighet:
 table(a["SEKTORTILLHORIGH", 2010])
 ```
 
+{{/handout}}
+
+
 ---
 
-Skapa en barplot med samma fördelning:
+Skapa en barplot med data ur MIDAS:
 
 ```{r, eval=F}
 variable <- "SEKTORTILLHORIGH"
@@ -1071,12 +1080,7 @@ ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 
 ### Density plot
 
-```r
-ggplot(diamonds, aes(depth, fill = cut)) + 
-   geom_density(alpha = 0.2) + xlim(55, 70)
-```
-
-```{r, echo=F,warning=F, fig.width = 12.5, fig.height = 6, cache=F}
+```{r, echo=T,warning=F, fig.width = 12.5, fig.height = 6, cache=F, tidy=F}
 ggplot(diamonds, aes(depth, fill = cut)) + 
    geom_density(alpha = 0.2) + xlim(55, 70)
 ```
@@ -1085,13 +1089,10 @@ ggplot(diamonds, aes(depth, fill = cut)) +
 
 ### Scatter plot
 
-```r
+
+```{r, echo=T, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F,tidy=F}
 ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) +
    geom_point() + facet_grid(Sex ~ Smoke)
-```
-
-```{r, echo=F, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F}
-ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
 ```
 
 ---
@@ -1235,6 +1236,8 @@ cat(RJSONIO::toJSON(x))
 
 ### iPlot
 
+{{#handout}}
+
 ```{r,eval=F}
 library(devtools)
 install_github("iPlot", "SwedishPensionsAgency")
@@ -1243,14 +1246,20 @@ install_github("iPlot", "SwedishPensionsAgency")
 library(iPlot)
 iPlot(ggplot2::diamonds)
 ```
-
 ![](img/iplot.png)
+{{/handout}}
+
+
+{{^handout}}
+<iframe src = 'http://nektar.io/shiny/iplot/diamonds/' height='700px'></iframe>
+{{/handout}}
+
 
 ---
 
 ## Quiz
 
-Testa iPlot online: [nektar.io/shiny/iplot/diamonds/](nektar.io/shiny/iplot/diamonds/)
+Testa iPlot online: [nektar.io/shiny/iplot/diamonds/](http://nektar.io/shiny/iplot/diamonds/)
 
 Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
@@ -1311,7 +1320,6 @@ Att skriva kod som andra (och framförallt framtida själv) förstår är en kon
 
 => Låg teknisk skuld!
 
-{{#handout}}
 ---
 
 ### Att skriva läsbar kod
@@ -1349,8 +1357,6 @@ f <- function(x, class) {
 }
 ```
 
-
-{{/handout}}
 --- &twocol
 
 ## Att lära sig mer om R
