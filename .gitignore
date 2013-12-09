@@ -1,5 +1,6 @@
 *.html
 *.md
+*.Rmd
 /figure
 *.Rproj.user
 /libraries
@@ -9,3 +10,4 @@
 .RData
 *.jpg
 *.png
+
