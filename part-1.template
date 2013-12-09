@@ -962,36 +962,29 @@ Vilket av följande kommandon installerar paketet `survey` från internet?
 
 ---
 
-## Grafik och dataanalys
+## Statisk presentation
 
-Nedan är några exempel på bibliotek som lämpar sig väl för analys och grafik:
+En av R:s mest välkända styrkor är dess grafiska presentation.
 
-- `ggplot2`
-- `iPlot`
-- `rCharts`
-
-`iPlot` är ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
-
----
-
-### `ggplot2`
-
-Paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. Skapat av Hadley Wickham.
-
-Exempel på tillämpningsområden:
-- interaktivt i R-konsolen
-- applikationer, t.ex. `iPlot`
-- publikationer, t.ex. Orange rapport
-
-Ladda paket:
+`ggplot` av Hadley Wickham är ett paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. 
 
 ```{r, warning=F}
 library(ggplot2)
 ```
 
+T.ex. så kan man skapa grafer interaktiv i R-konsolen eller så kan man tillsammans med **R Markdown** (eller Sweave) inkludera dem i publikationer.
+
 ---
 
-#### Density plot
+### Histogram
+
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
+```
+
+---
+
+### Density plot
 
 ```{r, warning=F, fig.width = 12.5, fig.height = 6}
 ggplot(diamonds, aes(depth, fill = cut)) + 
@@ -1000,15 +993,7 @@ ggplot(diamonds, aes(depth, fill = cut)) +
 
 ---
 
-#### Histogram
-
-```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
-ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
-```
-
----
-
-#### Scatter plot
+### Scatter plot
 
 ```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
 ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
@@ -1026,6 +1011,60 @@ Påminnelse: Den generella syntaxen är
 ```r
 ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
 ```
+
+--- &twocol
+
+### R Markdown (HTML)
+
+*** =right
+
+```
+    Title
+    ============================
+    
+    This is **R Markdown** ...
+
+    ```{r, eval = F}
+    summary(cars)
+    ```
+    
+    You can also embed plots:
+    
+    ```{r fig.width=5, fig.height=4, eval = F}
+    plot(cars)
+    ```
+    
+```
+
+*** =left
+
+![](img/rmarkdown.png)
+
+--- &twocol
+
+### Orange Rapport (PDF)
+
+*** =left
+
+![](img/orange-rapport-sida.png)
+
+*** =right
+
+![](img/orange-rapport-sida2.png)
+
+--- &twocol
+
+## Quiz
+
+I RStudio, skapa en ny **R Markdown**-fil och välj *spara som*. Klicka därefter på **knit**-knappen.
+
+*** =left
+
+![](img/rstudio-rmd.png)
+
+*** =right
+
+![](img/rstudio-rmd-2.png)
 
 ---
 
