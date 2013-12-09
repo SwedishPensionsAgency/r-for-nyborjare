@@ -986,6 +986,8 @@ T.ex. så kan man skapa grafer interaktiv i R-konsolen eller så kan man tillsam
 
 För rapportgenerering så finns det flertalet paket som kan vara till nytta, se t.ex. `brew`, `knitr`, `pander` och `whisker`.
 
+{{#handout}}
+
 ---
 
 ### Histogram
@@ -993,6 +995,9 @@ För rapportgenerering så finns det flertalet paket som kan vara till nytta, se
 ```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6,cache=F}
 ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
 ```
+
+{{/handout}}
+
 
 ---
 
@@ -1113,14 +1118,14 @@ x <- list(
 )
 ```
 
-{{/handout}}
-
 ### JSON
-
 
 ```{r, results='asis'}
 cat(RJSONIO::toJSON(x))
 ```
+
+{{/handout}}
+
 
 --- &twocol
 
