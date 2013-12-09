@@ -1070,11 +1070,15 @@ I RStudio, skapa en ny **R Markdown**-fil och välj *spara som*. Klicka därefte
 
 ## Interaktiv Presentation
 
-R och JavaScript samverkar bra då de har liknande datatyper, jämför t.ex. `list`:or i R med `JSON`-objekt i JavaScript. Nedan är några paket som drar nytta av denna samverkan:
+R och JavaScript samverkar bra då de har liknande datatyper, jämför t.ex. `list` i R med `JSON` i JavaScript. Nedan är några paket som drar nytta av denna samverkan:
 
-- Shiny
-- iPlot
-- rCharts
+- **`Shiny`** - *"Shiny makes it super simple for R users like you to turn analyses into interactive web applications that anyone can use"*
+
+- **`iPlot`** - *"A visualization app using click events for static plots in shiny"*
+
+- **`rCharts`** - *"rCharts is an R package to create, customize and publish interactive javascript visualizations from R using a familiar lattice style plotting interface"*
+
+- **`slidify`** - *"Slidify helps you create and publish beautiful HTML5 presentations from RMarkdown"*
 
 För ytterligare paket som hanterar interaktiva diagram se t.ex. `ggvis` och `googleVis`.
 
