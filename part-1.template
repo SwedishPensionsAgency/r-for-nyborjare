@@ -821,9 +821,12 @@ barplot(freq, horiz = T, las = 1)
 
 Barplot med titel och källa:
 
-```{r, eval=F}
+```{r, eval=F, tidy=F}
 docs <- get_doc(a, variable)
-barplot(freq, horiz = T, las = 1, main = paste(docs$title, year), sub = paste("Källa:", docs$source))
+barplot(freq, horiz = T, las = 1,
+   main = paste(docs$title, year),
+   sub = paste("Källa:", docs$source)
+)
 ```
 
 ![](img/sektortillhorigh2.png)
