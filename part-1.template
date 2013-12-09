@@ -1,0 +1,1179 @@
+---
+title: Grundkurs i R
+author: Love Hansson och Thomas Reinholdsson
+job: Pensionsmyndigheten
+widgets: [mathjax, bootstrap, quiz]
+ext_widgets: {rCharts: "libraries/highcharts"}
+framework: {{framework}}
+mode: selfcontained
+url: {lib: libraries}
+hitheme: {{hitheme}}
+---
+
+<style>
+   slide {
+      background-color: white;
+   }
+   body {
+      background-color: white;
+   }
+   .title-slide {
+      background-color: white;
+   }
+   article p {
+      margin-bottom: 10px;
+      margin-top: 10px;
+   }
+   pre code {
+   {{#handout}}
+      background: #f8f8ff;
+   {{/handout}}
+   {{^handout}}
+      background: #f8f8ff;
+   {{/handout}}
+   }
+
+</style>
+
+{{#handout}}
+
+## Om denna presentation
+
+Detta undervisningsmaterial är del av en nybörjarkurs i R anordnad av Love Hansson och Thomas Reinholdsson, Pensionsmyndigheten.
+
+Materialet består av en presentation och ett något mer utförligt handout-material för utskrift. Hela innehållet är skrivet i RMarkdown och genererat med hjälp av paketen [slidify](https://github.com/ramnathv/slidify) och [slidifyLibraries](https://github.com/ramnathv/slidifyLibraries).
+
+Varje avsnitt avslutas med en eller flera interaktiva frågor som kan användas för självstudier.
+
+Materialet är öppen källkod och finns att ladda ned från: http://github.com/SwedishPensionsAgency/r-for-nyborjare. Där finns även instruktioner och källkod för att generera handout och presentationsbilder.
+
+
+---
+
+{{/handout}}
+
+
+## Lärandemål
+
+- Förstå skillnaden på patchwork-språk som SAS och äkta programmeringsspråk som R
+- Använda och förstå ett flertal datastrukturer
+- Sammanställa deskriptiv statistik om data med enklare funktioner
+- Använda ggplot och grafiska funktioner för deskription och exploration av data
+- Installera och använda paket
+- Hämta data från olika källor (Excel, MiDAS, Coldbir, Pedal)
+- Lagra data i olika format
+- Självständigt inhämta ny kunskap och hitta svar på frågor om R (vara en del av R:s community)
+
+---
+
+## Innehåll
+- Om R och RStudio
+- Datatyper i R
+- Subsetting, sortering och sampling
+- En grundläggande "vokabulär" i R
+- Externa datakällor
+- Funktioner och pakethantering
+- Grafik
+- Best practices
+
+
+---
+
+## Kort om R
+
+R är ett __programmeringsspråk__ likt t.ex. Python, Scala eller C++.
+
+Några av R:s styrkor är att det innehåller många kraftfulla funktioner för analys och deskription av data både numeriskt och grafiskt.
+
+Under de senaste 2-3 åren har R och de funktioner som är tillgängliga utvecklats mycket snabbt. R är idag ett godtagbart förstahandsval för både visualisering och statistisk modellering, men även vid hantering och bearbetning av mycket stora datamängder.
+
+---
+
+## RStudio
+
+RStudio är en kraftfull utvecklingsmiljö (IDE) för R.
+
+Utöver en skripteditor och en R-kommandorad innehåller RStudio många funktioner för att __granska och utvärdera kod__, visa __programdokumentation__ och presentera __grafik__, m.m.
+
+![](img/rstudio1.png)
+
+---
+
+### Utvärdera kod
+
+Genom att skriva namnet på en funktion utan parenteser visas funktionens kod direkt i R-terminalen:
+
+```{r, eval=F}
+lm # Visar källkoden för funktionen lm
+```
+
+RStudio innehåller även en __source browser__ som kan visa källkoden som ett skript. Browsern aktiveras genom att markera namnet på en funktion och trycka __F2__.
+
+Många primitiva funktioner i R är dock skrivna i C och redan färdigkompilerade, vilket gör att source browsern inte innehåller någon värdefull information.
+
+```{r, eval=F}
+sum # Källkoden till denna funktion kan inte visas
+```
+
+---
+
+### Tabbkomplettering
+
+Genom att börja skriva namnet på en funktion och trycka på tabb-tangenten i RStudio visas en lista över de kommandon som liknar det som skrivits, samt en liten hjälptext.
+
+![](img/rstudio2.png)
+
+---
+
+### Hjälpfiler
+
+Genom att markera namnet på en funktion och trycka på __F1__ visas en hjälpfil.
+
+![](img/rstudio3.png)
+
+---
+
+## Datastrukturer
+
+Det finns flera olika datatyper som används inom R, de vanligaste listas nedan:
+
+- Vektorer
+- Listor
+- Faktorer
+- Matriser
+- "data.frame"
+
+---
+
+### Vektorer
+
+De vanligaste typerna av vektorer är:
+
+```{r, eval=F}
+logical <- c(T, FALSE, TRUE, FALSE)
+numeric <- c(1, 2.5, 4.5)
+integer <- c(1L, 6L, 10L)
+character <- c("these are", "some strings")
+```
+
+Man kan lägga samman vektorer - vilket medför att de "plattas" ut:
+
+```{r, eval=T}
+c(1, 2, 3, 4)
+c(1, c(2, c(3, 4)))
+```
+
+---
+
+För att testa eller se vilken datatyp en variabel är:
+
+```{r, eval=T}
+typeof(integer)
+is.integer(integer)
+is.double(integer)
+is.vector(integer)
+```
+
+---
+
+Vektorer kan enbart innehålla en datatyp. När man kombinerar flera olika datatyper, så får man tänka på att de konverteras till en och samma typ.
+
+```{r, eval=T}
+c("a", 1) # Konverterar 1 till "1"
+c("a", T) # Konverterar TRUE till "TRUE"
+c(1, T, F) # Konverterar TRUE och FALSE till 1 och 0
+```
+
+När logiska vektorer (`TRUE`/`FALSE`) konverteras till numeriska värden så ersätts de med `1` och `0`. Därav kan man t.ex. använda sig av `sum()`.
+
+---
+
+### Listor
+
+Listor kan innehålla olika typer av vektorer:
+
+```{r, eval=FALSE}
+x <- list(1:3, "a", c(T, F, T), c(2.3, 5.9))
+```
+
+Dessutom så kan de innehålla ytterligare listor, vilket medför att de ibland kallas ibland för __recursive vectors__.
+
+```{r, eval=T}
+x <- list(list(1,2), list("a","b","c"), 5:9)
+str(x)
+```
+
+{{#handout}}
+---
+
+### Attribut och namn
+
+Alla objekt kan ha attribut kopplade till sig. T.ex. använder man ofta namn för listor och vektorer.
+
+```{r, eval=FALSE}
+# Vektorer
+x <- c(a = 1, b = 2, "c" = 3)
+```
+
+Namnen kan anges med `"..."`, t.ex. `"c" = 3`.
+
+För att lägga till namn i efterhand:
+
+```{r, eval=FALSE}
+names(x) <- c("x", "y", "z")
+```
+
+```{r, eval=FALSE}
+# Listor
+x <- list(a = 1, b = 2, list(c = 3, d = 4))
+```
+
+---
+
+
+### Faktorer
+
+Faktorer inkluderar en slags uppslagstabell för kodvärden:
+
+```{r, eval=T}
+x <- factor(c("a", "b", "b", "a"))
+x
+levels(x)
+```
+
+---
+
+**Observera** att man **INTE** bör kombinera två faktorvariabler:
+
+```{r, eval=T}
+c(factor("a"), factor("b"))
+```
+
+Därför kan det ofta vara bättre att jobba med `character` snarare än `factor`.
+
+---
+
+### Matriser
+
+Till skillnad från `data.frame` och `list`, så måste alla värden vara av samma typ.
+
+```{r, eval=T}
+m <- matrix(1:6, ncol = 3)
+m
+```
+
+där `ncol` (alt. `nrow`) anger där hur många kolumner vektorn ska delas upp på.
+
+`matrix` är i princip samma som en två-dimensionell `array`. Array:er kan i sin tur ha alltifrån en till flera dimensioner, nedan är ett exempel:
+
+```{r, eval=T}
+a <- array(1:12, c(2, 3, 2))
+```
+
+För enklare dataanalys så är det vanligare att man använder `data.frame` eller `data.table`. 
+
+{{/handout}}
+---
+
+### data.frame()
+
+`data.frame` är det vanligaste sättet att lagra data i R. Det flexibla tabellformatet gör det enkelt att bearbeta data och använda för dataanalys.
+
+```{r, eval=FALSE}
+df <- data.frame(x = 1:3, y = c("a", "b", "c"))
+```
+
+Eftersom det kan vara problematiskt att jobba med faktorer, så kan man ange med argumentet `stringsAsFactors = FALSE` att text ska vara `character`:
+
+```{r, eval=FALSE}
+df <- data.frame(
+  x = 1:3, 
+  y = c("a", "b", "c"), 
+  stringsAsFactors = FALSE
+)
+```
+
+---
+
+### data.table()
+
+`data.table` fungerar på många sätt precis som `data.frame` men är snabbare och rekommenderas för stora datamängder eller datamängder som behöver sorteras ofta. Dessutom mindre kod för samma operationer jämfört med `data.frame`.
+
+```{r, eval=FALSE}
+library(data.table)
+dt <- data.table(x = 1:3, y = c("a", "b", "c"))
+```
+
+Syntax är något förenklat (se mer under avsnittet "Subsetting"):
+
+```{r,eval=F}
+dt[i, j, k]
+```
+där argumenten motsvarar respektive operation:
+- `i`: **subset** (t.ex. välj alla x > 0)
+- `j`: **with** (t.ex. skapa ny variabel)
+- `k`: **by** (t.ex. "group by")
+
+
+{{#handout}}
+
+Lästips: [Introduction to the data.table package in R](http://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf)
+
+```{r, eval=FALSE}
+vignette("datatable-intro")
+```
+
+{{/handout}}
+
+--- &radio
+
+## Quiz
+
+Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
+
+![](img/excelvector.png)
+
+1. `data.frame`
+2. _`vector`_
+3. `matrix`
+
+--- &radio
+
+## Quiz
+
+Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
+
+![](img/exceltable.png)
+
+1. _`data.frame`_
+2. `vector`
+3. `matrix`
+4. `character`
+
+---
+
+## Subsetting
+
+När vi har data vill vi kunna arbeta med delar av data. Detta kallas __subsetting__.
+
+Valet av metod för att hämta ut delar av data beror på vilken __datatyp__ vi använder oss av.
+
+R erbjuder __flera metoder__ för att hämta ut data för varje datatyp.
+
+
+{{#handout}}
+---
+
+### Grundläggande operationer
+
+Data i R lagras i en __datastruktur__. Om vi anropar hela strukturen får vi, vanligtvis, ut _all_ data i strukturen.
+
+För att hämta delar av data ur en struktur använder vi metoder kallade __operatorer__ på strukturen.
+
+Det finns tre sådana operatorer:
+- __[__: Hämta ett subset av data som matchar en uppsättning kriterier
+- __[[__: Hämta ett enda namngivet värde ur en datastruktur
+- __$__: Hämta en namngiven variabel/kolumn ur en sammansatt datastruktur
+
+Operatorerna anges direkt efter ett anrop av en datastruktur, på formen __mindata$id__ eller __minlista[2]__.
+
+{{/handout}}
+
+---
+
+### Enkla vektorer
+
+```{r,results="hide"}
+x <- c(aa=2.1, bb=4.2, cc=3.3, dd=5.4)
+```
+
+Metoder för dataextrahering:
+```{r, eval=F}
+x[c(1,2)] # Välj ett eller flera element
+x[['aa']] # Välj ett, namngivet eller numrerat, element
+```
+
+```{r, eval=T}
+x[order(x)] # Välj alla element, sorterade
+```
+
+---
+
+### Listor
+
+De metoder som fungerar för listor fungerar _oftast_ även för vektorer.
+
+Data:
+```{r,eval=T}
+ll <- list(2.1, 4.2, 3.3, 5.4)
+```
+
+Metoder för dataextrahering:
+```{r,eval=F}
+ll[c(1,2)]
+ll[[1]]
+```
+
+Det första alternativet `[` returnerar en lista med namn och värden, medan `[[` endast returnerar värdet `2.1`.
+
+---
+
+### data.frame()
+
+data.frame är R:s grundläggande datastruktur för data på tabellform.
+
+```{r,results="hide"}
+DF <- data.frame(id=c(1:3),
+value=c("Love", "Thomas", "Ole"))
+```
+
+Urval kan göras kolumnvis, radvis, eller enligt vissa kriterier. Observera kommatecknet i [ ]-anropet!
+```{r,eval=F}
+DF[c(1,2),] # Väljer raderna 1 och 2
+DF[,c("value")] # Väljer kolumnen "value"
+DF[DF$value=="Ole",] # Välj den rad där "value" == "Ole"
+```
+
+---
+
+### data.table()
+
+```{r,results="hide"}
+require(data.table)
+DT <- data.table(id=c(4:6),
+value=c("Cédric", "Elin", "Ingemar"))
+```
+
+Radvis urval fungerar som i data.frames, men kolumnvis urval skiljer sig markant. data.table ger även möjligheten att genomföra SQL-liknande beräkningar utan att behöva använda yttre funktioner.
+
+```{r,eval=F}
+DT[c(1:2)] # Väljer raderna 1 och 2
+DT[,list(value)] # Väljer kolumnen "value"
+DT[,id2 := (5-id),by=id] # Skapar en ny variabel med värdena {1,0,-1}
+```
+<small>Observera att kommatecknet kan utelämnas i första exemplet!</small>
+
+--- &radio
+
+## Quiz
+
+Skapa en vektor i enlighet med ovan genom att köra koden:
+
+```{r, eval=F}
+x <- c(aa=1,bb=2,cc=3,dd=2)
+```
+
+Gör de två anropen `x[["bb"]]` och `x[2]` samma sak?
+
+1. Nej.
+2. Ja; båda ger resultatet "bb".
+3. _Ja; båda ger resultatet 2._
+
+--- &radio
+
+## Quiz
+Ladda datasetet `diamonds` genom att köra koden `require(ggplot2)`.
+
+`diamonds` är en tabell av typen `data.frame` och innehåller mätdata över ca 55 000 diamanter.
+
+Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamonds$table` har värdet 55. Ungefär hur många diamanter i `diamonds`-datasetet har table=55?
+
+1. ca 10st
+2. ca 100st
+3. _mer än 1000st_
+4. Alla diamanter i datasetet
+
+
+---
+
+## Sortering och sampling
+
+Två vanliga operationer på data är __sortering__ och __sampling__.
+
+### Sortering
+
+Sortering görs, något kontraintuitivt, __inte__ med kommandot `sort()` utan med kommandot `order()`:
+```{r,results="hide"}
+DT[order(DT$id)] # Genomför en "proc sort" på tabellen DT
+# DT[sort(DT$id2)] # Genererar ett fel
+
+```
+<small>OBS! Ibland kan man av misstag råka använda `sort()` istället för `order()` utan att R varnar användaren. Detta kan leda till att data blir felaktigt utan att man märker det. Tumregeln är att aldrig använda `sort()`.</small>
+
+
+---
+
+### Sampling
+
+Sampling kan göras med kommandot __sample()__:
+```{r,results="hide"}
+# Sampla en vektor
+vektor <- c(1:1000)
+vektor_sample <- sample(vektor, 100)
+
+# Sampla rader ur en data.frame
+DT <- data.table(id=c(1:1000),namn=rep(c("Ny","Gammal"))) # Skapa tabell
+antalrader <- nrow(DT) # Antal rader i tabellen
+DT <- DT[sample(antalrader,10)] # Sampla tio rader ur DT
+
+```
+
+---
+
+## En grundläggande "vokabulär"
+
+Nyckeln till framgångsrik utveckling i R är att behärska ett antal __basfunktioner__ samt de metoder som är anpassade för det problem man vill lösa.
+
+Åsikterna om exakt vilka funktioner det är viktigt att kunna går isär. I takt med att man blir en bättre R-programmerare utvecklar man så småningom en egen uppfattning om vad som är "basen" för R-programmering.
+
+I utskriftsversionen av detta material har vi listat ett antal funktioner vi själva anser utgör de nödvändiga förkunskaperna för god R-programmering.
+
+En mer utförlig lista finns i online-boken __Advanced R programmering__ (se litteraturlistan).
+
+{{#handout}}
+---
+
+### Grunderna
+
+```r
+# Funktioner som visar information om andra funktioner
+?
+str
+
+# Operatorer
+%in%, match
+=, <-
+head, tail
+
+# Logik
+&, |, !, xor
+all, any
+
+# Flödeskontroll
+if, &, |
+for, while
+
+```
+
+---
+
+### Matematik
+
+```r
+# Jämförelser
+!=, ==, >, >=, <, <=
+is.na
+
+# Grundläggande matematik
+max, min, prod, sum
+mean, median, cor, sd, var
+```
+
+---
+
+
+### Datatyper
+
+```r
+# Vektorer och matriser
+c, matrix
+length, dim, ncol, nrow
+cbind, rbind
+names, colnames, rownames
+
+# Konverteringar
+as.data.frame, as.list, as.character, as.numeric
+
+# Städning och minneshantering
+rm
+gc
+memory.size
+tables
+
+```
+
+---
+
+
+### I/O
+
+I/O står för "input/output" och betecknar de funktioner som reglerar läsning och skrivning av data till/från datorns filsystem eller terminalfönstret.
+
+```r
+# Output
+print, cat
+
+# Läsa och skriva data
+data
+read.csv, write.csv,
+fread
+load, save
+library(foreign)
+```
+
+{{/handout}}
+
+---
+
+## Externa datakällor
+
+- Excel
+- SQL Server (t.ex. PEDAL)
+- Coldbir (t.ex. MIDAS)
+
+---
+
+### Excel
+
+För inläsning av textfiler så finns det funktioner i R man kan använda sig av, t.ex.:
+
+```{r, eval=F}
+x <- read.csv2("fil.csv")
+```
+
+Det finns motsvarande funktion för att skriva till CSV, se t.ex. `write.csv2`. Se även `*.table`, `*.delim2`.
+
+För inläsning av `xls` eller `xlsx` använd paketet `XLConnect`:
+
+```{r, eval=F}
+library(XLConnect)
+x <- readWorksheetFromFile("fil.xlsx", sheet = 1)
+```
+
+Läs mer: [XLConnect - A platform-independent interface to Excel](http://cran.r-project.org/web/packages/XLConnect/vignettes/XLConnect.pdf).
+
+--- &radio
+
+## Quiz
+
+### Hur läser man in en CSV-fil som har "`,`" som seperator?
+
+1. _read.csv("fil.csv")_
+2. read.csv2("fil.csv")
+3. read.table("fil.csv")
+
+***.hint
+
+`?read.table`
+
+***.explanation
+
+Rätt svar är `read.csv`!
+
+`read.csv` och `read.csv2` är endast wrapper-funktioner till `read.table`. Man skulle även kunna skriva `read.table("fil.csv", sep = ";")`.
+
+---
+
+### SQL Server
+
+`RODBC`:
+
+```{r, eval=F}
+con <- odbcDriverConnect("driver=SQL Server; server=pedal")
+x <- sqlQuery("SELECT * FROM PedalDIM.Arende.Process")
+close(con)
+```
+
+`pmtools`:
+
+```{r, eval=F}
+x <- pedal_query("SELECT * FROM PedalDIM.Arende.Process")
+```
+
+alternativ, använd SQL-kod från fil:
+
+```{r, eval=F}
+x <- pedal_query(file = "process.sql")
+```
+
+---
+
+### Coldbir
+
+Coldbir är en kolumndatabas i R - en vidareutveckling av tidigare midAUX (MIDAS).
+
+Paketet har som mål att med lite kod och simpel syntax erbjuda snabb läs-/skrivhastighet, för att göra det enklare och snabbare att analysera data i R.
+
+Dessutom finns stöd för hantering av dokumentation (t.ex. beskrivning av variabler).
+
+---
+
+Ladda paket:
+
+```{r, eval=F}
+library(Coldbir)
+```
+
+Skapa ny databaskoppling och ange sökväg:
+
+```{r, eval=F}
+a <- cdb('Q:/myDatabase')
+```
+
+Än sålänge har inget skapats - det är först när data läggs till som detta sker, därav lägger vi till ett dataset:
+
+```{r, eval=F}
+a[] <- ggplot2::diamonds
+```
+
+---
+
+Hämta dataset:
+
+```{r, eval=F}
+dt <- a[]
+```
+
+Hämta variabel:
+
+```{r, eval=F}
+var <- a["cut"]
+```
+
+Skapa ny variabel:
+
+```{r, eval=F}
+a["x_plus_y"] <- a["x"] + a["y"]
+```
+
+Tänk på att de bör ha samma längd.
+
+---
+
+### Coldbir: MIDAS
+
+Anslut till databas
+
+```{r, eval=F}
+a <- cdb("//psysstat5w/G/MidasCDB")
+```
+
+Lista samtliga variabler
+
+```{r, eval=F}
+get_vars(a)
+```
+
+Ange `dims = T` för att inkludera dimensioner
+
+```{r, eval=F}
+get_vars(a, dims = T)
+```
+
+---
+
+Hämta data för variabel
+
+```{r, eval=F}
+x <- a["KON", 2012]
+head(x, 10)
+# [1] <NA>   <NA>   <NA>   <NA>   <NA>   Kvinna <NA>   Man    <NA>   <NA>  
+# Levels: Kvinna Man
+```
+
+där `a` anger objektet för kopplingen till databasen, och därefter följer variabelnamn (case-sensitive) och val av dimension (`2012`). Om variabeln saknat dimensioner så hade anropet varit `a["KON"]`, eller med flera dimensioner `a["KON", c(2012, 12)]`.
+
+---
+
+Hämta variabeldokumentation:
+
+```{r, eval=F}
+get_doc(a, "SEKTORTILLHORIGH")
+```
+
+För att hämta enbart titel:
+
+```{r, eval=F}
+get_doc(a, "SEKTORTILLHORIGH")$title
+```
+
+Antal individer per sektortillhörighet:
+
+```{r, eval=F}
+table(a["SEKTORTILLHORIGH", 2010])
+```
+
+---
+
+Skapa en barplot med samma fördelning:
+
+```{r, eval=F}
+variable <- "SEKTORTILLHORIGH"
+year <- 2010
+freq <- table(a[variable, year])
+par(mar=c(7.5, 20, 5 , 5))
+barplot(freq, horiz = T, las = 1)
+```
+
+![](img/sektortillhorigh1.png)
+
+---
+
+Barplot med titel och källa:
+
+```{r, eval=F}
+docs <- get_doc(a, variable)
+barplot(freq, horiz = T, las = 1, main = paste(docs$title, year), sub = paste("Källa:", docs$source))
+```
+
+![](img/sektortillhorigh2.png)
+
+---
+
+## Funktioner
+
+En viktig del av att utveckla i R är att arbeta med, och skapa, __funktioner__.
+
+Nästan all funktionalitet i ett programmeringsspråk, som t.ex. R, består av funktioner. Till och med grundläggande aritmetiska operationer som t.ex. `+` och `*` eller hjälpsymbolen `?` är funktioner.
+
+Några exempel: 
+```r
+sum(1,2,3) # Visar summan av talen 1, 2 och 3
+
+?sum # Visar en hjälpsida för funktionen sum()
+```
+
+Den sistnämnda funktionen, `?`, spelar en särskilt viktig roll i R då den hjälper oss att förstå alla andra funktioner.
+
+---
+
+### Att skriva funktioner
+
+Utvecklare bör och kan enkelt skriva egna funktioner. R-funktioner används ofta för att __återanvända kod__, hantera __tillfällig minnesanvändning__ och öfr att skapa en __strukturerad programsyntax__.
+
+Funktioner kan därför, med _lite god vilja_, liknas vid ett SAS-makro. Åtminstone om man bortser från att SAS-makron inte följer samma syntax som vanlig SAS-kod.
+
+Exempel på en definition av en funktion:
+
+```{r, eval=FALSE}
+polynom <- function(x,y) {
+   return(x^2 + y)
+}
+```
+
+En funktion består av en __argumentlista__ och en __kodmassa__ (och lite annat).
+
+- Argumentlista: `function(x,y)`
+- Kodmassa: `{ return(x^2 + y) }`
+
+---
+
+### Exempel på funktioner
+
+En funktion för att beräkna kvadratroten av ett tal x:
+```{r, eval=FALSE}
+sq <- function(x) {
+   x^2
+}
+sq(5) # Ger resultatet 25
+```
+
+Beräkna binomialkoefficienten mellan två tal n, k:
+```{r, eval=FALSE}
+binom_coeff <- function(n,k) {
+   numerator <- factorial(n)
+   denominator <- factorial(k) * factorial(n-k)
+   return(numerator/denominator)
+}
+binom_coeff(5,2) # Ger resultatet 10
+```
+
+--- &radio
+
+## Quiz
+
+Vad gör följande funktion?
+
+```{r, eval=FALSE}
+f <- function(x,y,z) {
+   if (z > 3) {
+      j <- x + y
+   } else {
+      j <- x - y
+   }
+   return(j)
+}
+```
+
+1. Beräknar x - y + z
+2. _Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y_
+3. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
+
+---
+
+## Pakethantering
+
+R:s basfunktionalitet utvidgas med hjälp av funktioner.
+
+Det stora community av utvecklare och organisationer runt R har utvecklat tusentals funktioner och moduler som ofta är mycket användbara.
+
+Dessa funktioner är lagrade i __paket__ som kan läsas in i R på begäran. R levereras med ett antal "standardpaket", men fler kan installeras från internet.
+
+De flesta paket är lagrade på R-projektets paketserver __CRAN__.
+
+
+---
+
+### Ladda ett paket i R
+
+Ett paket laddas med någon av funtionerna `require()` eller `library()`:
+
+```{r,results="hide", warning=F, eval=FALSE}
+require(stats)
+library(class)
+```
+
+De funktioner som ingår i paketet kan nu användas i R:
+
+```{r, eval=FALSE}
+x <- rnorm(1000,0,1) # Skapa 1000 värden ~ N(0,1)
+y <- rep(1:10,100) # Skapa indexvariabel
+lm(y ~ x) # Använd funktion ur stats-paketet för linjär regression
+```
+
+---
+
+### Installera nya paket
+
+R har en inbyggd pakethantering som kan ladda ned och installera nya paket. De flesta paket är lagrade på __CRAN__ och kan installeras därifrån med funktionen `install.packages()`:
+
+```{r, eval=F}
+install.packages("ggplot2") # Installera paketet ggplot2 från CRAN
+```
+
+Vissa paket är lagrade på open source-plattformen __GitHub__, och installeras därifrån med hjälp av funktionen `install_github()` i `devtools`-paketet:
+
+```{r, eval=F}
+require(devtools)
+
+# Installera Coldbir-paketet från GitHub
+install_github("Coldbir","SwedishPensionsAgency")
+```
+
+--- &radio
+
+## Quiz
+Vilket av följande kommandon installerar paketet `survey` från internet?
+
+1. _`install.packages("survey")`_.
+2. load("survey"")
+3. install_library("survey")
+4. require(survey)
+
+---
+
+## Grafik och dataanalys
+
+Nedan är några exempel på bibliotek som lämpar sig väl för analys och grafik:
+
+- `ggplot2`
+- `iPlot`
+- `rCharts`
+
+`iPlot` är ett bra exempel på hur man - med hjälp av R-paketet `shiny` - relativt enkelt kan bygga egna web-applikationer.
+
+---
+
+### `ggplot2`
+
+Paket baserat på "*grammar of graphics*" för att enkelt skapa grafer i R. Skapat av Hadley Wickham.
+
+Exempel på tillämpningsområden:
+- interaktivt i R-konsolen
+- applikationer, t.ex. `iPlot`
+- publikationer, t.ex. Orange rapport
+
+Ladda paket:
+
+```{r, warning=F}
+library(ggplot2)
+```
+
+---
+
+#### Density plot
+
+```{r, warning=F, fig.width = 12.5, fig.height = 6}
+ggplot(diamonds, aes(depth, fill = cut)) + 
+   geom_density(alpha = 0.2) + xlim(55, 70)
+```
+
+---
+
+#### Histogram
+
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+ggplot(diamonds, aes(x=price, fill=cut)) + geom_bar()
+```
+
+---
+
+#### Scatter plot
+
+```{r, warning=F,message=F, fig.width = 12.5, fig.height = 6}
+ggplot(MASS::survey, aes(x = Pulse, y = Height, color = Exer)) + geom_point() + facet_grid(Sex ~ Smoke)
+```
+
+---
+
+## Quiz
+
+Ladda in datasetet `diamonds` med kommandot `require(ggplot2)`.
+
+Rita en täthetskurva över variabeln `price` med hjälp av ggplot-funktioner. Använd "fill"-funktionen för att dela upp kurvan beroende på värdet på variabeln `cut`.
+
+Påminnelse: Den generella syntaxen är
+```r
+ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
+```
+
+---
+
+### iPlot
+
+```{r,eval=F}
+library(devtools)
+install_github("iPlot", "SwedishPensionsAgency")
+
+# Exempel
+library(iPlot)
+iPlot(ggplot2::diamonds)
+```
+
+![](img/iplot.png)
+
+---
+
+## Quiz
+
+Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://ltcstats.perriard.se/shiny/iplot/diamonds/)
+
+Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
+
+--- &twocol
+
+### rCharts
+
+*** =right
+
+```{r, warning=F,message=F,cache=F,echo=T,tidy=F}
+library(rCharts)
+
+a <- Highcharts$new()
+a$chart(type = "spline")
+a$title(text = "Spline Chart")
+a$series(data = c(1, 3, 2, 4, 5, 4, 6,
+  2, 3, 5, NA), dashStyle = "longdash")
+a$series(data = c(NA, 4, 1, 3, 4, 2, 9,
+  1, 2, 3, 4), dashStyle = "shortdot")
+a$legend(symbolWidth = 80)
+
+# a$print()
+```
+
+*** =left
+
+```{r, results='asis', echo=F}
+a$print()
+```
+
+---
+
+## Best practices för programdesign
+
+Att skriva kod som andra (och framförallt framtida själv) förstår är en konst i sig. 
+
+**Style Guide**:
+
+- Hadley's Style Guide - [http://adv-r.had.co.nz/Style.html](http://adv-r.had.co.nz/Style.html)
+- Google's R Style Guide - [http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml](http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml)
+
+**Kommentarer**: Skriv kommentar genom att använda `#`. Beskriv ***varför*** och inte ***vad*** koden gör.
+
+**Refaktorisering**: Definiera funktioner, paketera kod, och försök skriva enkel och lite kod.
+
+=> Låg teknisk skuld!
+
+{{#handout}}
+---
+
+### Att skriva läsbar kod
+
+Oläslig kod är ofta farlig på flera sätt. Vanliga misstag innefattar:
+- _Spacing_: Uteblivna mellanslag och radbrytningar i kod
+- _Återanvändning_: Istället för att återvinna kod i funktioner, upprepas samma kod många gånger
+- _Kommentering_: Otillräcklig dokumentation innan och inom funktioner och annan kod
+- _Indentering_: Tabb-indrag används för att orientera koden efter vilken funktion den är underordnad
+
+---
+
+```r
+f<-function(x,y){
+print(x);if(class(x)=="integer")
+   return(x) else{return(y)}}
+```
+
+```r
+# A function that prints x, then returns
+# the value of x if x is an integer, else returns the value of y
+f <- function(x, y) {
+   # Print the value of x
+   print(x)
+
+   # Check if x is an integer
+   if (class(x) == "integer") {
+
+      # If x is an integer, return the value of x
+      return(x)
+   } else {
+
+      # Otherwise, return the value of y
+      return(class(y))
+   }
+}
+
+
+{{/handout}}
+--- &twocol
+
+## Att lära sig mer om R
+
+*** =right
+Att programmera är, framförallt i början, ofta att stöta på problem. Funktioner gör inte det man förväntat sig, man saknar kännedom om vissa metoder eller förstår inte viss syntax.
+
+En av styrkorna med R är det utomordentliga nätverk av engagerade och kunniga utvecklare som samlas kring vissa online-portaler, särskilt __GitHub__ och __StackOverflow__.
+
+Ofta är svaret på en fråga bara en Google-sökning bort. Det kan ibland vara svårt att veta exakt vad man ska söka på, men efter ett tag brukar det vara lätt att se ungefär vilken typ av sökning som ger bra svar.
+
+Ofta är den första träffen vid en googling en sida på [StackOverflow](http://www.stackoverflow.com/).
+
+*** =left
+
+![](img/googlestackoverflow.png)
+
+---
+
+### Att söka efter mer information
+
+Det finns gott om böcker om R-programmering, men dessa är ofta helt __onödiga__ för att lära sig R-programmering, särskilt i början.
+
+Genom att utveckla en __bra sökteknik__ kan man ofta hitta svar på frågor blixtsnabbt.
+
+All kommunikation kring R sker i regel på __engelska__.
+
+---
+
+## Kurslitteratur och referenser
+
+### Böcker
+- [Advanced R programming](http://adv-r.had.co.nz) av Hadley Wickham
+
+### R-paket
+- `ggplot2` av Hadley Wickham
+- `slidify` av Ramnath Vaidyanathan
+- `iPlot` av Thomas Reinholdsson och Love Hansson
+- `Coldbir` av Thomas Reinholdsson
+
+---
+
+## Tack för att ni lyssnade!
