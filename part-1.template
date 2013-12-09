@@ -1089,30 +1089,20 @@ Testa iPlot online: [http://ltcstats.perriard.se/shiny/iplot/diamonds/](http://l
 
 Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
 
---- &twocol
+---
 
 ### rCharts
 
-*** =right
-
-```{r, warning=F,message=F,cache=F,echo=T,tidy=F}
-library(rCharts)
-
-a <- Highcharts$new()
+```{r, warning=F,message=F,cache=F,echo=1:4,tidy=F,results='asis'}
+a <- rCharts::Highcharts$new()
 a$chart(type = "spline")
+a$series(data = c(1, 3, 2, 4, 5, 4, 6, 2, 3, 5, NA), 
+  dashStyle = "longdash")
+# ...
 a$title(text = "Spline Chart")
-a$series(data = c(1, 3, 2, 4, 5, 4, 6,
-  2, 3, 5, NA), dashStyle = "longdash")
 a$series(data = c(NA, 4, 1, 3, 4, 2, 9,
   1, 2, 3, 4), dashStyle = "shortdot")
 a$legend(symbolWidth = 80)
-
-# a$print()
-```
-
-*** =left
-
-```{r, results='asis', echo=F}
 a$print()
 ```
 
