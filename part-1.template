@@ -25,13 +25,14 @@ hitheme: {{hitheme}}
       margin-top: 10px;
    }
    pre code {
-   {{#handout}}
       background: #f8f8ff;
-   {{/handout}}
-   {{^handout}}
-      background: #f8f8ff;
-   {{/handout}}
    }
+
+  pre {
+    border-color: white;
+    border: 0;
+    border-width: 0px;
+  }
 
 </style>
 
