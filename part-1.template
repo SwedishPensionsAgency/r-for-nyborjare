@@ -61,7 +61,7 @@ Materialet är öppen källkod och finns att ladda ned från: http://github.com/
 - Sammanställa deskriptiv statistik om data med enklare funktioner
 - Använda ggplot och grafiska funktioner för deskription och exploration av data
 - Installera och använda paket
-- Hämta data från olika källor (Excel, MiDAS, Coldbir, Pedal)
+- Hämta data från olika källor (Excel, Coldbir, etc.)
 - Lagra data i olika format
 - Självständigt inhämta ny kunskap och hitta svar på frågor om R (vara en del av R:s community)
 
@@ -351,6 +351,14 @@ Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
 2. _`vector`_
 3. `matrix`
 
+***.hint
+
+Är data en- eller flerdimensionellt?
+
+***.explanation
+
+Data är endimensionellt (det består bara av en enda kolumn eller rad med data). Av de nämnda datatyperna är `vector` den typ som är anpassad för endimensionell datalagring.
+
 --- &radio
 
 ## Quiz
@@ -363,6 +371,14 @@ Vad är den bästa datatypen för att lagra det data som syns på skärmdumpen?
 2. `vector`
 3. `matrix`
 4. `character`
+
+***.hint
+
+Är data en- eller flerdimensionellt?
+
+***.explanation
+
+Data är flerdimensionellt. Det är alltså `data.frame` eller `matrix` som är aktuella i detta fall. Här, liksom i de flesta fall, är det `data.frame` som är bäst lämpat, då `matrix` främst är konstruerat för matrisberäkningar.
 
 ---
 
@@ -480,14 +496,29 @@ DT[,id2 := (5-id),by=id]
 Skapa en vektor i enlighet med ovan genom att köra koden:
 
 ```{r, eval=F}
-x <- c(aa=1,bb=2,cc=3,dd=2)
+x <- c(aa=1, bb=2, cc=3, dd=2)
 ```
 
-Gör de två anropen `x[["bb"]]` och `x[2]` samma sak?
+Gör de två anropen `x[2]` och `x[["bb"]]` samma sak? Försök svara på frågan utan att köra koden i R.
 
-1. Nej.
+1. Nej; 
+2. _
 2. Ja; båda ger resultatet "bb".
-3. _Ja; båda ger resultatet 2._
+3. Ja; båda ger resultatet 2.
+
+***.hint
+
+Vad gör operatorerna `[` och `[[`?
+
+***.explanation
+
+Det andra elementet i vektorn `x` har värdet 2. Elementets _namn_ är `bb`.
+
+Anropet `x[2]` returnerar hela det andra elementet, dvs. elementet `bb=2`.
+
+Anropet `x[["bb"]]` anropar det element som har detta namn, och returnerar enbart dess värde, alltså 2.
+
+Skillnaden mellan anropen är alltså att det första anropet returnerar ett helt element ur vektorn `x`, medan det andra anropet enbart returnerar värdet för detta element. Skillnaden är dock oväsentlig vid många tillämpningar - man kan t.ex. inkludera elementet i beräkningar med både `[`- och `[[`-metoderna.
 
 --- &radio
 
@@ -503,6 +534,13 @@ Använd syntaxen för `data.frame` för att hitta de rader där variabeln `diamo
 3. _mer än 1000st_
 4. Alla diamanter i datasetet
 
+***.hint
+
+Det finns flera sätt att ta reda på hur många rader som finns i tabellen `diamonds`. Vad händer om du bara skriver `diamonds` i R:s kommandotolk och trycker enter?
+
+***.explanation
+
+Lösningsförslag: `nrow(diamonds[diamonds$table==55,])`
 
 {{#handout}}
 
@@ -658,9 +696,8 @@ library(foreign)
 Data lagras ofta t.ex. på disk eller i databaser. R har en uppsättning funktioner för att läsa in och skriva data, t.ex. följande format:
 
 - Excel
-- SQL Server (t.ex. PEDAL)
-- Coldbir (t.ex. MIDAS)
-
+- SQL Server
+- Coldbir
 
 
 ---
@@ -727,6 +764,10 @@ x <- sqlQuery("SELECT * FROM PedalDIM.Arende.Process")
 close(con)
 ```
 
+<small>I exemplet ovan används servernamnet "pedal". Ersätt detta med namnet på din SQL-server.</small>
+
+{{#pm}}
+
 ---
 
 `pmtools`
@@ -744,11 +785,13 @@ En SQL-fråga kan även lagras i en separa fil och användas som anrop:
 x <- pedal_query(file = "process.sql")
 ```
 
+{{/pm}}
+
 ---
 
 ### Coldbir
 
-Coldbir ("COLumn DataBase In R") är en kolumndatabas i R - en vidareutveckling av tidigare midAUX (MIDAS).
+Coldbir ("COLumn DataBase In R") är en kolumndatabas i R - en vidareutveckling av det tidigare paketet midAUX (MIDAS), utvecklat på Pensionsmyndigheten.
 
 Paketet har som mål att med lite kod och simpel syntax erbjuda snabb läs-/skrivhastighet, för att göra det enklare och snabbare att analysera data i R.
 
@@ -802,6 +845,7 @@ a["x_plus_y"] <- a["x"] + a["y"]
 
 Tänk på att de bör ha samma längd.
 
+{{#pm}}
 {{#handout}}
 
 ---
@@ -862,7 +906,6 @@ table(a["SEKTORTILLHORIGH", 2010])
 
 {{/handout}}
 
-
 ---
 
 Skapa en barplot med data ur MIDAS:
@@ -890,6 +933,8 @@ barplot(freq, horiz = T, las = 1,
 ```
 
 ![](img/sektortillhorigh2.png)
+
+{{/pm}}
 
 ---
 
@@ -972,6 +1017,14 @@ f <- function(x,y,z) {
 2. _Om z är större än 3: Beräknar x + y. Annars: Beräknar x - y_
 3. Om x är större än 3: Beräknar z + y. Annars: Beräknar z - y
 
+***.hint
+
+`return(j)` skickar tillbaka värdet av variabeln `j`.
+
+***.explanation
+
+`if (z > 3)` kontrollerar om värdet på variabeln `z` är större än 3. Det är alltså enbart värdena på variablerna x och y som ligger till grund för det värde som returneras av funktionen.
+
 ---
 
 ## Pakethantering
@@ -1048,6 +1101,14 @@ Vilket av följande kommandon installerar paketet `survey` från internet?
 3. install_library("survey")
 4. require(survey)
 
+***.hint
+
+Det är skillnad på att _installera_ paket och _ladda_ paket. Tänk på dem som skillnaden mellan att installera ett program på datorn och att starta programmet när det väl är installerat.
+
+***.explanation
+
+`install_library()` existerar inte. `require()` laddar ett paket i R. `load()` läser in data från hårddisken i arbetsminnet.
+
 ---
 
 ## Statisk presentation
@@ -1109,6 +1170,15 @@ Påminnelse: Den generella syntaxen är
 ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
 ```
 
+***.hint
+
+Ersätt DATA och VARIABEL med namnen på ditt dataset och de variabler du vill använda för att rita din plot.
+
+***.explanation
+
+Lösningsförslag: 
+`ggplot(diamonds,aes(x=price, fill=cut)) + geom_density()`
+
 --- &twocol
 
 ### R Markdown - HTML
@@ -1143,11 +1213,16 @@ ggplot(DATA,aes(x=VARIABEL, fill=VARIABEL)) + geom_density()
 
 *** =left
 
+
 ![](img/orange-rapport-sida.png)
+
 
 *** =right
 
+
 ![](img/orange-rapport-sida2.png)
+
+
 
 --- &twocol
 
@@ -1162,6 +1237,14 @@ I RStudio, skapa en ny **R Markdown**-fil och välj *spara som*. Klicka därefte
 *** =right
 
 ![](img/rstudio-rmd-2.png)
+
+***.hint
+
+Ingen hint för denna uppgift
+
+***.explanation
+
+Den fil som RStudio genererat är en HTML-fil som kan sparas och visas i vilken webbläsare som helst.
 
 ---
 
@@ -1239,6 +1322,7 @@ cat(RJSONIO::toJSON(x))
 
 {{#handout}}
 
+
 ```{r,eval=F}
 library(devtools)
 install_github("iPlot", "SwedishPensionsAgency")
@@ -1247,7 +1331,9 @@ install_github("iPlot", "SwedishPensionsAgency")
 library(iPlot)
 iPlot(ggplot2::diamonds)
 ```
+
 ![](img/iplot.png)
+
 {{/handout}}
 
 
@@ -1263,6 +1349,14 @@ iPlot(ggplot2::diamonds)
 Testa iPlot online: [nektar.io/shiny/iplot/diamonds/](http://nektar.io/shiny/iplot/diamonds/)
 
 Använd iPlot för att upprepa analysen ovan, dvs. att rita en fördelningskurva av variabeln `price`, uppdelat för värde på variabeln `cut`.
+
+***.hint
+
+Ingen hint för denna uppgift.
+
+***.explanation
+
+iPlot använder sig av `ggplot2`-paketet för att rita grafiken.
 
 ---
 
@@ -1330,6 +1424,7 @@ Oläslig kod är ofta farlig på flera sätt. Vanliga misstag innefattar:
 - _Återanvändning_: Istället för att återvinna kod i funktioner, upprepas samma kod många gånger
 - _Kommentering_: Otillräcklig dokumentation innan och inom funktioner och annan kod
 - _Indentering_: Tabb-indrag används för att orientera koden efter vilken funktion den är underordnad
+- _Namngivning_: Variabler, funktioner och objekt är namngivna på ett förvirrande eller otydligt sätt
 
 ---
 
@@ -1344,7 +1439,7 @@ error("Wrong class")}}
 ```r
 # Determine whether x is of an expected class,
 # and halt the program if it is not
-f <- function(x, class) {
+check_class <- function(x, class) {
    if (class(x)) == class {
 
       # If x is of the expected class, keep running

@@ -20,6 +20,7 @@ file <- "part-1.template"
 # Create handout
 str <- whisker.render(read_file(file), data = list(
    handout = T,
+   pm = F,
    framework = "io2012",
    hitheme = "github"
 ))
@@ -30,6 +31,7 @@ pagify(rmd)
 # Create presentation
 str <- whisker.render(read_file(file), data = list(
    handout = F,
+   pm = T
    framework = "io2012",
    hitheme = "github"
 ))
