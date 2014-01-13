@@ -1498,8 +1498,8 @@ All kommunikation kring R sker i regel på __engelska__.
 ### R-paket
 - `ggplot2` av Hadley Wickham
 - `slidify` av Ramnath Vaidyanathan
-- `iPlot` av Thomas Reinholdsson och Love Hansson
-- `Coldbir` av Thomas Reinholdsson
+- `iPlot` av Love Hansson och Thomas Reinholdsson
+- `Coldbir` av Danne Mikula och Thomas Reinholdsson
 
 ---
 
