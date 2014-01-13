@@ -501,10 +501,9 @@ x <- c(aa=1, bb=2, cc=3, dd=2)
 
 Gör de två anropen `x[2]` och `x[["bb"]]` samma sak? Försök svara på frågan utan att köra koden i R.
 
-1. Nej; 
-2. _
+1. Nej
 2. Ja; båda ger resultatet "bb".
-3. Ja; båda ger resultatet 2.
+3. _Ja; båda ger resultatet 2._
 
 ***.hint
 
