@@ -19,7 +19,6 @@ file <- "rin10minutes.template"
 
 # Create presentations
 str <- whisker.render(read_file(file), data = list(
-   handout = T,
    framework = "io2012",
    hitheme = "github"
 ))
