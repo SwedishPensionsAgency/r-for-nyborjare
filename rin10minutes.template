@@ -1,0 +1,167 @@
+---
+title: R in 10 minutes
+author: Love Hansson
+job: Swedish Pensions Agency
+widgets: [mathjax, bootstrap, quiz]
+ext_widgets: {rCharts: "libraries/highcharts"}
+framework: {{framework}}
+mode: selfcontained
+url: {lib: libraries}
+hitheme: {{hitheme}}
+---
+
+<style>
+   slide {
+      background-color: white;
+   }
+   body {
+      background-color: white;
+   }
+   .title-slide {
+      background-color: white;
+   }
+   article p {
+      margin-bottom: 10px;
+      margin-top: 10px;
+   }
+   pre code {
+      background: #f8f8ff;
+   }
+
+  pre {
+    border-color: white;
+    border: 0;
+    border-width: 0px;
+  }
+
+</style>
+
+### Short summary
+- R can be seen as both a _programming language_ and a _statistics package_
+- A very useful IDE for R development is _RStudio_
+- Building up a basic vocabulary enables you to quickly learn more about R programming
+- The duality of R makes it an ideal meeting spot for statisticians, programmers, and analysts
+
+
+
+---
+
+## R - a statistics package
+R is a _statistics package_ much like SPSS, SAS or Stata.
+
+Being open source, R enables quick development of new functionality.
+
+There are literally thousands of open source libraries ("packages") for R for just about any statistics task there is.
+
+R is _code driven_ - there are graphical frontends for R as well but the area where R really shines is in its well-structured syntax.
+
+---
+
+## R - a programming language
+R is a feature complete _programming language_ similar to Python, Ruby or JavaScript.
+
+Being open source with a fairly easy syntax, programmers can quickly get up to speed with application development in R.
+
+R _is not for everyone_ but can be used for speedy and flexible development of a wide range of applications.
+
+
+---
+
+### Typical use cases
+Since R is both for statistical programming and other kinds of development, R can be very practical in situations where the two meet, e.g.:
+- Automated report building
+- Data visualization and analysis
+- Data-driven web applications
+- Database middle-end/front-end development
+
+--- 
+
+## RStudio
+
+RStudio is a powerful Integrated Development Environment (IDE) for R
+
+Features include syntax highlighting; audit and debug functionality; integration with tools for packaging code and generating documentation; and visualization tools; etc.
+
+
+---
+
+### RStudio
+
+![](img/rstudio1.png)
+
+---
+
+## Learning about R
+
+Key to developing a good understanding of R is to get access to a basic set of tools (i.e. skills and knowledge) that quickly enable to learn more by:
+
+- Asking the right questions
+- Looking at what others have done
+- Fixing errors and improving functionality in your own programs
+- Some suggestions: [Advanced R programming](http://adv-r.had.co.nz) by Hadley Wickham
+
+--- &twocol
+
+### Interaction - the key to learning (and having fun)
+
+*** =right
+One of the true strengths about R is its vivid and colourful online community. A multitude of online platforms enable users to interact and learn from each other. The two main examples of this are __GitHub__ and __StackOverflow__.
+
+*** =left
+
+![](img/googlestackoverflow.png)
+
+--- &twocol
+
+*** =right
+
+The solution to any kind of problem is mostly just a google search away. By developing a basic vocabulary and learning how to optimize your google search queries, learning how to solve a problem or perform a task is often a question of minutes if not seconds.
+
+Not uncommonly, you will find that the first or second Google hit leads to [StackOverflow](http://www.stackoverflow.com/).
+
+*** =left
+
+![](img/stackoverflow.png)
+
+---
+
+## R as a melting pot
+
+Due to the dual nature of R as both a statistical package and a programming language, R is a good place for programmers and statisticians to meet.
+
+Example: At the Swedish Pensions Agency statisticians, DBAs and BI analysts all use and contribute to a common codebase
+
+--- &twocol
+
+
+*** =right
+
+![]("img/orange-rapport.png")
+
+*** = left
+![]("img/orange-rapport-sida.png")
+
+
+
+---
+
+### Open source
+The large and growing community around R means that you will never be alone - and you're encouraged to share your code!
+
+Through RStudio R can be tightly integrated with version control systems like Git, and both code and results can easily be shared at the click of a button.
+
+
+---
+
+## Suggestions for further reading
+- Look at what others have done on GitHub
+- Browse through _one_ R book: "Advanced R programming" by Hadley Wickham
+- Make yourself familiar with StackOverflow and browse through some questions on your favorite topic
+- Start simple by solving simple statistical problems and work your way up
+
+---
+
+## Thank you!
+
+love.hansson@pensionsmyndigheten.se
+
